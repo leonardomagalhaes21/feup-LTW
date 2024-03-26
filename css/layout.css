@@ -1,0 +1,48 @@
+body {  
+    margin: 0 auto;
+    background-color: var(--lightergrey);
+    width: 80em;
+    
+
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: auto;
+    grid-template-areas: "header header"
+                         "menu menu"
+                         "aside items"
+                         "footer footer";
+}
+
+body > header {
+    grid-area: header;
+}
+
+#menu {
+    grid-area: menu;
+}
+
+aside {
+    grid-area: aside
+}
+
+#items {
+    grid-area: items;
+}
+
+body > footer {
+    grid-area: footer;
+}
+
+
+
+#menu ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+  
+#menu li {
+    display: block;
+    flex: 1;
+}
+

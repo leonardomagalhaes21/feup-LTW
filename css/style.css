@@ -1,0 +1,53 @@
+:root {
+    --lightgrey: #dcdcdc;
+    --lightergrey: #eaeaea;
+    --grey: #606060;
+    
+    --blue: #007bff;
+    
+    --black: #000000;
+    
+}
+
+
+body > header {
+    background-color: var(--lightgrey);
+    padding: 1em;
+}
+
+body > header h1 {
+    font-size: 3em;
+    font-weight: 100;
+    color: var(--black);
+    transition: 0.5s;
+}
+
+body > header h1 :hover {
+    color: var(--grey);
+}
+
+body > header strong {
+    font-weight: 900;
+}
+
+body > header h1 a {
+    text-decoration: none;
+    color: var(--black);
+}
+
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans|Poppins&display=swap');
+
+
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+p {
+    font-family: "Open Sans", sans-serif;
+    line-height: 1.5em;
+}

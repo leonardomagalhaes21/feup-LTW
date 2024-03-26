@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FEUP-reUSE</title>
+    <link rel="icon" href="docs/images/REuse-mini.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/layout.css">
+
+</head>
+<body>
+    <header>
+        <h1>
+            <a href="index.html">RE<strong>USE</strong></a>
+        </h1>
+        <div id="signup">
+            <a href="register.html">Register</a>
+            <a href="login.html">Login</a>
+        </div>
+    </header>
+    <nav id="menu">
+        <ul>
+            <li><a href="index.html">&#128187; Electronics</a></li>
+            <li><a href="index.html">&#128084; Clothing</a></li>
+            <li><a href="index.html">&#129681; Furniture</a></li>
+            <li><a href="index.html">&#128218; Books</a></li>
+            <li><a href="index.html">&#127918; Toys/Games</a></li>
+            <li><a href="index.html">&#9917; Sporting Goods</a></li>
+            <li><a href="index.html">&#128250; Home Appliances</a></li>
+            <li><a href="index.html">&#128259; Others</a></li>
+        </ul>
+    </nav>
+    <aside>
+        <h2>Search and Filter</h2>
+        <form method="get">
+            <input type="text" id="search" placeholder="Search here">
+            <br>
+            <label for="category">Category:</label>
+            <select id="category">
+                <option value="all" selected>All</option>
+                <option value="electronics">Electronics</option>
+                <option value="clothing">Clothing</option>
+                <option value="furniture">Furniture</option>
+                <option value="books">Books</option>
+                <option value="toys_games">Toys/Games</option>
+                <option value="sporting_goods">Sporting Goods</option>
+                <option value="home_appliances">Home Appliances</option>
+                <option value="others">Others</option>
+            </select>
+            <br>
+            <label for="order">Order by:</label>
+            <select id="order">
+                <option value="default" selected>Default</option>
+                <option value="price_asc">Price: Low to High</option>
+                <option value="price_desc">Price: High to Low</option>
+            </select>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    </aside>
+    <section id="items">
+        <h2>Items for Sale</h2>
+        <article>
+            <h2>Smartphone</h2>
+            <img src="https://picsum.photos/200?theme=phone" alt="Smartphone Image">
+            <p>A gently used smartphone in excellent condition. Comes with charger and original packaging.</p>
+            <p>Price: 200€</p>
+        </article>
+        <article>
+            <h2>Bicycle</h2>
+            <img src="https://picsum.photos/200?theme=sports" alt="Bicycle Image">
+            <p>A sturdy bicycle perfect for commuting or leisure rides. Includes a basket for carrying items.</p>
+            <p>Price: 150€</p>
+        </article>
+    </section>
+    <footer>
+        <p>&copy; FEUP-reUSE, 2024</p>
+    </footer>
+</body>
+</html>
