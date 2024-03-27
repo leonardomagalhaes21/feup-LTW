@@ -4,22 +4,25 @@
     --grey: #606060;
     
     --blue: #007bff;
+    --darkblue: #0056b3;
     
     --black: #000000;
+    --white: #ffffff;
     
 }
 
+/* header styling */
 
 body > header {
     background-color: var(--lightgrey);
-    padding: 1em;
+    border-radius: 5px 5px 0 0;
 }
 
 body > header h1 {
     font-size: 3em;
     font-weight: 100;
     color: var(--black);
-    transition: 0.5s;
+    margin: 0;
 }
 
 body > header h1 :hover {
@@ -35,10 +38,154 @@ body > header h1 a {
     color: var(--black);
 }
 
+#signup a {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: bold;
+    transition: 0.3s;
+    padding: 1em;
+}
+
+#signup a:hover {
+    color: var(--blue);
+}
+
+/* menu styling */
+
+#menu {
+    background-color: var(--lightgrey);
+    border-radius: 0 0 5px 5px;
+}
+
+#menu ul {
+    margin: 0;
+    padding: 0;
+}
+
+#menu li {
+    list-style-type: none;
+    text-align: center;
+    padding: 1em 0;
+}
+
+#menu li:hover {
+    background-color: var(--lightergrey);
+}
+
+#menu a {
+    text-decoration: none;
+    color: var(--black);
+    padding: 1em;
+    transition: 0.3s;
+}
+
+#menu a:hover {
+    color: var(--blue);
+}
+
+#menu li:nth-child(1) {
+    border-top: 5px solid var(--black);
+}
+
+#menu li:nth-child(2) {
+    border-top: 5px solid var(--white);
+}
+
+#menu li:nth-child(3) {
+    border-top: 5px solid var(--black);
+}
+
+#menu li:nth-child(4) {
+    border-top: 5px solid var(--white);
+}
+
+#menu li:nth-child(5) {
+    border-top: 5px solid var(--black);
+}
+
+#menu li:nth-child(6) {
+    border-top: 5px solid var(--white);
+}
+
+#menu li:nth-child(7) {
+    border-top: 5px solid var(--black);
+}
+
+#menu li:nth-child(8) {
+    border-top: 5px solid var(--white);
+}
+
+
+/* search styling */
+
+body > aside {
+    background-color: var(--lightgrey);
+    border-radius: 5px;
+    padding: 1em;
+    margin-top: 1em;
+    margin-right: 1em;
+}
+
+body > aside label {
+    margin-bottom: 0.5em;
+}
+
+button {
+    background-color: var(--blue);
+    color: var(--white);
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: var(--darkblue);
+}
+
+input[type="text"], select {
+    padding: 0.5em;
+    border: 1px solid var(--grey);
+    border-radius: 5px;
+}
+
+
+
+/* items styling */
+
+
+#items a {
+    text-decoration: none;
+    color: var(--black);
+    transition: 0.3s;
+}
+
+#items a:hover {
+    color: var(--blue);
+}
+
+#items > article {
+    background-color: var(--lightgrey);
+    margin-bottom: 1em;
+    border-radius: 10px;
+    transition: 0.3s ease;
+}
+
+#items > article:hover {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+#items > article img {
+    margin-right: 1em;
+    padding: 1em;
+    border-radius: 20px;
+}
 
 
 
 
+
+/* font styling */
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans|Poppins&display=swap');
 
