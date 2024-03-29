@@ -1,13 +1,18 @@
 PRAGMA foreign_keys=on;
 
+.headers on
+.mode columns
+.nullvalue NULL
+
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Categories;
 DROP TABLE IF EXISTS Sizes;
 DROP TABLE IF EXISTS Conditions;
 DROP TABLE IF EXISTS Items;
-DROP TABLE IF EXISTS Carts;
 DROP TABLE IF EXISTS Chats;
 DROP TABLE IF EXISTS Orders;
+DROP TABLE IF EXISTS OrderItems;
+DROP TABLE IF EXISTS Wishlists;
 
 DROP TRIGGER IF EXISTS UpdateItemStatusAfterOrder;
 DROP TRIGGER IF EXISTS ReactivateItemOnOrderCancel;
@@ -55,15 +60,6 @@ CREATE TABLE Items (
     FOREIGN KEY (idCondition) REFERENCES Conditions(idCondition)
 );
 
-CREATE TABLE Carts (
-    idCart INTEGER PRIMARY KEY,
-    idUser INTEGER NOT NULL,
-    idItem INTEGER NOT NULL,
-    quantity INTEGER DEFAULT 1,
-    FOREIGN KEY (idUser) REFERENCES Users(idUser),
-    FOREIGN KEY (idItem) REFERENCES Items(idItem)
-);
-
 CREATE TABLE Chats (
     idChat INTEGER PRIMARY KEY,
     idSender INTEGER NOT NULL,
@@ -77,19 +73,32 @@ CREATE TABLE Chats (
 CREATE TABLE Orders (
     idOrder INTEGER PRIMARY KEY,
     idBuyer INTEGER NOT NULL,
-    idItem INTEGER NOT NULL,
-    quantity INTEGER DEFAULT 1,
     totalPrice REAL NOT NULL,
     orderDate TEXT DEFAULT CURRENT_TIMESTAMP,
     status TEXT NOT NULL DEFAULT 'Pending',
-    CONSTRAINT CHECK_Status CHECK (status = 'Pending' OR  status='Done' OR  status='Canceled'),
-    FOREIGN KEY (idBuyer) REFERENCES Users(idUser),
+    CONSTRAINT CHECK_Status CHECK (status = 'Pending' OR status='Done' OR status='Canceled'),
+    FOREIGN KEY (idBuyer) REFERENCES Users(idUser)
+);
+
+CREATE TABLE OrderItems (
+    idOrderItem INTEGER PRIMARY KEY,
+    idOrder INTEGER NOT NULL,
+    idItem INTEGER NOT NULL,
+    FOREIGN KEY (idOrder) REFERENCES Orders(idOrder),
+    FOREIGN KEY (idItem) REFERENCES Items(idItem)
+);
+
+CREATE TABLE Wishlists (
+    idWishlist INTEGER PRIMARY KEY,
+    idUser INTEGER NOT NULL,
+    idItem INTEGER NOT NULL,
+    FOREIGN KEY (idUser) REFERENCES Users(idUser),
     FOREIGN KEY (idItem) REFERENCES Items(idItem)
 );
 
 
 CREATE TRIGGER UpdateItemStatusAfterOrder
-AFTER INSERT ON Orders
+AFTER INSERT ON OrderItems
 BEGIN
     UPDATE Items
     SET active = FALSE
@@ -102,8 +111,9 @@ WHEN NEW.status = 'Canceled'
 BEGIN
     UPDATE Items
     SET active = TRUE
-    WHERE idItem = NEW.idItem;
+    WHERE idItem = (SELECT idItem FROM OrderItems WHERE idOrder = NEW.idOrder);
 END;
+
 
 
 
@@ -143,14 +153,20 @@ VALUES (1, 'Elegant Dress', 'elegant dress', 'An elegant dress perfect for forma
 INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition)
 VALUES (1, 'Stylish Shoes', 'nice shoes', 'A pair of stylish and comfortable shoes suitable for everyday wear. Features durable material and a sleek design.', 2, 'Nike', 'Air Max', 1, 1);
 
-INSERT INTO Carts (idUser, idItem, quantity) VALUES
-(2, 1, 2),
-(2, 2, 1);
-
 INSERT INTO Chats (idSender, idRecipient, message) VALUES
 (2, 1, 'Hello come to al-nassr!'),
 (1, 2, 'Sure! What specific details would you like to know?');
 
-INSERT INTO Orders (idBuyer, idItem, quantity, totalPrice) VALUES
-(2, 1, 1, 200.00),
-(2, 2, 2, 800.00);
+INSERT INTO Orders (idBuyer, totalPrice) VALUES
+(2, 200.00),
+(2, 800.00);
+
+INSERT INTO OrderItems (idOrder, idItem) VALUES
+(1, 1),
+(2, 2);
+
+INSERT INTO Wishlists (idUser, idItem) VALUES
+(1, 3),
+(1, 4),
+(2, 4),
+(3, 5);
