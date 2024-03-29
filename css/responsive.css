@@ -1,0 +1,8 @@
+@media (max-width: 80em) {
+    body{ 
+      width: 100%;
+    }
+    #items > article {
+        width: 100%;
+    }
+}
