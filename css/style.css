@@ -11,6 +11,18 @@
     
 }
 
+/* common link styling */
+
+a {
+    text-decoration: none;
+    color: var(--black);
+    transition: 0.3s ease;
+}
+
+a:hover {
+    color: var(--blue);
+}
+
 /* header styling */
 
 body > header {
@@ -39,15 +51,8 @@ body > header h1 a {
 }
 
 #signup a {
-    text-decoration: none;
-    color: var(--black);
     font-weight: bold;
-    transition: 0.3s;
     padding: 1em;
-}
-
-#signup a:hover {
-    color: var(--blue);
 }
 
 /* menu styling */
@@ -73,14 +78,7 @@ body > header h1 a {
 }
 
 #menu a {
-    text-decoration: none;
-    color: var(--black);
     padding: 1em;
-    transition: 0.3s;
-}
-
-#menu a:hover {
-    color: var(--blue);
 }
 
 #menu li:nth-child(1) {
@@ -126,7 +124,7 @@ body > aside {
     margin-right: 1em;
 }
 
-body > aside label {
+label {
     margin-bottom: 0.5em;
 }
 
@@ -143,7 +141,7 @@ button:hover {
     background-color: var(--darkblue);
 }
 
-input[type="text"], select {
+input, select {
     padding: 0.5em;
     border: 1px solid var(--grey);
     border-radius: 5px;
@@ -152,17 +150,6 @@ input[type="text"], select {
 
 
 /* items styling */
-
-
-#items a {
-    text-decoration: none;
-    color: var(--black);
-    transition: 0.3s;
-}
-
-#items a:hover {
-    color: var(--blue);
-}
 
 #items > article {
     background-color: var(--lightgrey);
@@ -181,6 +168,41 @@ input[type="text"], select {
     border-radius: 20px;
 }
 
+#items .item-details {
+    padding: 0 1em;
+}
+
+/* signup styling */
+
+#register, #login {
+    padding: 1em;
+}
+
+#register form, #login form{
+    padding: 2em;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#register input, #login input{
+    width: 100%;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    border: none;
+    border-bottom: 1px solid var(--black);
+    border-radius: 0;
+    transition: border-color 0.3s;
+}
+
+#register input:focus, #login input:focus{
+    outline: none;
+    border-bottom: 1px solid var(--blue);
+}
+
+#register label:last-of-type, #login label:last-of-type{
+    margin-bottom: 2em;
+}
 
 
 
