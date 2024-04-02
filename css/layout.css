@@ -10,6 +10,7 @@ body {
     grid-template-areas: "header header"
                          "menu menu"
                          "signup signup"
+                         "details details"
                          "aside items"
                          "footer footer";
 }
@@ -105,3 +106,16 @@ form {
     justify-content: center;
     align-items: center;
 }
+
+/* item layout */
+
+#item-details {
+    grid-area: details;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#item-details .header {
+    display: flex;
+}	

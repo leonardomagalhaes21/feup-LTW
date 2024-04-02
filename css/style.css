@@ -204,6 +204,47 @@ input, select {
     margin-bottom: 2em;
 }
 
+/* item styling */
+
+#item-details {
+    margin-top: 2em;
+    padding: 0 1em;
+}
+
+#item-details h2 {
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
+#item-details article {
+    display: flex;
+    align-items: center;
+}
+
+#item-details article img {
+    width: 500px;
+    height: 500px;
+    margin-right: 1em;
+    border-radius: 10px;
+}
+
+.item-info {
+    padding: 1em;
+}
+
+.item-info h3 {
+    font-size: 1.5em;
+}
+
+.item-info h4 {
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.item-info p {
+    margin-bottom: 0.5em;
+}
+
 
 
 
