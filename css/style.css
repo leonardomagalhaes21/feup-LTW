@@ -208,17 +208,12 @@ input, select {
 
 #item-details {
     margin-top: 2em;
-    padding: 0 1em;
+    padding: 1em;
 }
 
 #item-details h2 {
     font-size: 2em;
-    margin-bottom: 1em;
-}
-
-#item-details article {
-    display: flex;
-    align-items: center;
+    margin-bottom: 2em;
 }
 
 #item-details article img {
@@ -226,6 +221,12 @@ input, select {
     height: 500px;
     margin-right: 1em;
     border-radius: 10px;
+}
+
+#item-details header button {
+    background-color: transparent;
+    color: var(--grey);
+    font-size: 1em;
 }
 
 .item-info {
