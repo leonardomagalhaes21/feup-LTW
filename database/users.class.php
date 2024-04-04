@@ -16,6 +16,20 @@ class User {
         $this->email = $email;
     }
 
+    public static function userExists(string $username, string $password){
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('SELECT * FROM Users WHERE username = ?');
+        $stmt->execute([$username]);
+        $user = $stmt->fetch();
+    
+        if ($user && password_verify($password, $user['password'])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+        
+
     public static function getUserById(PDO $db, int $idUser): ?User {
         $stmt = $db->prepare('SELECT * FROM Users WHERE idUser = ?');
         $stmt->execute([$idUser]);
