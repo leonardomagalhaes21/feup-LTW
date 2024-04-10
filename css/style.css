@@ -246,6 +246,47 @@ input, select {
     margin-bottom: 0.5em;
 }
 
+/* user profile styling */
+
+#user-profile {
+    padding: 2em;
+}
+
+.profile-info {
+    margin-bottom: 2em;
+}
+
+.profile-info img {
+    border-radius: 50%;
+    border: 2px solid var(--black);
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-right: 2em;
+}
+
+.profile-content {
+    width: 100%;
+    background-color: var(--white);
+    padding: 1em;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-actions {
+    margin-bottom: 1em;
+}
+
+.profile-actions a {
+    padding: 1em;
+    margin-right: 1em;
+    border: 1px solid var(--lightgrey);
+    border-radius: 3px;
+    background-color: var(--lightergrey)
+}
+
+
+
 
 
 
