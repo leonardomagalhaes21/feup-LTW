@@ -63,7 +63,7 @@
     <section id="items">
         <h2>Items for Sale</h2>
         <article>
-            <a href="item.html">
+            <a href="item.php">
                 <img src="https://picsum.photos/200?theme=phone" alt="Smartphone Image">
             </a>
             <div class="item-details">
@@ -75,48 +75,48 @@
             </div>
         </article>
         <article>
-            <a href="item.html">
+            <a href="item.php">
                 <img src="https://picsum.photos/200?theme=sports" alt="Bicycle Image">
             </a>
             <div class="item-details">
                 <h2>
-                    <a href="item.html">Bicycle</a>
+                    <a href="item.php">Bicycle</a>
                 </h2>
                 <p>A sturdy bicycle perfect for commuting or leisure rides. Includes a basket for carrying items.</p>
                 <p>Price: 150€</p>
             </div>
         </article>
         <article>
-            <a href="item.html">
+            <a href="item.php">
                 <img src="https://picsum.photos/200?theme=technology" alt="Laptop Image">
             </a>
             <div class="item-details">
                 <h2>
-                    <a href="item.html">Laptop</a>
+                    <a href="item.php">Laptop</a>
                 </h2>
                 <p>A powerful laptop suitable for work and entertainment. Features a fast processor and ample storage.</p>
                 <p>Price: 800€</p>
             </div>
         </article>
         <article>
-            <a href="item.html">
+            <a href="item.php">
                 <img src="https://picsum.photos/200?theme=dress" alt="Dress Image">
             </a>
             <div class="item-details">
                 <h2>
-                    <a href="item.html">Elegant Dress</a>
+                    <a href="item.php">Elegant Dress</a>
                 </h2>
                 <p>An elegant dress perfect for formal occasions or evening events. Made from high-quality fabric with exquisite design details.</p>
                 <p>Price: 120€</p>
             </div>
         </article>
         <article>
-            <a href="item.html">
+            <a href="item.php">
                 <img src="https://picsum.photos/200?theme=shoes" alt="Stylish Shoes Image">
             </a>
             <div class="item-details">
                 <h2>
-                    <a href="item.html">Stylish Shoes</a>
+                    <a href="item.php">Stylish Shoes</a>
                 </h2>
                 <p>A pair of stylish and comfortable shoes suitable for everyday wear. Features durable material and a sleek design.</p>
                 <p>Price: 70€</p>
