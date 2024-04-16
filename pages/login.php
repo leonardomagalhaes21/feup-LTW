@@ -1,8 +1,7 @@
 <?php
-require_once 'database/connection.db.php';
-require_once 'database/users.class.php';
+require_once __DIR__ . '/../database/connection.db.php';
+require_once __DIR__ . '/../database/users.class.php';
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,31 +10,31 @@ require_once 'database/users.class.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FEUP-reUSE - Login</title>
     <link rel="icon" href="docs/images/REuse-mini.png">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/responsive.css">
 </head>
 <body>
     <header>
         <h1>
-            <a href="index.php">RE<strong>USE</strong></a>
+            <a href="pages/index.php">RE<strong>USE</strong></a>
         </h1>
         <div id="signup">
-            <a href="register.php">Register</a>
-            <a href="login.php">Login</a>
+            <a href="pages/register.php">Register</a>
+            <a href="pages/login.php">Login</a>
         </div>
     </header>
 
     <nav id="menu">
         <ul>
-            <li><a href="index.php">&#128187; Electronics</a></li>
-            <li><a href="index.php">&#128084; Clothing</a></li>
-            <li><a href="index.php">&#129681; Furniture</a></li>
-            <li><a href="index.php">&#128218; Books</a></li>
-            <li><a href="index.php">&#127918; Games</a></li>
-            <li><a href="index.php">&#9917; Sports</a></li>
-            <li><a href="index.php">&#128250; Houseware</a></li>
-            <li><a href="index.php">&#128259; Others</a></li>
+            <li><a href="pages/index.php">&#128187; Electronics</a></li>
+            <li><a href="pages/index.php">&#128084; Clothing</a></li>
+            <li><a href="pages/index.php">&#129681; Furniture</a></li>
+            <li><a href="pages/index.php">&#128218; Books</a></li>
+            <li><a href="pages/index.php">&#127918; Games</a></li>
+            <li><a href="pages/index.php">&#9917; Sports</a></li>
+            <li><a href="pages/index.php">&#128250; Houseware</a></li>
+            <li><a href="pages/index.php">&#128259; Others</a></li>
         </ul>
     </nav>
 
@@ -48,7 +47,8 @@ require_once 'database/users.class.php';
             
             try {
                 if (User::userExists($username, $password)) {
-                    echo "Login successful"; 
+                    header("Location: index.php");
+                    exit();
                 } else {
                     echo "Login failed";
                 }

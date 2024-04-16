@@ -1,3 +1,8 @@
+<?php
+require_once __DIR__ . '/../database/connection.db.php';
+require_once __DIR__ . '/../database/users.class.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,22 +10,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FEUP-reUSE</title>
     <link rel="icon" href="docs/images/REuse-mini.png">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/responsive.css">
 </head>
 <body>
     <header>
         <h1>
-            <a href="index.php">RE<strong>USE</strong></a>
+            <a href="pages/index.php">RE<strong>USE</strong></a>
         </h1>
     </header>
     <section id="user-profile">
         <div class="profile-info">
             <img src="https://picsum.photos/200" alt="User Image">
             <div class="profile-details">
-                <h2>User Name</h2>
-                <p>Email: user@gmail.com</p>
+                <h2>Name: <?php echo $name; ?></h2>
+                <p>Email: <?php echo $email; ?></p>
             </div>
         </div>
         <div class="profile-content">
