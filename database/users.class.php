@@ -47,11 +47,12 @@ class User {
         $stmt->execute([$username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if (!$user) {
-            return null;
-        }
-
-        return new User($user['idUser'], $user['name'], $user['username'], $user['password'], $user['email']);
+        if ($user) {
+            $name = $user->name;
+            $name = $user->email;
+        }else{
+            return new User($user['idUser'], $user['name'], $user['username'], $user['password'], $user['email']);
+        }   
     }
 }
 ?>
