@@ -23,7 +23,8 @@ CREATE TABLE Users (
     name TEXT NOT NULL,
     username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
-    email TEXT UNIQUE NOT NULL
+    email TEXT UNIQUE NOT NULL,
+    isAdmin BOOLEAN NOT NULL DEFAULT 0
 );
 
 CREATE TABLE Categories (
@@ -118,10 +119,10 @@ END;
 
 
 
-INSERT INTO Users (name, username, password, email) VALUES
-('Leonardo Teixeira', 'leo', '12345678', 'leo@gmail.com'),
-('Cristiano Ronaldo', 'paicris', '12345678', 'cr7@gmail.com'),
-('Neymar Jr', 'neymito', '12345678', 'ney@gmail.com');
+INSERT INTO Users (name, username, password, email, isAdmin) VALUES
+('Leonardo Teixeira', 'leo', '$2y$10$4zN2fHMbSNK1tI82oS8JBeoFRJ6PNUPe6E6ZpUswZr5remJUk/0hu', 'leo@gmail.com', 1),
+('Cristiano Ronaldo', 'paicris', '$2y$10$4zN2fHMbSNK1tI82oS8JBeoFRJ6PNUPe6E6ZpUswZr5remJUk/0hu', 'cr7@gmail.com', 1),
+('Neymar Jr', 'neymito', '$2y$10$4zN2fHMbSNK1tI82oS8JBeoFRJ6PNUPe6E6ZpUswZr5remJUk/0hu', 'ney@gmail.com', 0);
 
 INSERT INTO Categories (categoryName) VALUES
 ('Electronics'),
