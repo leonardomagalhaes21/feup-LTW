@@ -55,6 +55,16 @@ body > header h1 a {
     padding: 1em;
 }
 
+#user-icons {
+    margin-top: 1em;
+}
+  
+#user-icons img {
+    width: 40px;
+    height: 40px;
+    margin-right: 2em;
+}
+
 /* menu styling */
 
 #menu {
@@ -81,38 +91,13 @@ body > header h1 a {
     padding: 1em;
 }
 
-#menu li:nth-child(1) {
+#menu li:nth-child(odd) {
     border-top: 5px solid var(--black);
 }
 
-#menu li:nth-child(2) {
+#menu li:nth-child(even) {
     border-top: 5px solid var(--white);
 }
-
-#menu li:nth-child(3) {
-    border-top: 5px solid var(--black);
-}
-
-#menu li:nth-child(4) {
-    border-top: 5px solid var(--white);
-}
-
-#menu li:nth-child(5) {
-    border-top: 5px solid var(--black);
-}
-
-#menu li:nth-child(6) {
-    border-top: 5px solid var(--white);
-}
-
-#menu li:nth-child(7) {
-    border-top: 5px solid var(--black);
-}
-
-#menu li:nth-child(8) {
-    border-top: 5px solid var(--white);
-}
-
 
 /* search styling */
 

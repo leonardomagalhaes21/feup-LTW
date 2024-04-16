@@ -51,7 +51,7 @@ body > header h1{
     justify-content: center;
 }
 
-#signup {
+#signup, #user-icons {
     display: flex;
     justify-content: flex-end;
 }
