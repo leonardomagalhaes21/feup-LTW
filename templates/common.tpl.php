@@ -17,23 +17,23 @@
       <body>
         <header>
           <h1>
-              <a href="index.php">RE<strong>USE</strong></a>
+              <a href="../pages/index.php">RE<strong>USE</strong></a>
           </h1>
           <?php 
             if ($session->isLoggedIn()) {
           ?>
               <div id="user-icons">
-                <a href="messages.php"><img src="../docs/images/icon_chat.svg" alt="Messages"></a>
-                <a href="add_publication.php"><img src="../docs/images/icon_add.svg" alt="Add Publication"></a>
+                <a href="../pages/messages.php"><img src="../docs/images/icon_chat.svg" alt="Messages"></a>
+                <a href="../pages/add_publication.php"><img src="../docs/images/icon_add.svg" alt="Add Publication"></a>
                 <a href="#"><img src="../docs/images/icon_cart.svg" alt="Cart"></a>
-                <a href="user-profile.php"><img src="../docs/images/icon_profile.svg" alt="Profile"></a>
+                <a href="../pages/user-profile.php"><img src="../docs/images/icon_profile.svg" alt="Profile"></a>
               </div>
           <?php 
             } else {
           ?>
               <div id="signup">
-                  <a href="register.php">Register</a>
-                  <a href="login.php">Login</a>
+                  <a href="../pages/register.php">Register</a>
+                  <a href="../pages/login.php">Login</a>
               </div>
           <?php 
             }

@@ -9,14 +9,14 @@
 ?>
     <nav id="menu">
         <ul>
-            <li><a href="index.php">&#128187; Electronics</a></li>
-            <li><a href="index.php">&#128084; Clothing</a></li>
-            <li><a href="index.php">&#129681; Furniture</a></li>
-            <li><a href="index.php">&#128218; Books</a></li>
-            <li><a href="index.php">&#127918; Games</a></li>
-            <li><a href="index.php">&#9917; Sports</a></li>
-            <li><a href="index.php">&#128250; Houseware</a></li>
-            <li><a href="index.php">&#128259; Others</a></li>
+            <li><a href="../pages/index.php">&#128187; Electronics</a></li>
+            <li><a href="../pages/index.php">&#128084; Clothing</a></li>
+            <li><a href="../pages/index.php">&#129681; Furniture</a></li>
+            <li><a href="../pages/index.php">&#128218; Books</a></li>
+            <li><a href="../pages/index.php">&#127918; Games</a></li>
+            <li><a href="../pages/index.php">&#9917; Sports</a></li>
+            <li><a href="../pages/index.php">&#128250; Houseware</a></li>
+            <li><a href="../pages/index.php">&#128259; Others</a></li>
         </ul>
     </nav>
     <aside>
@@ -50,60 +50,60 @@
     <section id="items">
         <h2>Items for Sale</h2>
         <article>
-            <a href="item.php">
+            <a href="../pages/item.php">
                 <img src="https://picsum.photos/200?theme=phone" alt="Smartphone Image">
             </a>
             <div class="item-details">
                 <h2>
-                    <a href="item.php">Smartphone</a>
+                    <a href="../pages/item.php">Smartphone</a>
                 </h2>
                 <p>A gently used smartphone in excellent condition. Comes with charger and original packaging.</p>
                 <p>Price: 200€</p>
             </div>
         </article>
         <article>
-            <a href="item.php">
+            <a href="../pages/item.php">
                 <img src="https://picsum.photos/200?theme=sports" alt="Bicycle Image">
             </a>
             <div class="item-details">
                 <h2>
-                    <a href="item.php">Bicycle</a>
+                    <a href="../pages/item.php">Bicycle</a>
                 </h2>
                 <p>A sturdy bicycle perfect for commuting or leisure rides. Includes a basket for carrying items.</p>
                 <p>Price: 150€</p>
             </div>
         </article>
         <article>
-            <a href="item.php">
+            <a href="../pages/item.php">
                 <img src="https://picsum.photos/200?theme=technology" alt="Laptop Image">
             </a>
             <div class="item-details">
                 <h2>
-                    <a href="item.php">Laptop</a>
+                    <a href="../pages/item.php">Laptop</a>
                 </h2>
                 <p>A powerful laptop suitable for work and entertainment. Features a fast processor and ample storage.</p>
                 <p>Price: 800€</p>
             </div>
         </article>
         <article>
-            <a href="item.php">
+            <a href="../pages/item.php">
                 <img src="https://picsum.photos/200?theme=dress" alt="Dress Image">
             </a>
             <div class="item-details">
                 <h2>
-                    <a href="item.php">Elegant Dress</a>
+                    <a href="../pages/item.php">Elegant Dress</a>
                 </h2>
                 <p>An elegant dress perfect for formal occasions or evening events. Made from high-quality fabric with exquisite design details.</p>
                 <p>Price: 120€</p>
             </div>
         </article>
         <article>
-            <a href="item.php">
+            <a href="../pages/item.php">
                 <img src="https://picsum.photos/200?theme=shoes" alt="Stylish Shoes Image">
             </a>
             <div class="item-details">
                 <h2>
-                    <a href="item.php">Stylish Shoes</a>
+                    <a href="../pages/item.php">Stylish Shoes</a>
                 </h2>
                 <p>A pair of stylish and comfortable shoes suitable for everyday wear. Features durable material and a sleek design.</p>
                 <p>Price: 70€</p>

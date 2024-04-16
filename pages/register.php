@@ -18,24 +18,24 @@ require_once __DIR__ . '/../database/users.class.php';
 <body>
     <header>
         <h1>
-            <a href="index.php">RE<strong>USE</strong></a>
+            <a href="../pages/index.php">RE<strong>USE</strong></a>
         </h1>
         <div id="signup">
-            <a href="register.php">Register</a>
-            <a href="login.php">Login</a>
+            <a href="../pages/register.php">Register</a>
+            <a href="../pages/login.php">Login</a>
         </div>
     </header>
 
     <nav id="menu">
         <ul>
-            <li><a href="index.php">&#128187; Electronics</a></li>
-            <li><a href="index.php">&#128084; Clothing</a></li>
-            <li><a href="index.php">&#129681; Furniture</a></li>
-            <li><a href="index.php">&#128218; Books</a></li>
-            <li><a href="index.php">&#127918; Games</a></li>
-            <li><a href="index.php">&#9917; Sports</a></li>
-            <li><a href="index.php">&#128250; Houseware</a></li>
-            <li><a href="index.php">&#128259; Others</a></li>
+            <li><a href="../pages/index.php">&#128187; Electronics</a></li>
+            <li><a href="../pages/index.php">&#128084; Clothing</a></li>
+            <li><a href="../pages/index.php">&#129681; Furniture</a></li>
+            <li><a href="../pages/index.php">&#128218; Books</a></li>
+            <li><a href="../pages/index.php">&#127918; Games</a></li>
+            <li><a href="../pages/index.php">&#9917; Sports</a></li>
+            <li><a href="../pages/index.php">&#128250; Houseware</a></li>
+            <li><a href="../pages/index.php">&#128259; Others</a></li>
         </ul>
     </nav>
 

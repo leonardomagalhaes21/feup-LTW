@@ -17,7 +17,7 @@ require_once __DIR__ . '/../database/users.class.php';
 <body>
     <header>
         <h1>
-            <a href="index.php">RE<strong>USE</strong></a>
+            <a href="../pages/index.php">RE<strong>USE</strong></a>
         </h1>
     </header>
     <section id="user-profile">
