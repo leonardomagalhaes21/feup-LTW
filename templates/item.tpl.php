@@ -24,7 +24,7 @@
     </section>
 <?php } ?>
 
-<?php function drawItem(Item $item) { ?>
+<?php function drawItem(PDO $db, Item $item) { ?>
     <section id="item-details">
         <header>
             <button>&#8592; Go Back</button>
@@ -38,7 +38,11 @@
                 <p>Description: <?=$item->description?></p>
                 <p>Brand: <?=$item->brand?></p>
                 <p>Model: <?=$item->model?></p>
-                <p>Price: $<?=$item->price?></p>
+                <p>Price: $<?=$item->price?></p>             
+                <p>Category: <?=Category::getCategoryById($db, $item->idCategory)->categoryName?></p>
+                <p>Condition: <?=Condition::getConditionById($db, $item->idCondition)->conditionName?></p>
+                <p>Size: <?=Size::getSizeById($db, $item->idSize)->sizeName?></p>
+                <p>Seller: <?=User::getUserById($db, $item->idSeller)->name?></p>
             </div>
         </article>
     </section>

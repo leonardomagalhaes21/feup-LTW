@@ -20,6 +20,6 @@
 
     drawHeader($session);
     drawCategories($categories);
-    drawItem($item);
+    drawItem($db, $item);
     drawFooter();
 ?>

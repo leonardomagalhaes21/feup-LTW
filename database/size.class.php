@@ -12,14 +12,32 @@ class Size {
         $this->sizeName = $sizeName;
     }
 
-    public static function getSizeById(int $idSize): ?Size {
-        $db = getDatabaseConnection();
+    static function getSizes(PDO $db) : array {
+        $stmt = $db->prepare('SELECT * FROM Sizes');
+        $stmt->execute();
+    
+        $sizes = array();
+        
+        while ($size = $stmt->fetch()) {
+            $sizes[] = new Size(
+              $size['idSize'],
+              $size['sizeName']
+            );
+        }
+
+        return $sizes;
+    }
+
+    public static function getSizeById(PDO $db, int $idSize): ?Size {
         $stmt = $db->prepare('SELECT * FROM Sizes WHERE idSize = ?');
         $stmt->execute([$idSize]);
-        $size = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $size = $stmt->fetch();
+
         if ($size === false) {
             return null;
         }
+        
         return new Size($size['idSize'], $size['sizeName']);
     }
 }

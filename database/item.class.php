@@ -13,30 +13,30 @@ class Item {
     public string $name;
     public ?string $introduction;
     public ?string $description;
-    public ?Category $category;
+    public int $idCategory;
     public ?string $brand;
     public ?string $model;
-    public ?Size $size;
-    public ?Condition $condition;
+    public int $idSize;
+    public int $idCondition;
     public float $price;
     public bool $active;
 
-    public function __construct(int $idItem, int $idSeller, string $name, ?string $introduction, ?string $description, ?Category $category, ?string $brand, ?string $model, ?Size $size, ?Condition $condition, float $price, bool $active) {
+    public function __construct(int $idItem, int $idSeller, string $name, ?string $introduction, ?string $description, int $idCategory, ?string $brand, ?string $model, int $idSize, int $idCondition, float $price, bool $active) {
         $this->idItem = $idItem;
         $this->idSeller = $idSeller;
         $this->name = $name;
         $this->introduction = $introduction;
         $this->description = $description;
-        $this->category = $category;
+        $this->idCategory = $idCategory;
         $this->brand = $brand;
         $this->model = $model;
-        $this->size = $size;
-        $this->condition = $condition;
+        $this->idSize = $idSize;
+        $this->idCondition = $idCondition;
         $this->price = $price;
         $this->active = $active;
     }
 
-    static function getItems(PDO $db, int $count) : array { // mudar estes nulls
+    static function getItems(PDO $db, int $count) : array {
         $stmt = $db->prepare('SELECT * FROM Items LIMIT ?');
         $stmt->execute(array($count));
     
@@ -48,13 +48,13 @@ class Item {
             $item['name'],
             $item['introduction'],
             $item['description'],
-            null,
+            (int) $item['idCategory'],
             $item['brand'],
             $item['model'],
-            null,
-            null,
+            (int) $item['idSize'],
+            (int) $item['idCondition'],
             $item['price'],
-            true
+            (bool) $item['active']
           );
         }
     
@@ -76,13 +76,13 @@ class Item {
             $item['name'],
             $item['introduction'],
             $item['description'],
-            null,
+            (int) $item['idCategory'],
             $item['brand'],
             $item['model'],
-            null,
-            null,
+            (int) $item['idSize'],
+            (int) $item['idCondition'],
             $item['price'],
-            true
+            (bool) $item['active']
         );
     }
 
