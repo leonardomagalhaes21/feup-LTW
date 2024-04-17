@@ -1,7 +1,7 @@
 <?php 
   declare(strict_types = 1); 
 
-  require_once(__DIR__ . '/../database/item.class.php')
+  require_once(__DIR__ . '/../database/users.class.php')
 ?>
 
 <?php function drawProfile($user) { //meter condiçao para apenas mostrar o profile content se o id fôr o do user atual ?>
