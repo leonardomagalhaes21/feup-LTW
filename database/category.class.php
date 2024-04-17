@@ -12,14 +12,32 @@ class Category {
         $this->categoryName = $categoryName;
     }
 
-    public static function getCategoryById(int $idCategory): ?Category {
-        $db = getDatabaseConnection();
+    static function getCategories(PDO $db) : array {
+        $stmt = $db->prepare('SELECT * FROM Categories');
+        $stmt->execute();
+    
+        $categories = array();
+        
+        while ($category = $stmt->fetch()) {
+            $categories[] = new Category(
+              $category['idCategory'],
+              $category['categoryName']
+            );
+        }
+
+        return $categories;
+    }
+
+    public static function getCategoryById(PDO $db, int $idCategory): ?Category {
         $stmt = $db->prepare('SELECT * FROM Categories WHERE idCategory = ?');
         $stmt->execute([$idCategory]);
-        $category = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $category = $stmt->fetch();
+
         if ($category === false) {
             return null;
         }
+        
         return new Category($category['idCategory'], $category['categoryName']);
     }
 }

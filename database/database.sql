@@ -53,6 +53,7 @@ CREATE TABLE Items (
     model TEXT,
     idSize TEXT,
     idCondition TEXT,
+    price REAL NOT NULL,
     active BOOLEAN NOT NULL DEFAULT TRUE,
     --falta imagem
     FOREIGN KEY (idSeller) REFERENCES Users(idUser),
@@ -125,14 +126,14 @@ INSERT INTO Users (name, username, password, email, isAdmin) VALUES
 ('Neymar Jr', 'neymito', '$2y$10$4zN2fHMbSNK1tI82oS8JBeoFRJ6PNUPe6E6ZpUswZr5remJUk/0hu', 'ney@gmail.com', 0);
 
 INSERT INTO Categories (categoryName) VALUES
-('Electronics'),
-('Clothing'),
-('Furniture'),
-('Books'),
-('Games'),
-('Sports'),
-('Homeware'),
-('Others');
+('&#128187; Electronics'),
+('&#128084; Clothing'),
+('&#129681; Furniture'),
+('&#128218; Books'),
+('&#127918; Games'),
+('&#9917; Sports'),
+('&#128250; Homeware'),
+('&#128259; Others');
 
 INSERT INTO Sizes (sizeName) VALUES
 ('Small'),
@@ -143,16 +144,16 @@ INSERT INTO Conditions (conditionName) VALUES
 ('New'),
 ('Used');
 
-INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition)
-VALUES (1, 'Smartphone', 'gently used smartphone', 'A gently used smartphone in excellent condition. Comes with charger and original packaging.', 1, 'Samsung', 'Galaxy S10', 1, 2);
-INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition)
-VALUES (1, 'Bicycle', 'nice bicycle', 'A sturdy bicycle perfect for commuting or leisure rides. Includes a basket for carrying items.', 6, 'Schwinn', 'Cruiser', 3, 2);
-INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition)
-VALUES (1, 'Laptop', 'powerful laptop', 'A powerful laptop suitable for work and entertainment. Features a fast processor and ample storage.', 1, 'Dell', 'XPS 15', 2, 1);
-INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition)
-VALUES (1, 'Elegant Dress', 'elegant dress', 'An elegant dress perfect for formal occasions or evening events. Made from high-quality fabric with exquisite design details.', 2, 'Ralph Lauren', 'Elegant Evening Gown', 2, 1);
-INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition)
-VALUES (1, 'Stylish Shoes', 'nice shoes', 'A pair of stylish and comfortable shoes suitable for everyday wear. Features durable material and a sleek design.', 2, 'Nike', 'Air Max', 1, 1);
+INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price)
+VALUES (1, 'Smartphone', 'gently used smartphone', 'A gently used smartphone in excellent condition. Comes with charger and original packaging.', 1, 'Samsung', 'Galaxy S10', 1, 2, 200);
+INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price)
+VALUES (1, 'Bicycle', 'nice bicycle', 'A sturdy bicycle perfect for commuting or leisure rides. Includes a basket for carrying items.', 6, 'Schwinn', 'Cruiser', 3, 2, 150);
+INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price)
+VALUES (1, 'Laptop', 'powerful laptop', 'A powerful laptop suitable for work and entertainment. Features a fast processor and ample storage.', 1, 'Dell', 'XPS 15', 2, 1, 800);
+INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price)
+VALUES (1, 'Elegant Dress', 'elegant dress', 'An elegant dress perfect for formal occasions or evening events. Made from high-quality fabric with exquisite design details.', 2, 'Ralph Lauren', 'Elegant Evening Gown', 2, 1, 120);
+INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price)
+VALUES (1, 'Stylish Shoes', 'nice shoes', 'A pair of stylish and comfortable shoes suitable for everyday wear. Features durable material and a sleek design.', 2, 'Nike', 'Air Max', 1, 1, 70);
 
 INSERT INTO Chats (idSender, idRecipient, message) VALUES
 (2, 1, 'Hello come to al-nassr!'),
