@@ -12,14 +12,32 @@ class Condition {
         $this->conditionName = $conditionName;
     }
 
-    public static function getConditionById(int $idCondition): ?Condition {
-        $db = getDatabaseConnection();
+    static function getConditions(PDO $db) : array {
+        $stmt = $db->prepare('SELECT * FROM Conditions');
+        $stmt->execute();
+    
+        $conditions = array();
+        
+        while ($condition = $stmt->fetch()) {
+            $conditions[] = new Condition(
+              $condition['idCondition'],
+              $condition['conditionName']
+            );
+        }
+
+        return $conditions;
+    }
+
+    public static function getConditionById(PDO $db, int $idCondition): ?Condition {
         $stmt = $db->prepare('SELECT * FROM Conditions WHERE idCondition = ?');
         $stmt->execute([$idCondition]);
-        $condition = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $condition = $stmt->fetch();
+
         if ($condition === false) {
             return null;
         }
+        
         return new Condition($condition['idCondition'], $condition['conditionName']);
     }
 }
