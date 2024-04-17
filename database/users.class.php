@@ -33,7 +33,7 @@ class User {
     public static function getUserById(PDO $db, int $idUser): ?User {
         $stmt = $db->prepare('SELECT * FROM Users WHERE idUser = ?');
         $stmt->execute([$idUser]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $user = $stmt->fetch();
 
         if (!$user) {
             return null;

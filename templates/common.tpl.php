@@ -28,6 +28,7 @@
               <a href="../pages/messages.php"><img src="../docs/images/icon_chat.svg" alt="Messages"></a>
               <a href="../pages/add_publication.php"><img src="../docs/images/icon_add.svg" alt="Add Publication"></a>
               <a href="#"><img src="../docs/images/icon_cart.svg" alt="Cart"></a>
+          <!-- mudar em baixo para o user atual -->
               <a href="../pages/user-profile.php"><img src="../docs/images/icon_profile.svg" alt="Profile"></a>
             </div>
         <?php 

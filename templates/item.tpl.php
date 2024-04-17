@@ -42,7 +42,7 @@
                 <p>Category: <?=Category::getCategoryById($db, $item->idCategory)->categoryName?></p>
                 <p>Condition: <?=Condition::getConditionById($db, $item->idCondition)->conditionName?></p>
                 <p>Size: <?=Size::getSizeById($db, $item->idSize)->sizeName?></p>
-                <p>Seller: <?=User::getUserById($db, $item->idSeller)->name?></p>
+                <p>Seller: <a href="../pages/user-profile.php?idUser=<?=$item->idSeller?>"><?=User::getUserById($db, $item->idSeller)->name?></a></p>
             </div>
         </article>
     </section>
