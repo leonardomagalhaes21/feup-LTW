@@ -36,7 +36,7 @@ class Item {
         $this->active = $active;
     }
 
-    static function getItems(PDO $db, int $count) : array {
+    static function getItems(PDO $db, int $count) : array { // mudar estes nulls
         $stmt = $db->prepare('SELECT * FROM Items LIMIT ?');
         $stmt->execute(array($count));
     
@@ -61,27 +61,28 @@ class Item {
         return $items;
     }
 
-    public static function getItemById(int $idItem): ?Item {
-        $db = getDatabaseConnection();
+    public static function getItemById(PDO $db ,int $idItem): ?Item { // mudar estes nulls
         $stmt = $db->prepare('SELECT * FROM Items WHERE idItem = ?');
-        $stmt->execute([$idItem]);
+        $stmt->execute(array($idItem));
+
         $item = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($item === false) {
             return null;
         }
+
         return new Item(
             $item['idItem'],
             $item['idSeller'],
             $item['name'],
             $item['introduction'],
             $item['description'],
-            Category::getCategoryById($item['idCategory']),
+            null,
             $item['brand'],
             $item['model'],
-            Size::getSizeById($item['idSize']),
-            Condition::getConditionById($item['idCondition']),
+            null,
+            null,
             $item['price'],
-            $item['active']
+            true
         );
     }
 

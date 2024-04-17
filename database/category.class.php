@@ -28,7 +28,7 @@ class Category {
         return $categories;
     }
 
-    public static function getCategoryById(PDO $db, int $idCategory): Category {
+    public static function getCategoryById(PDO $db, int $idCategory): ?Category {
         $stmt = $db->prepare('SELECT * FROM Categories WHERE idCategory = ?');
         $stmt->execute([$idCategory]);
 
