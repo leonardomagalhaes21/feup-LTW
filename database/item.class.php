@@ -18,9 +18,10 @@ class Item {
     public ?string $model;
     public ?Size $size;
     public ?Condition $condition;
+    public float $price;
     public bool $active;
 
-    public function __construct(int $idItem, int $idSeller, string $name, ?string $introduction, ?string $description, ?Category $category, ?string $brand, ?string $model, ?Size $size, ?Condition $condition, bool $active) {
+    public function __construct(int $idItem, int $idSeller, string $name, ?string $introduction, ?string $description, ?Category $category, ?string $brand, ?string $model, ?Size $size, ?Condition $condition, float $price, bool $active) {
         $this->idItem = $idItem;
         $this->idSeller = $idSeller;
         $this->name = $name;
@@ -31,7 +32,33 @@ class Item {
         $this->model = $model;
         $this->size = $size;
         $this->condition = $condition;
+        $this->price = $price;
         $this->active = $active;
+    }
+
+    static function getItems(PDO $db, int $count) : array {
+        $stmt = $db->prepare('SELECT * FROM Items LIMIT ?');
+        $stmt->execute(array($count));
+    
+        $items = array();
+        while ($item = $stmt->fetch()) {
+          $items[] = new Item(
+            $item['idItem'],
+            $item['idSeller'],
+            $item['name'],
+            $item['introduction'],
+            $item['description'],
+            null,
+            $item['brand'],
+            $item['model'],
+            null,
+            null,
+            $item['price'],
+            true
+          );
+        }
+    
+        return $items;
     }
 
     public static function getItemById(int $idItem): ?Item {
@@ -53,6 +80,7 @@ class Item {
             $item['model'],
             Size::getSizeById($item['idSize']),
             Condition::getConditionById($item['idCondition']),
+            $item['price'],
             $item['active']
         );
     }
