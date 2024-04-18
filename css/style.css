@@ -102,6 +102,10 @@ body > header h1 a {
     border-top: 5px solid var(--white);
 }
 
+#hamburger, .hamburger {
+    display: none;
+}
+
 /* search styling */
 
 body > aside {

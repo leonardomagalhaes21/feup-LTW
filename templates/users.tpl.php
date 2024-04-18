@@ -12,7 +12,7 @@
         <div class="profile-info">
             <img src="https://picsum.photos/200" alt="<?=$user->name?> Profle Picture">
             <div class="profile-details">
-                <h2>Name: <?=$user->name?></h2>
+                <h2><?=$user->name?></h2>
                 <p>Email: <?=$user->email?></p>
             </div>
         </div>

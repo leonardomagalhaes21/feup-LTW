@@ -45,6 +45,9 @@
 
 <?php function drawCategories($categories) { ?>
     <nav id="menu">
+        <!-- just for the hamburguer menu in responsive layout -->
+        <input type="checkbox" id="hamburger"> 
+        <label class="hamburger" for="hamburger"></label>
         <ul>
             <?php foreach ($categories as $category) { ?>
                 <li><a href="../pages/index.php"><?= $category->categoryName ?></a></li>
