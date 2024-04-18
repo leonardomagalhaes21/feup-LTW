@@ -5,5 +5,6 @@
   $session = new Session();
   $session->logout();
 
-  header('Location: ' . $_SERVER['HTTP_REFERER']);
+  //ver melhor esta linha em baixo com o $_SERVER['HTTP_REFERER']
+  header('Location: ../pages');
 ?>
