@@ -54,6 +54,7 @@ body > header h1{
 #signup, #user-icons {
     display: flex;
     justify-content: flex-end;
+    flex-wrap: wrap;
 }
 
 
@@ -149,5 +150,6 @@ form {
 .profile-actions {
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
