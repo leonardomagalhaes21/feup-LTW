@@ -1,42 +1,26 @@
 <?php
-require_once __DIR__ . '/../database/connection.db.php';
-require_once __DIR__ . '/../database/users.class.php';
+    declare(strict_types = 1);
+
+    require_once(__DIR__ . '/../utils/session.php');
+    $session = new Session();
+
+
+    require_once(__DIR__ . '/../database/connection.db.php');
+    require_once(__DIR__ . '/../database/category.class.php');
+    require_once __DIR__ . '/../database/users.class.php';
+
+    require_once(__DIR__ . '/../templates/common.tpl.php');
+
+
+    $db = getDatabaseConnection();
+
+    $categories = Category::getCategories($db);
+
+    drawHeader($session);
+    drawCategories($categories);
+
+
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FEUP-reUSE - Login</title>
-    <link rel="icon" href="docs/images/REuse-mini.png">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/layout.css">
-    <link rel="stylesheet" href="../css/responsive.css">
-</head>
-<body>
-    <header>
-        <h1>
-            <a href="../pages/index.php">RE<strong>USE</strong></a>
-        </h1>
-        <div id="signup">
-            <a href="../pages/register.php">Register</a>
-            <a href="../pages/login.php">Login</a>
-        </div>
-    </header>
-
-    <nav id="menu">
-        <ul>
-            <li><a href="../pages/index.php">&#128187; Electronics</a></li>
-            <li><a href="../pages/index.php">&#128084; Clothing</a></li>
-            <li><a href="../pages/index.php">&#129681; Furniture</a></li>
-            <li><a href="../pages/index.php">&#128218; Books</a></li>
-            <li><a href="../pages/index.php">&#127918; Games</a></li>
-            <li><a href="../pages/index.php">&#9917; Sports</a></li>
-            <li><a href="../pages/index.php">&#128250; Houseware</a></li>
-            <li><a href="../pages/index.php">&#128259; Others</a></li>
-        </ul>
-    </nav>
 
     <section id="login">
         <h2>Login</h2>
@@ -47,6 +31,8 @@ require_once __DIR__ . '/../database/users.class.php';
             
             try {
                 if (User::userExists($username, $password)) {
+                    $_SESSION['id'] = User::getUserByUsername($db, $username)->idUser;
+                    $_SESSION['name'] = User::getUserByUsername($db, $username)->usename;
                     header("Location: index.php");
                     exit();
                 } else {

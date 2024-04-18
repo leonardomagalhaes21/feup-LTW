@@ -11,7 +11,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>FEUP-reUSE</title>
-      <link rel="icon" href="docs/images/REuse-mini.png">
+      <link rel="icon" href="../docs/images/REuse-mini.png">
       <link rel="stylesheet" href="../css/style.css">
       <link rel="stylesheet" href="../css/layout.css">
       <link rel="stylesheet" href="../css/responsive.css">
@@ -28,8 +28,7 @@
               <a href="../pages/messages.php"><img src="../docs/images/icon_chat.svg" alt="Messages"></a>
               <a href="../pages/add_publication.php"><img src="../docs/images/icon_add.svg" alt="Add Publication"></a>
               <a href="#"><img src="../docs/images/icon_cart.svg" alt="Cart"></a>
-          <!-- mudar em baixo para o user atual -->
-              <a href="../pages/user-profile.php"><img src="../docs/images/icon_profile.svg" alt="Profile"></a>
+              <a href="../pages/user-profile.php?idUser=<?=$_SESSION['id']?>"><img src="../docs/images/icon_profile.svg" alt="Profile"></a>
             </div>
         <?php 
           } else {

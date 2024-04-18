@@ -8,6 +8,9 @@
     
     --black: #000000;
     --white: #ffffff;
+
+    --red: #d11b2e;
+    --green: #26bf4a;
     
 }
 
@@ -230,6 +233,15 @@ input, select {
 .item-info p {
     margin-bottom: 0.5em;
 }
+
+span.active {
+    color: var(--green);
+}
+
+span.inactive {
+    color: var(--red);
+}
+
 
 /* user profile styling */
 
