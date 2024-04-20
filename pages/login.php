@@ -10,6 +10,7 @@
     require_once __DIR__ . '/../database/users.class.php';
 
     require_once(__DIR__ . '/../templates/common.tpl.php');
+    require_once(__DIR__ . '/../templates/signup.tpl.php');
 
 
     $db = getDatabaseConnection();
@@ -18,44 +19,6 @@
 
     drawHeader($session);
     drawCategories($categories);
-
-
+    drawLogin();
+    drawFooter();
 ?>
-
-    <section id="login">
-        <h2>Login</h2>
-        <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $username = $_POST["username"];
-            $password = $_POST["password"];
-            
-            try {
-                if (User::userExists($username, $password)) {
-                    $_SESSION['id'] = User::getUserByUsername($db, $username)->idUser;
-                    $_SESSION['name'] = User::getUserByUsername($db, $username)->usename;
-                    header("Location: index.php");
-                    exit();
-                } else {
-                    echo "Login failed";
-                }
-            } catch (PDOException $e) {
-                echo "Database error: " . $e->getMessage();
-            }
-        }
-        ?>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <label>
-                Username <input type="text" name="username" required>
-            </label>
-            <label>
-                Password <input type="password" name="password" required>
-            </label>
-            <button type="submit">Login</button>
-        </form>
-    </section>
-
-    <footer>
-        <p>&copy; FEUP-reUSE, 2024</p>
-    </footer>
-</body>
-</html>
