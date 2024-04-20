@@ -9,16 +9,25 @@
 
   $db = getDatabaseConnection();
 
-  $user = User::getCustomerWithPassword($db, $_POST['email'], $_POST['password']);
+  $username = $_POST["username"];
+  $password = $_POST["password"];
 
-  if ($customer) {
-    $session->setId($user->idUser);
-    $session->setName($user->name());
-    $session->addMessage('success', 'Login successful!');
-  } 
-  else {
-    $session->addMessage('error', 'Wrong password!');
+  try {
+      if (User::userExists($username, $password)) {
+          $_SESSION['id'] = User::getUserByUsername($db, $username)->idUser;
+          $_SESSION['name'] = User::getUserByUsername($db, $username)->username;
+          $session->addMessage('success', 'Login successful!');
+          header("Location: ../pages/index.php");
+          exit();
+      } else {
+          $session->addMessage('error', 'Wrong password!');
+          $_SESSION['error'] = 'Login failed.';
+          header("Location: ../pages/login.php");
+          exit();
+      }
+  } catch (PDOException $e) {
+      $session->addMessage('error', 'Database error: ' . $e->getMessage());
+      header("Location: ../pages/login.php");
+      exit();
   }
-
-  header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>
