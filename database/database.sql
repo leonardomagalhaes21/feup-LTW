@@ -43,7 +43,7 @@ CREATE TABLE Conditions (
 );
 
 CREATE TABLE Items (
-    idItem INTEGER PRIMARY KEY,
+    idItem INTEGER PRIMARY KEY AUTOINCREMENT,
     idSeller INTEGER NOT NULL,
     name TEXT NOT NULL,
     introduction TEXT,

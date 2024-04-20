@@ -12,21 +12,27 @@ class Category {
         $this->categoryName = $categoryName;
     }
 
-    static function getCategories(PDO $db) : array {
-        $stmt = $db->prepare('SELECT * FROM Categories');
-        $stmt->execute();
+    static function getCategories(PDO $db): array {
+        try {
+            $stmt = $db->prepare('SELECT * FROM Categories');
+            $stmt->execute();
     
-        $categories = array();
-        
-        while ($category = $stmt->fetch()) {
-            $categories[] = new Category(
-              $category['idCategory'],
-              $category['categoryName']
-            );
+            $categories = array();
+    
+            while ($category = $stmt->fetch()) {
+                $categories[] = new Category(
+                    $category['idCategory'],
+                    $category['categoryName']
+                );
+            }
+    
+            return $categories;
+        } catch (PDOException $e) {
+            echo "Error fetching categories: " . $e->getMessage();
+            return array(); 
         }
-
-        return $categories;
     }
+    
 
     public static function getCategoryById(PDO $db, int $idCategory): ?Category {
         $stmt = $db->prepare('SELECT * FROM Categories WHERE idCategory = ?');
