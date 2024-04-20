@@ -9,7 +9,7 @@ require_once 'users.class.php';
 
 class Item {
     public int $idItem;
-    public int $idSeller;
+    public ?int $idSeller;
     public string $name;
     public ?string $introduction;
     public ?string $description;
@@ -90,5 +90,20 @@ class Item {
         return User::getUserById(getDatabaseConnection(), $this->idSeller);
     }
 
+    public static function getHighestItemId(PDO $db): int {
+        $stmt = $db->prepare('SELECT MAX(idItem) FROM Items');
+        $stmt->execute();
+        $maxId = $stmt->fetch();
+        if (!empty($maxId) && isset($maxId[0])) {
+            return (int) $maxId[0];
+        } else {
+            return 0;
+        }
+    }
+
+    public function save(PDO $db) {
+        $stmt = $db->prepare('INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $stmt->execute(array($this->idSeller, $this->name, $this->introduction, $this->description, $this->idCategory, $this->brand, $this->model, $this->idSize, $this->idCondition, $this->price, $this->active));
+    }
 }
 ?>
