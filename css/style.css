@@ -325,6 +325,11 @@ span.inactive {
     margin-top: 0;
 }
 
+#admin #user-list {
+    max-height: 200px; 
+    overflow-y: auto;
+}
+
 #admin input, #admin select {
     padding: 0.5em;
     border: 1px solid var(--grey);
