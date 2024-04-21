@@ -126,12 +126,15 @@
                 </select>
             </label><br>
             <label>
-                Upload Main Image: <input type="file" id="main_image" name="main_image" required>
-            </label><br>
+                Upload Main Image: <input type="file" id="main_image" name="main_image" required onchange="previewMainImage(event)">
+            </label>
+            <img id="main_image_preview" src="#" alt="Main Image Preview">
             <label>
-                Upload Secondary Images(max 5):<input type="file" id="secondary_images" name="secondary_images[]" multiple>
+                Upload Secondary Images(max 5):<input type="file" id="secondary_images" name="secondary_images[]" multiple onchange="previewSecondaryImages(event)">
                 <span class="hint"> (Select multiple images from file browser)</span>
-            </label><br>
+            </label>
+
+            <div id="secondary_images_preview"></div>
             <button type="submit">Submit</button>
         </form>
     </section>

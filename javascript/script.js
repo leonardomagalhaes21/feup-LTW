@@ -9,6 +9,29 @@ function validateForm() {
     return true;
 }
 
+function previewMainImage(event) {
+    const mainImage = document.getElementById('main_image_preview');
+    mainImage.style.display = 'block';
+    mainImage.src = URL.createObjectURL(event.target.files[0]);
+}
+
+function previewSecondaryImages(event) {
+    const secondaryImagesDiv = document.getElementById('secondary_images_preview');
+    secondaryImagesDiv.innerHTML = '';
+
+    for (let i = 0; i < event.target.files.length; i++) {
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(event.target.files[i]);
+        img.alt = 'Secondary Image Preview';
+        img.style.width = '100px';
+        img.style.height = '100px';
+        img.style.objectFit = 'cover';
+        img.style.borderRadius = '10px';
+        img.style.marginRight = '1em';
+        img.style.marginBottom = '1em';
+        secondaryImagesDiv.appendChild(img);
+    }
+}
 
 function plusSlides(n) {
     showSlides(slideIndex += n);
