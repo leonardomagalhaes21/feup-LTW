@@ -30,7 +30,7 @@ drawHeader($session);
             ?>
             <label for="user_search">Search User:</label>
             <input type="text" id="user_search" name="user_search" placeholder="Search for a user...">
-            <div id="user_list" style="max-height: 200px; overflow-y: auto;">
+            <div id="user_list">
                 <?php
                 $users = User::getAllUsers($db);
 
