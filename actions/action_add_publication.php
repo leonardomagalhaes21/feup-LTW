@@ -28,8 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["image"])) {
     $imageName = uniqid() . '_' . basename($_FILES["image"]["name"]);
     $targetFile = $targetDir . $imageName;
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+    $tmp_imageName = $_FILES["image"]["tmp_name"];
 
-    $check = getimagesize($_FILES["image"]["tmp_name"]);
+    $check = getimagesize($tmp_imageName);
     if ($check === false) {
         $_SESSION['message'] = "File is not an image.";
         header("Location: ../pages/add_publication.php");
@@ -42,15 +43,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["image"])) {
         exit();
     }
 
-    if (
-        $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-    ) {
+    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
         $_SESSION['message'] = "Sorry, only JPG, JPEG, PNG files are allowed.";
         header("Location: ../pages/add_publication.php");
         exit();
     }
 
-    if (!move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+    if (!move_uploaded_file($tmp_imageName, $targetFile)) {
         $_SESSION['message'] = "Sorry, there was an error uploading your file.";
         header("Location: ../pages/add_publication.php");
         exit();
