@@ -101,6 +101,27 @@ class Item {
         }
     }
 
+    public function getMainImage(PDO $db) {
+        $stmt = $db->prepare('SELECT Images.imagePath 
+                              FROM Images 
+                              JOIN ItemImages ON Images.idImage = ItemImages.idImage 
+                              WHERE ItemImages.idItem = ? AND ItemImages.isMain = 1');
+        $stmt->execute(array($this->idItem));
+        $mainImage = $stmt->fetch();
+        return $mainImage ? $mainImage['imagePath'] : null;
+    }
+
+    function getSecondaryImages(PDO $db) {
+        $stmt = $db->prepare('SELECT Images.imagePath 
+                                FROM Images 
+                                JOIN ItemImages ON Images.idImage = ItemImages.idImage 
+                                WHERE ItemImages.idItem = ? AND ItemImages.isMain = 0');
+        $stmt->execute(array($this->idItem));
+        $images = $stmt->fetchAll();
+    
+        return $images;
+    }
+
     public function save(PDO $db) {
         $stmt = $db->prepare('INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
         $stmt->execute(array($this->idSeller, $this->name, $this->introduction, $this->description, $this->idCategory, $this->brand, $this->model, $this->idSize, $this->idCondition, $this->price, $this->active));

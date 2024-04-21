@@ -20,6 +20,6 @@
     drawHeader($session);
     drawCategories($categories);
     drawSearchAndFilter();
-    drawItems($items);
+    drawItems($items, $db);
     drawFooter();
 ?>
