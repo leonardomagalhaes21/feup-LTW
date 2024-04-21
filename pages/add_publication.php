@@ -29,7 +29,7 @@ $conditions = Condition::getConditions($db);
     ?>
     <section id = "add-publication">
         <h1>Add New Publication</h1>
-        <form action="../actions/action_add_publication.php" method="post" enctype="multipart/form-data">
+        <form action="../actions/action_add_publication.php" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
             <label>
                 Name: <input type="text" id="name" name="name" required>
             </label><br>
@@ -73,7 +73,11 @@ $conditions = Condition::getConditions($db);
                 </select>
             </label><br>
             <label>
-                Upload Image: <input type="file" id="image" name="image" required>
+                Upload Main Image: <input type="file" id="main_image" name="main_image" required>
+            </label><br>
+            <label>
+                Upload Secondary Images(max 5):<input type="file" id="secondary_images" name="secondary_images[]" multiple>
+                <span class="hint"> (Select multiple images from file browser)</span>
             </label><br>
             <button type="submit">Submit</button>
         </form>

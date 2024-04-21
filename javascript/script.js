@@ -1,3 +1,15 @@
+
+function validateForm() {
+    let secondaryImages = document.getElementById("secondary_images").files;
+    
+    if (secondaryImages.length > 5) {
+        alert("You can only upload 5 secondary images!");
+        return false;
+    }
+    return true;
+}
+
+
 function plusSlides(n) {
     showSlides(slideIndex += n);
 }
