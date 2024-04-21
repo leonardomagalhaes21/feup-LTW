@@ -306,6 +306,34 @@ span.inactive {
     background-color: var(--lightergrey)
 }
 
+/* admin styling */
+
+#admin {
+    margin-top: 1em;
+    gap: 1em;
+}
+
+#admin article {
+    flex: 1 1 30%;
+    background-color: var(--white);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 1em;
+}
+
+#admin h2 {
+    margin-top: 0;
+}
+
+#admin input, #admin select {
+    padding: 0.5em;
+    border: 1px solid var(--grey);
+    border-radius: 5px;
+    margin-bottom: 1em;
+
+}
+
+
 
 
 

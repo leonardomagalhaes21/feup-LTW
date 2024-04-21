@@ -7,13 +7,15 @@ class User {
     public string $username;
     public string $password;
     public string $email;
+    public bool $isAdmin;
 
-    public function __construct(int $idUser, string $name, string $username, string $password, string $email) {
+    public function __construct(int $idUser, string $name, string $username, string $password, string $email, bool $isAdmin) {
         $this->idUser = $idUser;
         $this->name = $name;
         $this->username = $username;
         $this->password = $password;
         $this->email = $email;
+        $this->isAdmin = $isAdmin;
     }
 
     public static function userExists(string $username, string $password){
@@ -39,7 +41,7 @@ class User {
             return null;
         }
 
-        return new User($user['idUser'], $user['name'], $user['username'], $user['password'], $user['email']);
+        return new User($user['idUser'], $user['name'], $user['username'], $user['password'], $user['email'], (bool) $user['isAdmin']);
     }
 
     public static function getUserByUsername(PDO $db, string $username): ?User {
@@ -51,7 +53,28 @@ class User {
             return null;
         }
 
-        return new User($user['idUser'], $user['name'], $user['username'], $user['password'], $user['email']);
+        return new User($user['idUser'], $user['name'], $user['username'], $user['password'], $user['email'], (bool) $user['isAdmin']);
+    }
+
+    public static function isAdmin(PDO $db, int $idUser): bool {
+        $stmt = $db->prepare('SELECT isAdmin FROM Users WHERE idUser = ?');
+        $stmt->execute(array($idUser));
+        $isAdmin = $stmt->fetch()['isAdmin'];
+
+        return (bool) $isAdmin;
+    }
+
+    public static function getAllUsers(PDO $db): array {
+        $stmt = $db->prepare('SELECT * FROM Users');
+        $stmt->execute();
+        $users = $stmt->fetchAll();
+
+        $result = [];
+        foreach ($users as $user) {
+            $result[] = new User($user['idUser'], $user['name'], $user['username'], $user['password'], $user['email'], (bool) $user['isAdmin']);
+        }
+
+        return $result;
     }
 }
 ?>

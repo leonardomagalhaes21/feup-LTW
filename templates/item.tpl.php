@@ -99,7 +99,7 @@
                 Model: <input type="text" id="model" name="model" required>
             </label><br>
             <label>
-                Price: <input type="number" id="price" name="price" required>
+                Price: <input type="number" id="price" name="price" step="0.01" required>
             </label><br>
             <label>
                 Category:

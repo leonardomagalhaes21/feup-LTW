@@ -153,3 +153,11 @@ form {
     flex-wrap: wrap;
 }
 
+/* admin layout */
+
+#admin {
+    grid-area: details;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}

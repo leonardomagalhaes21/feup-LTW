@@ -23,6 +23,9 @@
                 <a href="#">Wishlist</a>
                 <a href="#">Your Items</a>
                 <a href="#">Your Orders</a>
+                <?php if ($user->isAdmin) { ?>
+                    <a href="../pages/admin-page.php">Admin Panel</a>
+                <?php } ?>
                 <a href="../actions/action_logout.php">Logout</a>
             </div>
             <!-- completar depois com ajax -->

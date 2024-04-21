@@ -19,8 +19,6 @@ $items = Item::getItems($db, 10); //limitado a 10 items por enquanto
 
 drawHeader($session);
 drawCategories($categories);
-drawSearchAndFilter();
-drawItems($items, $db);
 
 // Buscar e exibir mensagens agrupadas por chat
 $userId = $_SESSION['idUser']; // ID do usuário atual
