@@ -32,23 +32,23 @@
         <h2>Item Overview</h2>
     </header>
     <article>
-        <?php 
-        $mainImagePath = $item->getMainImage($db);
-        
-        $secondaryImages = $item->getSecondaryImages($db);
-        ?>
-        <div class="slideshow">
             <?php 
-            echo '<div class="image-slide"><img src="' . $mainImagePath . '" alt="' . $item->name . '"></div>';
-
-            foreach ($secondaryImages as $image) {
-                echo '<div class="image-slide"><img src="' . $image['imagePath'] . '" alt="' . $item->name . '"></div>';
-            }
+            $mainImagePath = $item->getMainImage($db);
+            
+            $secondaryImages = $item->getSecondaryImages($db);
             ?>
-            <button onclick="plusSlides(-1)">&#10094;</button>
-            <button onclick="plusSlides(1)">&#10095;</button>
-
-        </div>
+            <div class="slideshow">
+                <?php 
+                echo '<div class="image-slide"><img src="' . $mainImagePath . '" alt="' . $item->name . '"></div>';
+    
+                foreach ($secondaryImages as $image) {
+                    echo '<div class="image-slide"><img src="' . $image['imagePath'] . '" alt="' . $item->name . '"></div>';
+                }
+                ?>
+                <button onclick="plusSlides(-1)">&#10094;</button>
+                <button onclick="plusSlides(1)">&#10095;</button>
+    
+            </div>
             <div class="item-info">
                 <h3><?=$item->name?></h3>
                 <h4><?=$item->introduction?></h4>
