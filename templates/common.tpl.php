@@ -15,6 +15,7 @@
       <link rel="stylesheet" href="../css/style.css">
       <link rel="stylesheet" href="../css/layout.css">
       <link rel="stylesheet" href="../css/responsive.css">
+      <script src="../javascript/script.js" defer></script>
     </head>
     <body>
       <header>

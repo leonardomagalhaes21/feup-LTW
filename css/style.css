@@ -167,20 +167,20 @@ input, select {
     padding: 0 1em;
 }
 
-/* signup styling */
+/* signup/add publication styling */
 
-#register, #login {
+#register, #login, #add-publication {
     padding: 1em;
 }
 
-#register form, #login form{
+#register form, #login form, #add-publication form{
     padding: 2em;
     background-color: var(--white);
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#register input, #login input{
+#register input, #login input, #add-publication input{
     width: 100%;
     padding: 0.5em;
     margin-bottom: 1em;
@@ -190,12 +190,12 @@ input, select {
     transition: border-color 0.3s;
 }
 
-#register input:focus, #login input:focus{
+#register input:focus, #login input:focus, #add-publication input:focus{
     outline: none;
     border-bottom: 1px solid var(--blue);
 }
 
-#register label:last-of-type, #login label:last-of-type{
+#register label:last-of-type, #login label:last-of-type, #add-publication label:last-of-type{
     margin-bottom: 2em;
 }
 

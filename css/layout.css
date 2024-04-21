@@ -98,9 +98,9 @@ form {
     flex-direction: row;
 }
 
-/* signup layout */
+/* signup/add publication layout */
 
-#register, #login {
+#register, #login, #add-publication {
     grid-area: signup;
     display: flex;
     flex-direction: column;
