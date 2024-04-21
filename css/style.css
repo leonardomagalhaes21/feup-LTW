@@ -204,6 +204,17 @@ input, select {
     color: var(--grey);
 }
 
+#add-publication #main_image_preview{
+    display: none;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 1em;
+    margin-bottom: 1em;
+
+}
+
 /* item styling */
 
 #item-details {
