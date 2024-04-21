@@ -27,14 +27,13 @@
 
 <?php function drawItem(PDO $db, Item $item) { ?>
     <section id="item-details">
-    <header>
-        <button>&#8592; Go Back</button>
-        <h2>Item Overview</h2>
-    </header>
-    <article>
+        <header>
+            <button>&#8592; Go Back</button>
+            <h2>Item Overview</h2>
+        </header>
+        <article>
             <?php 
             $mainImagePath = $item->getMainImage($db);
-            
             $secondaryImages = $item->getSecondaryImages($db);
             ?>
             <div class="slideshow">
@@ -47,7 +46,6 @@
                 ?>
                 <button onclick="plusSlides(-1)">&#10094;</button>
                 <button onclick="plusSlides(1)">&#10095;</button>
-    
             </div>
             <div class="item-info">
                 <h3><?=$item->name?></h3>
@@ -61,6 +59,16 @@
                 <p>Size: <?=Size::getSizeById($db, $item->idSize)->sizeName?></p>
                 <p>Seller: <a href="../pages/user-profile.php?idUser=<?=$item->idSeller?>"><?=User::getUserById($db, $item->idSeller)->name?></a></p>
                 <p><span class="<?=$item->active ? 'active' : 'inactive'?>"><?=$item->active ? 'Active' : 'Inactive'?></span></p>
+            </div>
+
+            <!-- Formulário de Mensagem -->
+            <div id="message-form">
+                <h3>Contact Seller</h3>
+                <form action="../utils/sendMessage.php" method="post">
+                    <input type="hidden" name="recipient" value="<?=$item->idSeller?>">
+                    <textarea name="message" rows="4" cols="50" placeholder="Enter your message here..."></textarea>
+                    <input type="submit" value="Send Message">
+                </form>
             </div>
         </article>  
     </section>

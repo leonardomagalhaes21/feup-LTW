@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 require_once 'connection.db.php';
-require_once 'user.class.php';
+require_once 'users.class.php';
 
 class Chat {
     public int $idChat;
@@ -34,6 +34,12 @@ class Chat {
             $chat['message'],
             $chat['timestamp']
         );
+    }
+
+    public static function getMessagesForChat(PDO $db, int $chatId): array {
+        $stmt = $db->prepare('SELECT * FROM Chats WHERE idChat = ?');
+        $stmt->execute([$chatId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getSender(): ?User {
