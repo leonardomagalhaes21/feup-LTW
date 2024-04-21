@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS Categories;
 DROP TABLE IF EXISTS Sizes;
 DROP TABLE IF EXISTS Conditions;
 DROP TABLE IF EXISTS Items;
+DROP TABLE IF EXISTS Images;
 DROP TABLE IF EXISTS Chats;
 DROP TABLE IF EXISTS Orders;
 DROP TABLE IF EXISTS OrderItems;
@@ -48,18 +49,31 @@ CREATE TABLE Items (
     name TEXT NOT NULL,
     introduction TEXT,
     description TEXT,
-    idCategory TEXT,
+    idCategory INTEGER,
     brand TEXT,
     model TEXT,
-    idSize TEXT,
-    idCondition TEXT,
+    idSize INTEGER,
+    idCondition INTEGER,
     price REAL NOT NULL,
     active BOOLEAN NOT NULL DEFAULT TRUE,
-    --falta imagem
     FOREIGN KEY (idSeller) REFERENCES Users(idUser),
     FOREIGN KEY (idCategory) REFERENCES Categories(idCategory),
     FOREIGN KEY (idSize) REFERENCES Sizes(idSize),
     FOREIGN KEY (idCondition) REFERENCES Conditions(idCondition)
+);
+
+CREATE TABLE Images (
+    idImage INTEGER PRIMARY KEY AUTOINCREMENT,
+    imagePath TEXT NOT NULL
+);
+
+CREATE TABLE ItemImages (
+    idItemImage INTEGER PRIMARY KEY AUTOINCREMENT,
+    idItem INTEGER NOT NULL,
+    idImage INTEGER NOT NULL,
+    isMain BOOLEAN NOT NULL DEFAULT FALSE,
+    FOREIGN KEY (idItem) REFERENCES Items(idItem),
+    FOREIGN KEY (idImage) REFERENCES Images(idImage)
 );
 
 CREATE TABLE Chats (
@@ -154,6 +168,27 @@ INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand,
 VALUES (1, 'Elegant Dress', 'elegant dress', 'An elegant dress perfect for formal occasions or evening events. Made from high-quality fabric with exquisite design details.', 2, 'Ralph Lauren', 'Elegant Evening Gown', 2, 1, 120);
 INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price)
 VALUES (1, 'Stylish Shoes', 'nice shoes', 'A pair of stylish and comfortable shoes suitable for everyday wear. Features durable material and a sleek design.', 2, 'Nike', 'Air Max', 1, 1, 70);
+
+
+INSERT INTO Images (imagePath) VALUES
+('../docs/itemImages/smartphone.jpg'),
+('../docs/itemImages/smartphone2.jpg'),
+('../docs/itemImages/smartphone3.jpg'),
+('../docs/itemImages/bicycle.jpg'),
+('../docs/itemImages/laptop.jpg'),
+('../docs/itemImages/dress.jpg'),
+('../docs/itemImages/shoes.jpg');
+
+
+INSERT INTO ItemImages (idItem, idImage, isMain) VALUES
+(1, 1, TRUE),
+(1, 2, FALSE),
+(1, 3, FALSE),
+(2, 4, TRUE),
+(3, 5, TRUE),
+(4, 6, TRUE),
+(5, 7, TRUE);
+
 
 INSERT INTO Chats (idSender, idRecipient, message) VALUES
 (2, 1, 'Hello come to al-nassr!'),

@@ -158,6 +158,9 @@ input, select {
     margin-right: 1em;
     padding: 1em;
     border-radius: 20px;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
 }
 
 #items .item-details {
@@ -213,6 +216,7 @@ input, select {
     height: 500px;
     margin-right: 1em;
     border-radius: 10px;
+    object-fit: contain;
 }
 
 #item-details header button {
