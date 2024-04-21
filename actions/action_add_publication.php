@@ -23,37 +23,78 @@ $idCondition = intval($_POST['idCondition'] ?? 0);
 $idSize = intval($_POST['idSize'] ?? 0);
 $idSeller = intval($_SESSION['id']);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["image"])) {
-    $targetDir = "../docs/itemImages/";
-    $imageName = uniqid() . '_' . basename($_FILES["image"]["name"]);
-    $targetFile = $targetDir . $imageName;
-    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+$targetDir = "../docs/itemImages/";
 
-    $check = getimagesize($_FILES["image"]["tmp_name"]);
-    if ($check === false) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["main_image"])) {
+    $mainImageName = uniqid() . '_' . basename($_FILES["main_image"]["name"]);
+    $mainImageTargetFile = $targetDir . $mainImageName;
+    $mainImageFileType = strtolower(pathinfo($mainImageTargetFile, PATHINFO_EXTENSION));
+
+    $tmp_mainImageName = $_FILES["main_image"]["tmp_name"];
+
+    $mainImageCheck = getimagesize($tmp_mainImageName);
+    if ($mainImageCheck === false) {
         $_SESSION['message'] = "File is not an image.";
         header("Location: ../pages/add_publication.php");
         exit();
     }
 
-    if ($_FILES["image"]["size"] > 500000) {
-        $_SESSION['message'] = "Your file is too large.";
+    if ($_FILES["main_image"]["size"] > 2000000) {
+        $_SESSION['message'] = "Main image file is too large.";
         header("Location: ../pages/add_publication.php");
         exit();
     }
 
-    if (
-        $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-    ) {
+    if ($mainImageFileType != "jpg" && $mainImageFileType != "png" && $mainImageFileType != "jpeg") {
         $_SESSION['message'] = "Sorry, only JPG, JPEG, PNG files are allowed.";
         header("Location: ../pages/add_publication.php");
         exit();
     }
 
-    if (!move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-        $_SESSION['message'] = "Sorry, there was an error uploading your file.";
+    if (!move_uploaded_file($tmp_mainImageName, $mainImageTargetFile)) {
+        $_SESSION['message'] = "Sorry, there was an error uploading your main image file.";
         header("Location: ../pages/add_publication.php");
         exit();
+    }
+}
+
+$secondaryImageIds = [];
+if (isset($_FILES["secondary_images"])) {
+
+    foreach ($_FILES["secondary_images"]["tmp_name"] as $key => $tmp_name) {
+        $secondaryImageName = uniqid() . '_' . basename($_FILES["secondary_images"]["name"][$key]);
+        $secondaryImageTargetFile = $targetDir . $secondaryImageName;
+        $secondaryImageFileType = strtolower(pathinfo($secondaryImageTargetFile, PATHINFO_EXTENSION));
+
+        $tmp_secondaryImageName = $_FILES["secondary_images"]["tmp_name"][$key];
+
+        $secondaryImageCheck = getimagesize($tmp_secondaryImageName);
+        if ($secondaryImageCheck === false) {
+            continue;
+        }
+
+        if ($_FILES["secondary_images"]["size"][$key] > 2000000) {
+            continue;
+        }
+
+        if ($secondaryImageFileType != "jpg" && $secondaryImageFileType != "png" && $secondaryImageFileType != "jpeg") {
+            continue;
+        }
+
+        if (!move_uploaded_file($tmp_secondaryImageName, $secondaryImageTargetFile)) {
+            continue;
+        }
+
+        try {
+            $stmt = $db->prepare('INSERT INTO Images (imagePath) VALUES (?)');
+            $stmt->execute(array($secondaryImageTargetFile));
+
+            $secondaryImageId = $db->lastInsertId();
+
+            $secondaryImageIds[] = $secondaryImageId;
+        } catch (PDOException $e) {
+            continue;
+        }
     }
 }
 
@@ -64,12 +105,17 @@ try {
     $lastInsertedItemId = $db->lastInsertId();
 
     $stmt = $db->prepare('INSERT INTO Images (imagePath) VALUES (?)');
-    $stmt->execute(array($targetFile));
+    $stmt->execute(array($mainImageTargetFile));
 
-    $lastInsertedImageId = $db->lastInsertId();
+    $mainImageId = $db->lastInsertId();
 
     $stmt = $db->prepare('INSERT INTO ItemImages (idItem, idImage, isMain) VALUES (?, ?, ?)');
-    $stmt->execute(array($lastInsertedItemId, $lastInsertedImageId, true));
+    $stmt->execute(array($lastInsertedItemId, $mainImageId, true));
+
+    foreach ($secondaryImageIds as $secondaryImageId) {
+        $stmt = $db->prepare('INSERT INTO ItemImages (idItem, idImage) VALUES (?, ?)');
+        $stmt->execute(array($lastInsertedItemId, $secondaryImageId));
+    }
 
     header("Location: ../pages/index.php");
 } catch (PDOException $e) {
