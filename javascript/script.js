@@ -9,19 +9,6 @@ function validateForm() {
     return true;
 }
 
-function filterUsers(select) {
-    const searchTerm = select.value.toLowerCase();
-    const options = select.getElementsByTagName('option');
-    
-    for (let i = 0; i < options.length; i++) {
-        const username = options[i].textContent.toLowerCase();
-        if (username.includes(searchTerm)) {
-            options[i].style.display = '';
-        } else {
-            options[i].style.display = 'none';
-        }
-    }
-}
 
 function previewMainImage(event) {
     const mainImage = document.getElementById('main_image_preview');
