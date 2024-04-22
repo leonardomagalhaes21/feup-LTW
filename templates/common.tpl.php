@@ -51,33 +51,44 @@
         <label class="hamburger" for="hamburger"></label>
         <ul>
             <?php foreach ($categories as $category) { ?>
-                <li><a href="../pages/index.php"><?= $category->categoryName ?></a></li>
+                <li><a href="../pages/index.php?category=<?= $category->idCategory ?>"><?= $category->categoryName ?></a></li>
             <?php } ?>
         </ul>
     </nav>
 <?php } ?>
 
-<?php function drawSearchAndFilter() {  // precisa de melhorar ?>
+<?php function drawSearchAndFilter($categories, $sizes, $conditions) { ?>
   <aside>
     <h2>Search and Filter</h2>
-    <form method="get">
-        <input type="text" id="search" placeholder="Search here">
+    <form method="get" action="index.php">
+        <input type="text" id="search" name="search" placeholder="Search here">
         <br>
         <label for="category">Category:</label>
-        <select id="category">
+        <select id="category" name="category">
             <option value="all" selected>All</option>
-            <option value="electronics">Electronics</option>
-            <option value="clothing">Clothing</option>
-            <option value="furniture">Furniture</option>
-            <option value="books">Books</option>
-            <option value="toys_games">Toys/Games</option>
-            <option value="sporting_goods">Sporting Goods</option>
-            <option value="home_appliances">Home Appliances</option>
-            <option value="others">Others</option>
+            <?php foreach ($categories as $category) { ?>
+                <option value="<?= $category->idCategory ?>"><?= $category->categoryName ?></option>
+            <?php } ?>
+        </select>
+        <br>
+        <label for="size">Size:</label>
+        <select id="size" name="size">
+            <option value="all" selected>All</option>
+            <?php foreach ($sizes as $size) { ?>
+                <option value="<?= $size->idSize ?>"><?= $size->sizeName ?></option>
+            <?php } ?>
+        </select>
+        <br>
+        <label for="condition">Condition:</label>
+        <select id="condition" name="condition">
+            <option value="all" selected>All</option>
+            <?php foreach ($conditions as $condition) { ?>
+                <option value="<?= $condition->idCondition ?>"><?= $condition->conditionName ?></option>
+            <?php } ?>
         </select>
         <br>
         <label for="order">Order by:</label>
-        <select id="order">
+        <select id="order" name="order">
             <option value="default" selected>Default</option>
             <option value="price_asc">Price: Low to High</option>
             <option value="price_desc">Price: High to Low</option>

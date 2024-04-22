@@ -122,6 +122,53 @@ class Item {
         return $images;
     }
 
+    public static function searchItems(PDO $db, $search, $category, $size, $condition, $order) {
+        $query = "SELECT * FROM Items WHERE name LIKE ?";
+        $search = $search . '%';
+        $parameters = array($search);
+        if ($category != 'all') {
+            $query = $query .  " AND idCategory = ?";
+            $parameters[] = $category;
+        }
+        if ($size != 'all') {
+            $query = $query . " AND idSize = ?";
+            $parameters[] = $size;
+        }
+        if ($condition != 'all') {
+            $query = $query . " AND idCondition = ?";
+            $parameters[] = $condition;
+        }
+
+        if ($order == 'price_asc') {
+            $query = $query . " ORDER BY price ASC";
+        } elseif ($order == 'price_desc') {
+            $query = $query . " ORDER BY price DESC";
+        }
+
+        $stmt = $db->prepare($query);
+        $stmt->execute($parameters);
+
+        $items = array();
+        while ($item = $stmt->fetch()) {
+            $items[] = new Item(
+                $item['idItem'],
+                $item['idSeller'],
+                $item['name'],
+                $item['introduction'],
+                $item['description'],
+                (int) $item['idCategory'],
+                $item['brand'],
+                $item['model'],
+                (int) $item['idSize'],
+                (int) $item['idCondition'],
+                $item['price'],
+                (bool) $item['active']
+            );
+        }
+
+        return $items;
+    }
+
     public function save(PDO $db) {
         $stmt = $db->prepare('INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
         $stmt->execute(array($this->idSeller, $this->name, $this->introduction, $this->description, $this->idCategory, $this->brand, $this->model, $this->idSize, $this->idCondition, $this->price, $this->active));
