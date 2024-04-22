@@ -123,9 +123,9 @@ class Item {
     }
 
     public static function searchItems(PDO $db, $search, $category, $size, $condition, $order) {
-        $query = "SELECT * FROM Items WHERE name LIKE ?";
+        $query = "SELECT * FROM Items WHERE (name LIKE ? OR brand LIKE ? OR model LIKE ?)";
         $search = $search . '%';
-        $parameters = array($search);
+        $parameters = array($search, $search, $search); // name,brand,model
         if ($category != 'all') {
             $query = $query .  " AND idCategory = ?";
             $parameters[] = $category;
@@ -141,7 +141,8 @@ class Item {
 
         if ($order == 'price_asc') {
             $query = $query . " ORDER BY price ASC";
-        } elseif ($order == 'price_desc') {
+        } 
+        elseif ($order == 'price_desc') {
             $query = $query . " ORDER BY price DESC";
         }
 
