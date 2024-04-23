@@ -5,20 +5,20 @@ require_once(__DIR__ . '/../utils/session.php');
 $session = new Session();
 
 require_once(__DIR__ . '/../database/connection.db.php');
-require_once(__DIR__ . '/../database/category.class.php');
+require_once(__DIR__ . '/../database/size.class.php');
+
+$db = getDatabaseConnection();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $categoryName = $_POST['categoryName'] ?? '';
+    $sizeId = isset($_POST['sizeId']) ? (int)$_POST['sizeId'] : 0;
 
-    if (empty($categoryName)) {
+    if ($sizeId === 0) {
+        header("Location: /pages/user-profile.php?idUser=" . $_SESSION['id']);
         exit();
     }
 
     try {
-        $db = getDatabaseConnection();
-        $highestCategoryId = Category::getHighestCategoryId($db);
-        $category = new Category($highestCategoryId + 1, $categoryName);
-        $category->save($db);
+        Size::removeSize($db, $sizeId);
         header("Location: /pages/user-profile.php?idUser=" . $_SESSION['id']);
         exit();
     } catch (PDOException $e) {

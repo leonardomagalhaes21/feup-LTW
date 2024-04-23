@@ -32,7 +32,19 @@ class Category {
             return array(); 
         }
     }
-    
+
+    public static function getCategoryByName(PDO $db, string $categoryName): ?Category {
+        $stmt = $db->prepare('SELECT * FROM Categories WHERE categoryName = ?');
+        $stmt->execute([$categoryName]);
+
+        $category = $stmt->fetch();
+
+        if ($category === false) {
+            return null;
+        }
+        
+        return new Category($category['idCategory'], $category['categoryName']);
+    }
 
     public static function getCategoryById(PDO $db, int $idCategory): ?Category {
         $stmt = $db->prepare('SELECT * FROM Categories WHERE idCategory = ?');
@@ -48,22 +60,23 @@ class Category {
     }
     public function save(PDO $db): void {
         try {
-            // Check if the category already exists in the database
-            $existingCategory = self::getCategoryById($db, $this->idCategory);
-    
-            if ($existingCategory) {
-                // If the category already exists, update its details
-                $stmt = $db->prepare('UPDATE Categories SET categoryName = ? WHERE idCategory = ?');
-                $stmt->execute([$this->categoryName, $this->idCategory]);
-            } else {
-                // If the category doesn't exist, insert a new record
-                $stmt = $db->prepare('INSERT INTO Categories (categoryName) VALUES (?)');
-                $stmt->execute([$this->categoryName]);
-            }
+            $stmt = $db->prepare('INSERT INTO Categories (categoryName) VALUES (?)');
+            $stmt->execute([$this->categoryName]);
         } catch (PDOException $e) {
-            // Handle any database errors here (you might want to log or display the error)
-            echo "Error saving category: " . $e->getMessage();
+            exit();
         }
+    }
+    
+    public static function getHighestCategoryId(PDO $db): int {
+        $stmt = $db->prepare('SELECT MAX(idCategory) FROM Categories');
+        $stmt->execute();
+        $id = $stmt->fetchColumn(); 
+        return $id !== null ? (int) $id : 0;
+    }
+    
+    public static function removeCategory(PDO $db, string $categoryName): void {
+        $stmt = $db->prepare('DELETE FROM Categories WHERE categoryName = ?');
+        $stmt->execute([$categoryName]);
     }
     
 }

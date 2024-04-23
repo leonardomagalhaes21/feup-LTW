@@ -40,5 +40,26 @@ class Condition {
         
         return new Condition($condition['idCondition'], $condition['conditionName']);
     }
+
+    public function save(PDO $db): void {
+        try {
+            $stmt = $db->prepare('INSERT INTO Conditions (conditionName) VALUES (?)');
+            $stmt->execute([$this->conditionName]);
+        } catch (PDOException $e) {
+            exit();
+        }
+    }
+
+    public static function getHighestConditionId(PDO $db): int {
+        $stmt = $db->prepare('SELECT MAX(idCondition) FROM Conditions');
+        $stmt->execute();
+        $id = $stmt->fetchColumn(); 
+        return $id !== null ? (int) $id : 0;
+    }
+
+    public static function removeCondition(PDO $db, int $idCondition): void {
+        $stmt = $db->prepare('DELETE FROM Conditions WHERE idCondition = ?');
+        $stmt->execute([$idCondition]);
+    }
 }
 ?>
