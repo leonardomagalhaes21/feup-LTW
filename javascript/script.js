@@ -1,6 +1,12 @@
 
 function validateForm() {
+    let introduction = document.getElementById("introduction").value;
     let secondaryImages = document.getElementById("secondary_images").files;
+
+    if (introduction.length > 50) {
+        alert("Introduction cannot exceed 50 characters!");
+        return false;
+    }
     
     if (secondaryImages.length > 5) {
         alert("You can only upload 5 secondary images!");

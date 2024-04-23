@@ -76,6 +76,14 @@ CREATE TABLE ItemImages (
     FOREIGN KEY (idImage) REFERENCES Images(idImage)
 );
 
+CREATE TABLE UserImage (
+    idUserImage INTEGER PRIMARY KEY AUTOINCREMENT,
+    idUser INTEGER NOT NULL,
+    idImage INTEGER NOT NULL,
+    FOREIGN KEY (idUser) REFERENCES Users(idUser),
+    FOREIGN KEY (idImage) REFERENCES Images(idImage)
+);
+
 CREATE TABLE Chats (
     idChat INTEGER PRIMARY KEY,
     idSender INTEGER NOT NULL,
@@ -177,8 +185,8 @@ INSERT INTO Images (imagePath) VALUES
 ('../docs/itemImages/bicycle.jpg'),
 ('../docs/itemImages/laptop.jpg'),
 ('../docs/itemImages/dress.jpg'),
-('../docs/itemImages/shoes.jpg');
-
+('../docs/itemImages/shoes.jpg'),
+('../docs/userImages/ronaldo.jpg');
 
 INSERT INTO ItemImages (idItem, idImage, isMain) VALUES
 (1, 1, TRUE),
@@ -189,6 +197,8 @@ INSERT INTO ItemImages (idItem, idImage, isMain) VALUES
 (4, 6, TRUE),
 (5, 7, TRUE);
 
+INSERT INTO UserImage (idUser, idImage) VALUES
+(2, 8);
 
 INSERT INTO Chats (idSender, idRecipient, message) VALUES
 (2, 1, 'Hello come to al-nassr!'),
@@ -196,7 +206,7 @@ INSERT INTO Chats (idSender, idRecipient, message) VALUES
 
 INSERT INTO Orders (idBuyer, totalPrice) VALUES
 (2, 200.00),
-(2, 800.00);
+(2, 150.00);
 
 INSERT INTO OrderItems (idOrder, idItem) VALUES
 (1, 1),

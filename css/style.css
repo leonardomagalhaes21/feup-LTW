@@ -11,7 +11,7 @@
 
     --red: #d11b2e;
     --green: #26bf4a;
-    
+    --yellow: #f59918;
 }
 
 /* common link styling */
@@ -148,6 +148,7 @@ input, select {
     margin-bottom: 1em;
     border-radius: 10px;
     transition: 0.3s ease;
+    max-height: 15em;
 }
 
 #items > article:hover {
@@ -204,7 +205,7 @@ input, select {
     color: var(--grey);
 }
 
-#add-publication #main_image_preview{
+#main_image_preview{
     display: none;
     width: 100px;
     height: 100px;
@@ -338,9 +339,65 @@ span.inactive {
 
 }
 
+/* order styling */
 
+#orders {
+    gap: 2em;
+}
 
+#orders article {
+    background-color: var(--lightgrey);
+    margin-bottom: 1em;
+    border-radius: 10px;
+    transition: 0.3s ease;
+    padding: 1em;
+}
 
+#orders > article:hover {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.status.pending {
+    color: var(--yellow);
+}
+
+.status.done {
+    color: var(--green);
+}
+
+.status.canceled {
+    color: var(--red);
+}
+
+/* edit profile styling */
+
+#edit-profile-form{
+    width: 25em;
+    margin: 0 auto;
+    padding: 2em;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#edit-profile-form input{
+    width: 100%;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    border: none;
+    border-bottom: 1px solid var(--black);
+    border-radius: 0;
+    transition: border-color 0.3s;
+}
+
+#edit-profile-form input:focus{
+    outline: none;
+    border-bottom: 1px solid var(--blue);
+}
+
+#edit-profile-form label:last-of-type{
+    margin-bottom: 2em;
+}
 
 
 

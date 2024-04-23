@@ -4,13 +4,18 @@
   require_once(__DIR__ . '/../database/users.class.php')
 ?>
 
-<?php function drawProfile($user) {
+<?php function drawProfile($db, $user) {
         $loggedId = $_SESSION['id'] ?? null;
         $condition = $loggedId === $user->idUser;
+        $profileImage = $user->getProfileImage($db);
     ?>
     <section id="user-profile">
         <div class="profile-info">
-            <img src="https://picsum.photos/200" alt="<?=$user->name?> Profle Picture">
+            <?php if ($profileImage) { ?>
+                <img src="<?=$profileImage?>" alt="<?=$user->name?> Profle Picture">
+            <?php } else { ?>
+                <img src="../docs/images/default_profile_picture.png" alt="<?=$user->name?> Profle Picture">
+            <?php } ?>
             <div class="profile-details">
                 <h2><?=$user->name?></h2>
                 <p>Email: <?=$user->email?></p>
@@ -45,6 +50,9 @@
                             }
                         });
                     }
+
+                    loadContent('profile_user_details.php');
+
                     $('#user-details').click(function(e) {
                         e.preventDefault(); 
                         loadContent('profile_user_details.php'); 
