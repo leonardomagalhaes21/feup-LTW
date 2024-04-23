@@ -19,9 +19,8 @@
     $categories = Category::getCategories($db);
     $sizes = Size::getSizes($db);
     $conditions = Condition::getConditions($db);
-    $items = Item::getItems($db, 10); //limitado a 10 items por enquanto
 
-    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    if ($_SERVER["REQUEST_METHOD"] === "GET") {
         
         $search = isset($_GET["search"]) ? $_GET["search"] : '';
         $category = isset($_GET["category"]) ? $_GET["category"] : 'all';
@@ -29,10 +28,15 @@
         $condition = isset($_GET["condition"]) ? $_GET["condition"] : 'all';
         $order = isset($_GET["order"]) ? $_GET["order"] : 'default';
 
-        $items = Item::searchItems($db, $search, $category, $size, $condition, $order);
+        if(empty($search) && $category === 'all' && $size === 'all' && $condition === 'all' && $order === 'default') {
+            $items = Item::getFeaturedItems($db);
+        } 
+        else {
+            $items = Item::searchItems($db, $search, $category, $size, $condition, $order);
+        }
     } 
     else {
-        $items = Item::getItems($db, 10);
+        $items = Item::getFeaturedItems($db);
     }
 
     drawHeader($session);

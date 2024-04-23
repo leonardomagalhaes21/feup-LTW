@@ -56,6 +56,7 @@ CREATE TABLE Items (
     idCondition INTEGER,
     price REAL NOT NULL,
     active BOOLEAN NOT NULL DEFAULT TRUE,
+    featured BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (idSeller) REFERENCES Users(idUser),
     FOREIGN KEY (idCategory) REFERENCES Categories(idCategory),
     FOREIGN KEY (idSize) REFERENCES Sizes(idSize),
@@ -166,16 +167,16 @@ INSERT INTO Conditions (conditionName) VALUES
 ('New'),
 ('Used');
 
-INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price)
-VALUES (1, 'Smartphone', 'gently used smartphone', 'A gently used smartphone in excellent condition. Comes with charger and original packaging.', 1, 'Samsung', 'Galaxy S10', 1, 2, 200);
-INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price)
-VALUES (1, 'Bicycle', 'nice bicycle', 'A sturdy bicycle perfect for commuting or leisure rides. Includes a basket for carrying items.', 6, 'Schwinn', 'Cruiser', 3, 2, 150);
-INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price)
-VALUES (1, 'Laptop', 'powerful laptop', 'A powerful laptop suitable for work and entertainment. Features a fast processor and ample storage.', 1, 'Dell', 'XPS 15', 2, 1, 800);
-INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price)
-VALUES (1, 'Elegant Dress', 'elegant dress', 'An elegant dress perfect for formal occasions or evening events. Made from high-quality fabric with exquisite design details.', 2, 'Ralph Lauren', 'Elegant Evening Gown', 2, 1, 120);
-INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price)
-VALUES (1, 'Stylish Shoes', 'nice shoes', 'A pair of stylish and comfortable shoes suitable for everyday wear. Features durable material and a sleek design.', 2, 'Nike', 'Air Max', 1, 1, 70);
+INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, featured)
+VALUES (1, 'Smartphone', 'gently used smartphone', 'A gently used smartphone in excellent condition. Comes with charger and original packaging.', 1, 'Samsung', 'Galaxy S10', 1, 2, 200, 1);
+INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, featured)
+VALUES (1, 'Bicycle', 'nice bicycle', 'A sturdy bicycle perfect for commuting or leisure rides. Includes a basket for carrying items.', 6, 'Schwinn', 'Cruiser', 3, 2, 150, 1);
+INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, featured)
+VALUES (1, 'Laptop', 'powerful laptop', 'A powerful laptop suitable for work and entertainment. Features a fast processor and ample storage.', 1, 'Dell', 'XPS 15', 2, 1, 800, 1);
+INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, featured)
+VALUES (1, 'Elegant Dress', 'elegant dress', 'An elegant dress perfect for formal occasions or evening events. Made from high-quality fabric with exquisite design details.', 2, 'Ralph Lauren', 'Elegant Evening Gown', 2, 1, 120, 1);
+INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, featured)
+VALUES (1, 'Stylish Shoes', 'nice shoes', 'A pair of stylish and comfortable shoes suitable for everyday wear. Features durable material and a sleek design.', 2, 'Nike', 'Air Max', 1, 1, 70, 1);
 
 
 INSERT INTO Images (imagePath) VALUES

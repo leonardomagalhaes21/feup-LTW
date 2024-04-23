@@ -57,7 +57,8 @@ class Order {
                 $item['idSize'],
                 $item['idCondition'],
                 $item['price'],
-                (bool) $item['active']
+                (bool) $item['active'],
+                (bool) $item['featured']
             );
         }
         return $items;
