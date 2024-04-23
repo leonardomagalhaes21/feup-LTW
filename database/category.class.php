@@ -46,5 +46,25 @@ class Category {
         
         return new Category($category['idCategory'], $category['categoryName']);
     }
+    public function save(PDO $db): void {
+        try {
+            // Check if the category already exists in the database
+            $existingCategory = self::getCategoryById($db, $this->idCategory);
+    
+            if ($existingCategory) {
+                // If the category already exists, update its details
+                $stmt = $db->prepare('UPDATE Categories SET categoryName = ? WHERE idCategory = ?');
+                $stmt->execute([$this->categoryName, $this->idCategory]);
+            } else {
+                // If the category doesn't exist, insert a new record
+                $stmt = $db->prepare('INSERT INTO Categories (categoryName) VALUES (?)');
+                $stmt->execute([$this->categoryName]);
+            }
+        } catch (PDOException $e) {
+            // Handle any database errors here (you might want to log or display the error)
+            echo "Error saving category: " . $e->getMessage();
+        }
+    }
+    
 }
 ?>

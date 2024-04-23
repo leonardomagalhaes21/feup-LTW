@@ -57,9 +57,13 @@ drawHeader($session);
         <div>
             <h3>Add New Category</h3>
             <form action="../actions/action_add_category.php" method="post">
+                <label for="categoryName">Category Name:</label>
+                <input type="text" id="categoryName" name="categoryName" required>
+                <button type="submit">Add Category</button>
             </form>
         </div>
     </article>
+
 
     <article>
         <h2>System Operation Overview</h2>

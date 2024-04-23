@@ -42,6 +42,12 @@ class Chat {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function getMessagesInvolvingUser(PDO $db, int $userId): array {
+        $stmt = $db->prepare('SELECT * FROM Chats WHERE idSender = ? OR idRecipient = ?');
+        $stmt->execute([$userId, $userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } 
+
     public function getSender(): ?User {
         return User::getUserById(getDatabaseConnection(), $this->idSender);
     }

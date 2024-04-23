@@ -4,9 +4,12 @@
   require_once(__DIR__ . '/../database/item.class.php')
 ?>
 
-<?php function drawItems(array $items, PDO $db) { ?>
+<?php function drawItems(array $items, PDO $db, bool $drawHeader) { ?>
+
     <section id="items">
+        <?php if ($drawHeader){ ?>
         <h2>Items for Sale</h2>
+        <?php } ?>
         <?php foreach ($items as $item) { ?>
             <article>
                 <?php $mainImagePath = $item->getMainImage($db) ?>
@@ -139,3 +142,18 @@
         </form>
     </section>
 <?php } ?>
+
+<?php function drawOrders(array $orders, PDO $db) { ?>
+
+<section id="orders">
+    <?php foreach ($orders as $order) { ?>
+        <article>
+            <p> <?=$order->totalPrice?> </p>
+            <p> <?=$order->orderDate?> </p>
+            <p> <?=$order->status?> </p>
+            <!-- meter items da order -->
+        </article>
+    <?php } ?>
+</section>
+<?php } ?>
+

@@ -38,6 +38,6 @@
     drawHeader($session);
     drawCategories($categories);
     drawSearchAndFilter($categories, $sizes, $conditions);
-    drawItems($items, $db);
+    drawItems($items, $db, true);
     drawFooter();
 ?>
