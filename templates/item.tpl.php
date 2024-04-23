@@ -20,7 +20,19 @@
                     <h2>
                         <a href="../pages/item.php?idItem=<?=$item->idItem?>"><?=$item->name?></a>
                     </h2>
-                    <p><?=$item->description?></p>
+                    <h3>
+                        <?php if (!empty($item->brand) && !empty($item->model)) {
+                            echo "{$item->brand} - {$item->model}";
+                        } 
+                        elseif (!empty($item->brand)) {
+                            echo $item->brand;
+                        } 
+                        elseif (!empty($item->model)) {
+                            echo $item->model;
+                        }
+                        ?>
+                    </h3>
+                    <p><?=$item->introduction?></p>
                     <p>Price: $<?=$item->price?></p>
                 </div>
             </article>
@@ -53,7 +65,7 @@
             <div class="item-info">
                 <h3><?=$item->name?></h3>
                 <h4><?=$item->introduction?></h4>
-                <p>Description: <?=$item->description?></p>
+                <p><?=$item->description?></p>
                 <p>Brand: <?=$item->brand?></p>
                 <p>Model: <?=$item->model?></p>
                 <p>Price: $<?=$item->price?></p>             
@@ -96,10 +108,10 @@
                 Introduction: <input type="text" id="introduction" name="introduction" required>
             </label><br>
             <label>
-                Brand: <input type="text" id="brand" name="brand" required>
+                Brand: <input type="text" id="brand" name="brand">
             </label><br>
             <label>
-                Model: <input type="text" id="model" name="model" required>
+                Model: <input type="text" id="model" name="model">
             </label><br>
             <label>
                 Price: <input type="number" id="price" name="price" step="0.01" required>

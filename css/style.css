@@ -369,6 +369,36 @@ span.inactive {
     color: var(--red);
 }
 
+/* edit profile styling */
+
+#edit-profile-form{
+    width: 25em;
+    margin: 0 auto;
+    padding: 2em;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#edit-profile-form input{
+    width: 100%;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    border: none;
+    border-bottom: 1px solid var(--black);
+    border-radius: 0;
+    transition: border-color 0.3s;
+}
+
+#edit-profile-form input:focus{
+    outline: none;
+    border-bottom: 1px solid var(--blue);
+}
+
+#edit-profile-form label:last-of-type{
+    margin-bottom: 2em;
+}
+
 
 
 /* font styling */

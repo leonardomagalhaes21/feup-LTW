@@ -30,7 +30,7 @@
         Profile Picture: <input type="file" id="main_image" name="main_image" onchange="previewMainImage(event)">
     </label>
     <img id="main_image_preview" src="#" alt="Profile Image Preview">
-    <input type="submit" name="submit" value="Save Changes">
+    <button type="submit">Save changes</button>
 </form>
 
 
