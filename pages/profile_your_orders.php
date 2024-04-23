@@ -12,12 +12,15 @@ require_once (__DIR__ . '/../database/order.class.php');
 require_once(__DIR__ . '/../templates/common.tpl.php');
 require_once(__DIR__ . '/../templates/users.tpl.php');
 require_once(__DIR__ . '/../templates/item.tpl.php');
+require_once(__DIR__ . '/../templates/order.tpl.php');
 
 $db = getDatabaseConnection();
 
-$user = User::getUserById($db, $_SESSION['id']);
+$userId = $session->getId();
 
-$orders = Item::getOrdersFromUser($db, $_SESSION['id']);
+$user = User::getUserById($db, $userId);
+
+$orders = Item::getOrdersFromUser($db, $userId);
 
 drawOrders($orders, $db);
 

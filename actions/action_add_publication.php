@@ -9,7 +9,6 @@
 
     $db = getDatabaseConnection();
 
-    $message = '';
 
     $idItem = Item::getHighestItemId($db) + 1;
     $name = $_POST['name'] ?? '';

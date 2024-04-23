@@ -161,3 +161,19 @@ form {
     align-items: center;
     flex-wrap: wrap;
 }
+
+/* order layout */
+
+#orders {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+/* edit profile layout */
+
+#edit-profile-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
