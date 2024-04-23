@@ -11,7 +11,7 @@
 
     --red: #d11b2e;
     --green: #26bf4a;
-    
+    --yellow: #f59918;
 }
 
 /* common link styling */
@@ -148,6 +148,7 @@ input, select {
     margin-bottom: 1em;
     border-radius: 10px;
     transition: 0.3s ease;
+    max-height: 15em;
 }
 
 #items > article:hover {
@@ -204,7 +205,7 @@ input, select {
     color: var(--grey);
 }
 
-#add-publication #main_image_preview{
+#main_image_preview{
     display: none;
     width: 100px;
     height: 100px;
@@ -338,9 +339,35 @@ span.inactive {
 
 }
 
+/* order styling */
 
+#orders {
+    gap: 2em;
+}
 
+#orders article {
+    background-color: var(--lightgrey);
+    margin-bottom: 1em;
+    border-radius: 10px;
+    transition: 0.3s ease;
+    padding: 1em;
+}
 
+#orders > article:hover {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.status.pending {
+    color: var(--yellow);
+}
+
+.status.done {
+    color: var(--green);
+}
+
+.status.canceled {
+    color: var(--red);
+}
 
 
 

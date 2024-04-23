@@ -143,17 +143,4 @@
     </section>
 <?php } ?>
 
-<?php function drawOrders(array $orders, PDO $db) { ?>
-
-<section id="orders">
-    <?php foreach ($orders as $order) { ?>
-        <article>
-            <p> <?=$order->totalPrice?> </p>
-            <p> <?=$order->orderDate?> </p>
-            <p> <?=$order->status?> </p>
-            <!-- meter items da order -->
-        </article>
-    <?php } ?>
-</section>
-<?php } ?>
 

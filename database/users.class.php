@@ -76,6 +76,17 @@ class User {
 
         return $result;
     }
+
+    public function getProfileImage(PDO $db): ?string {
+        $stmt = $db->prepare('SELECT imagePath FROM UserImage JOIN Images ON UserImage.idImage = Images.idImage WHERE idUser = ?');
+        $stmt->execute(array($this->idUser));
+        $imagePath = $stmt->fetch();
+        if ($imagePath)
+            $imagePath = $imagePath['imagePath'];
+    
+        return $imagePath ? $imagePath : null;
+    }
+
     public static function save(PDO $db, $name, $email, $idUser) {
         $stmt = $db->prepare('UPDATE Users SET name = ?, email = ? WHERE idUser = ?');
         $stmt->execute(array($name, $email, $idUser));

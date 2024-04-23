@@ -161,3 +161,11 @@ form {
     align-items: center;
     flex-wrap: wrap;
 }
+
+/* order layout */
+
+#orders {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}

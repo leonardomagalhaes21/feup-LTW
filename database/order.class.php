@@ -40,5 +40,28 @@ class Order {
         return User::getUserById(getDatabaseConnection(), $this->idBuyer);
     }
 
+    public function getItems(PDO $db): array {
+        $stmt = $db->prepare('SELECT Items.* FROM Items INNER JOIN OrderItems ON Items.idItem = OrderItems.idItem WHERE OrderItems.idOrder = ?');
+        $stmt->execute(array($this->idOrder));
+        $items = array();
+        while ($item = $stmt->fetch()) {
+            $items[] = new Item(
+                $item['idItem'],
+                $item['idSeller'],
+                $item['name'],
+                $item['introduction'],
+                $item['description'],
+                $item['idCategory'],
+                $item['brand'],
+                $item['model'],
+                $item['idSize'],
+                $item['idCondition'],
+                $item['price'],
+                (bool) $item['active']
+            );
+        }
+        return $items;
+    }
+
 }
 ?>
