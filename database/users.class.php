@@ -76,5 +76,10 @@ class User {
 
         return $result;
     }
+    public static function save(PDO $db, $name, $email, $idUser) {
+        $stmt = $db->prepare('UPDATE Users SET name = ?, email = ? WHERE idUser = ?');
+        $stmt->execute(array($name, $email, $idUser));
+    }
+    
 }
 ?>

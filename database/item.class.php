@@ -124,7 +124,7 @@ class Item {
 
     public static function searchItems(PDO $db, $search, $category, $size, $condition, $order) {
         $query = "SELECT * FROM Items WHERE (name LIKE ? OR brand LIKE ? OR model LIKE ?)";
-        $search = $search . '%';
+        $search = '%' . $search . '%';
         $parameters = array($search, $search, $search); // name,brand,model
         if ($category != 'all') {
             $query = $query .  " AND idCategory = ?";
@@ -174,5 +174,77 @@ class Item {
         $stmt = $db->prepare('INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
         $stmt->execute(array($this->idSeller, $this->name, $this->introduction, $this->description, $this->idCategory, $this->brand, $this->model, $this->idSize, $this->idCondition, $this->price, $this->active));
     }
+    
+    public static function getWishlistItems(PDO $db, int $userId): array {
+        $stmt = $db->prepare('SELECT *
+                              FROM Items
+                              JOIN Wishlists ON Items.idItem = Wishlists.idItem
+                              WHERE Wishlists.idUser = ?');
+        $stmt->execute([$userId]);
+        $wishlistItems = [];
+        while ($item = $stmt->fetch()) {
+            $wishlistItems[] = new Item(
+                $item['idItem'],
+                $item['idSeller'],
+                $item['name'],
+                $item['introduction'],
+                $item['description'],
+                (int) $item['idCategory'],
+                $item['brand'],
+                $item['model'],
+                (int) $item['idSize'],
+                (int) $item['idCondition'],
+                $item['price'],
+                (bool) $item['active']
+            );;
+        }
+    
+        return $wishlistItems;
+    }
+    
+    public static function getItemsFromUser(PDO $db, int $userId): array {
+        $stmt = $db->prepare('SELECT *
+                              FROM Items
+                              WHERE idSeller = ?');
+        $stmt->execute(array($userId));
+        $items = [];
+        while ($item = $stmt->fetch()) {
+            $items[] = new Item(
+                $item['idItem'],
+                $item['idSeller'],
+                $item['name'],
+                $item['introduction'],
+                $item['description'],
+                (int) $item['idCategory'],
+                $item['brand'],
+                $item['model'],
+                (int) $item['idSize'],
+                (int) $item['idCondition'],
+                $item['price'],
+                (bool) $item['active']
+            );;
+        }
+    
+        return $items;
+    }
+    public static function getOrdersFromUser(PDO $db, int $userId): array {
+        $stmt = $db->prepare('SELECT *
+                              FROM Orders
+                              WHERE idBuyer = ?');
+        $stmt->execute([$userId]);
+        $orders = [];
+        while ($order = $stmt->fetch()) {
+            $orders[] = new Order(
+                $order['idOrder'],
+                $order['idBuyer'],
+                $order['totalPrice'],
+                $order['orderDate'],
+                $order['status']
+            );
+        }
+    
+        return $orders;
+    }
+    
 }
 ?>

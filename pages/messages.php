@@ -4,6 +4,13 @@ declare(strict_types = 1);
 require_once(__DIR__ . '/../utils/session.php');
 $session = new Session();
 
+// Verifica se o usuário está logado
+if (!$session->isLoggedIn()) {
+    // Redireciona o usuário para a página de login se não estiver logado
+    header("Location: ../pages/login.php");
+    exit;
+}
+
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/category.class.php');
 require_once(__DIR__ . '/../database/item.class.php');
@@ -21,40 +28,15 @@ drawHeader($session);
 drawCategories($categories);
 
 // Buscar e exibir mensagens agrupadas por chat
-$userId = $_SESSION['idUser']; // ID do usuário atual
-$chats = []; // Array para armazenar os chats
-
-// Busca mensagens recebidas e enviadas pelo usuário atual
-$receivedMessages = Chat::getReceivedMessages($db, $userId);
-$sentMessages = Chat::getSentMessages($db, $userId);
-
-// Agrupa as mensagens por chat
-foreach ($receivedMessages as $message) {
-    $chatId = $message['idChat'];
-    if (!isset($chats[$chatId])) {
-        // Se este chat ainda não foi adicionado ao array, adiciona-o
-        $chats[$chatId] = ['messages' => [], 'participants' => []];
-    }
-    $chats[$chatId]['messages'][] = $message;
-    $chats[$chatId]['participants'][] = $message['idSender']; // Adiciona o remetente como participante do chat
-}
-
-foreach ($sentMessages as $message) {
-    $chatId = $message['idChat'];
-    if (!isset($chats[$chatId])) {
-        // Se este chat ainda não foi adicionado ao array, adiciona-o
-        $chats[$chatId] = ['messages' => [], 'participants' => []];
-    }
-    $chats[$chatId]['messages'][] = $message;
-    $chats[$chatId]['participants'][] = $message['idRecipient']; // Adiciona o destinatário como participante do chat
-}
+$userId = $_SESSION['id']; // ID do usuário atual
+$chats = Chat::getMessagesInvolvingUser($db, $userId); // Obtém as mensagens para o chat atual
 
 ?>
 
 <section>
     <h2>Messages</h2>
     <div class="messages">
-        <?php foreach ($chats as $chatId => $chatData) { ?>
+        <?php foreach ($chats as $chatData) { ?>
             <div class="chat">
                 <?php foreach ($chatData['messages'] as $message) { ?>
                     <div class="message">
