@@ -20,8 +20,9 @@ class Item {
     public int $idCondition;
     public float $price;
     public bool $active;
+    public bool $featured;
 
-    public function __construct(int $idItem, int $idSeller, string $name, ?string $introduction, ?string $description, int $idCategory, ?string $brand, ?string $model, int $idSize, int $idCondition, float $price, bool $active) {
+    public function __construct(int $idItem, int $idSeller, string $name, ?string $introduction, ?string $description, int $idCategory, ?string $brand, ?string $model, int $idSize, int $idCondition, float $price, bool $active, bool $featured) {
         $this->idItem = $idItem;
         $this->idSeller = $idSeller;
         $this->name = $name;
@@ -34,6 +35,7 @@ class Item {
         $this->idCondition = $idCondition;
         $this->price = $price;
         $this->active = $active;
+        $this->featured = $featured;
     }
 
     static function getItems(PDO $db, int $count) : array {
@@ -54,18 +56,45 @@ class Item {
             (int) $item['idSize'],
             (int) $item['idCondition'],
             $item['price'],
-            (bool) $item['active']
+            (bool) $item['active'],
+            (bool) $item['featured']
           );
         }
     
         return $items;
     }
 
-    public static function getItemById(PDO $db ,int $idItem): ?Item { // mudar estes nulls
+    public static function getFeaturedItems(PDO $db) : array {
+        $stmt = $db->prepare('SELECT * FROM Items WHERE featured = 1 AND active = 1');
+        $stmt->execute();
+    
+        $items = array();
+        while ($item = $stmt->fetch()) {
+          $items[] = new Item(
+            $item['idItem'],
+            $item['idSeller'],
+            $item['name'],
+            $item['introduction'],
+            $item['description'],
+            (int) $item['idCategory'],
+            $item['brand'],
+            $item['model'],
+            (int) $item['idSize'],
+            (int) $item['idCondition'],
+            $item['price'],
+            (bool) $item['active'],
+            (bool) $item['featured']
+          );
+        }
+    
+        return $items;
+    }
+
+    public static function getItemById(PDO $db ,int $idItem): ?Item {
         $stmt = $db->prepare('SELECT * FROM Items WHERE idItem = ?');
         $stmt->execute(array($idItem));
 
-        $item = $stmt->fetch(PDO::FETCH_ASSOC);
+        $item = $stmt->fetch();
         if ($item === false) {
             return null;
         }
@@ -82,7 +111,8 @@ class Item {
             (int) $item['idSize'],
             (int) $item['idCondition'],
             $item['price'],
-            (bool) $item['active']
+            (bool) $item['active'],
+            (bool) $item['featured']
         );
     }
 
@@ -123,7 +153,7 @@ class Item {
     }
 
     public static function searchItems(PDO $db, $search, $category, $size, $condition, $order) {
-        $query = "SELECT * FROM Items WHERE (name LIKE ? OR brand LIKE ? OR model LIKE ?)";
+        $query = "SELECT * FROM Items WHERE (name LIKE ? OR brand LIKE ? OR model LIKE ?) AND active = 1";
         $search = '%' . $search . '%';
         $parameters = array($search, $search, $search); // name,brand,model
         if ($category != 'all') {
@@ -163,7 +193,8 @@ class Item {
                 (int) $item['idSize'],
                 (int) $item['idCondition'],
                 $item['price'],
-                (bool) $item['active']
+                (bool) $item['active'],
+                (bool) $item['featured']
             );
         }
 
@@ -179,7 +210,7 @@ class Item {
         $stmt = $db->prepare('SELECT *
                               FROM Items
                               JOIN Wishlists ON Items.idItem = Wishlists.idItem
-                              WHERE Wishlists.idUser = ?');
+                              WHERE Wishlists.idUser = ? AND Items.active = 1');
         $stmt->execute([$userId]);
         $wishlistItems = [];
         while ($item = $stmt->fetch()) {
@@ -195,7 +226,8 @@ class Item {
                 (int) $item['idSize'],
                 (int) $item['idCondition'],
                 $item['price'],
-                (bool) $item['active']
+                (bool) $item['active'],
+                (bool) $item['featured']
             );;
         }
     
@@ -221,12 +253,14 @@ class Item {
                 (int) $item['idSize'],
                 (int) $item['idCondition'],
                 $item['price'],
-                (bool) $item['active']
+                (bool) $item['active'],
+                (bool) $item['featured']
             );;
         }
     
         return $items;
     }
+
     public static function getOrdersFromUser(PDO $db, int $userId): array {
         $stmt = $db->prepare('SELECT *
                               FROM Orders

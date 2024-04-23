@@ -40,11 +40,17 @@
     </section>
 <?php } ?>
 
-<?php function drawItem(PDO $db, Item $item) { ?>
+<?php function drawItem(PDO $db, Item $item, bool $isAdmin = false) { ?>
     <section id="item-details">
         <header>
             <button>&#8592; Go Back</button>
             <h2>Item Overview</h2>
+            <?php if ($isAdmin) { ?>
+                <form action="../actions/action_item_change_featured.php" method="post">
+                    <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                    <button type="submit"><?=($item->featured ? 'Remove from Featured' : 'Set as Featured')?></button>
+                </form>
+            <?php } ?>
         </header>
         <article>
             <?php 
