@@ -12,21 +12,26 @@ class Size {
         $this->sizeName = $sizeName;
     }
 
-    static function getSizes(PDO $db) : array {
-        $stmt = $db->prepare('SELECT * FROM Sizes');
-        $stmt->execute();
+    static function getSizes(PDO $db): array {
+        try {
+            $stmt = $db->prepare('SELECT * FROM Sizes');
+            $stmt->execute();
+            
+            $sizes = array();
+            
+            while ($size = $stmt->fetch()) {
+                $sizes[] = new Size(
+                    $size['idSize'],
+                    $size['sizeName']
+                );
+            }
     
-        $sizes = array();
-        
-        while ($size = $stmt->fetch()) {
-            $sizes[] = new Size(
-              $size['idSize'],
-              $size['sizeName']
-            );
+            return $sizes;
+        } catch (PDOException $e) {
+            return array(); 
         }
-
-        return $sizes;
     }
+    
 
     public static function getSizeById(PDO $db, int $idSize): ?Size {
         $stmt = $db->prepare('SELECT * FROM Sizes WHERE idSize = ?');
@@ -39,6 +44,27 @@ class Size {
         }
         
         return new Size($size['idSize'], $size['sizeName']);
+    }
+
+    public function save(PDO $db): void {
+        try {
+            $stmt = $db->prepare('INSERT INTO Sizes (sizeName) VALUES (?)');
+            $stmt->execute([$this->sizeName]);
+        } catch (PDOException $e) {
+            exit();
+        }
+    }
+
+    public static function getHighestSizeId(PDO $db): int {
+        $stmt = $db->prepare('SELECT MAX(idSize) FROM Sizes');
+        $stmt->execute();
+        $id = $stmt->fetchColumn(); 
+        return $id !== null ? (int) $id : 0;
+    }
+
+    public static function removeSize(PDO $db, int $idSize): void {
+        $stmt = $db->prepare('DELETE FROM Sizes WHERE idSize = ?');
+        $stmt->execute([$idSize]);
     }
 }
 ?>

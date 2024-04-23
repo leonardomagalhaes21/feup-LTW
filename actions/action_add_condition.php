@@ -5,20 +5,20 @@ require_once(__DIR__ . '/../utils/session.php');
 $session = new Session();
 
 require_once(__DIR__ . '/../database/connection.db.php');
-require_once(__DIR__ . '/../database/category.class.php');
+require_once(__DIR__ . '/../database/condition.class.php');
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $categoryName = $_POST['categoryName'] ?? '';
+    $conditionName = $_POST['conditionName'] ?? '';
 
-    if (empty($categoryName)) {
+    if (empty($conditionName)) {
         exit();
     }
 
     try {
         $db = getDatabaseConnection();
-        $highestCategoryId = Category::getHighestCategoryId($db);
-        $category = new Category($highestCategoryId + 1, $categoryName);
-        $category->save($db);
+        $highestConditionId = Condition::getHighestConditionId($db);
+        $condition = new Condition($highestConditionId + 1, $conditionName);
+        $condition->save($db);
         header("Location: /pages/user-profile.php?idUser=" . $_SESSION['id']);
         exit();
     } catch (PDOException $e) {
@@ -27,4 +27,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 } else {
     exit();
 }
-?>
