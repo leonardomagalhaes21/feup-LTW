@@ -17,16 +17,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST['email'] ?? '';
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
-    $idUser = $_SESSION['id'];
+
+    $user->name = $name;
+    $user->email = $email;
+    $user->username = $username;
 
     if (!empty($password)) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $db->prepare('UPDATE Users SET name = ?, email = ?, username = ?, password = ? WHERE idUser = ?');
-        $stmt->execute(array($name, $email, $username, $hashedPassword, $idUser));
+        $user->password = $hashedPassword;
+    }
+
+    if (!empty($password)) {
+        $user->save($db, $name, $email, $username, $hashedPassword, $_SESSION['id']);
     } 
     else {
-        $stmt = $db->prepare('UPDATE Users SET name = ?, email = ?, username = ? WHERE idUser = ?');
-        $stmt->execute(array($name, $email, $username, $idUser));
+        $user->save($db, $name, $email, $username, $user->password, $_SESSION['id']);
     }
 
     if(isset($_FILES["main_image"])) {
