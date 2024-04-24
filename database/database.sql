@@ -91,8 +91,10 @@ CREATE TABLE Chats (
     idRecipient INTEGER NOT NULL,
     message TEXT NOT NULL,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    idItem INTEGER NOT NULL,
     FOREIGN KEY (idSender) REFERENCES Users(idUser),
-    FOREIGN KEY (idRecipient) REFERENCES Users(idUser)
+    FOREIGN KEY (idRecipient) REFERENCES Users(idUser),
+    FOREIGN KEY (idItem) REFERENCES Items(idItem)
 );
 
 CREATE TABLE Orders (
@@ -201,9 +203,15 @@ INSERT INTO ItemImages (idItem, idImage, isMain) VALUES
 INSERT INTO UserImage (idUser, idImage) VALUES
 (2, 8);
 
-INSERT INTO Chats (idSender, idRecipient, message) VALUES
-(2, 1, 'Hello come to al-nassr!'),
-(1, 2, 'Sure! What specific details would you like to know?');
+INSERT INTO Chats (idSender, idRecipient, message, idItem) VALUES
+(2, 1, 'Hello im interested!' , 1),
+(1, 2, 'Hello come to al-nassr!', 1),
+(2, 1, 'I will come tomorrow', 1),
+(1, 2, 'Ok see you then!', 1),
+(3, 1, 'Estou interessado', 1),
+(1, 3, 'Olá, como posso ajudar?', 1),
+(3, 1, 'Estou interessado', 2),
+(1, 3, 'É de graça pra vc', 2);
 
 INSERT INTO Orders (idBuyer, totalPrice) VALUES
 (2, 200.00),
