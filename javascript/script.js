@@ -1,13 +1,25 @@
 
 function validateForm() {
-    let introduction = document.getElementById("introduction").value;
+    let name = document.getElementById("name").value;
+    let brand = document.getElementById("brand").value;
+    let model = document.getElementById("model").value;
     let secondaryImages = document.getElementById("secondary_images").files;
 
-    if (introduction.length > 50) {
-        alert("Introduction cannot exceed 50 characters!");
+    if (name.length > 25) {
+        alert("Name cannot exceed 25 characters!");
         return false;
     }
-    
+
+    if (brand.length > 15) {
+        alert("Brand cannot exceed 15 characters!");
+        return false;
+    }
+
+    if (model.length > 15) {
+        alert("Model cannot exceed 15 characters!");
+        return false;
+    }
+
     if (secondaryImages.length > 5) {
         alert("You can only upload 5 secondary images!");
         return false;

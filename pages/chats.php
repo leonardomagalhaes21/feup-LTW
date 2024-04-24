@@ -33,21 +33,28 @@
 
 ?>
 
-    <section>
+    <section class="chats">
         <h2>Chats</h2>
-        <div class="chats">
-            <?php
-                foreach ($pairs as $pair) {
-                    $otherUserId = (int)$pair['otherUserId'];
-                    $itemId = (int)$pair['idItem'];
+        <?php
+            foreach ($pairs as $pair) {
+                echo "<article>";
+                $otherUserId = (int)$pair['otherUserId'];
+                $itemId = (int)$pair['idItem'];
 
-                    $otherUser = User::getUserById($db, $otherUserId);
-                    $item = Item::getItemById($db, $itemId);
-
-                    echo "<a href='../pages/chat_messages.php?otherUserId={$otherUserId}&itemId={$itemId}'>{$otherUser->username} - {$item->name}</a> <br>";
+                $otherUser = User::getUserById($db, $otherUserId);
+                $item = Item::getItemById($db, $itemId);
+                $otherUserImage = $otherUser->getProfileImage($db);
+                if ($otherUserImage) {
+                    echo "<a href='../pages/chat_messages.php?otherUserId={$otherUserId}&itemId={$itemId}'><img src='{$otherUserImage}' alt='User Image'></a>";
+                } 
+                else {
+                    echo "<a href='../pages/chat_messages.php?otherUserId={$otherUserId}&itemId={$itemId}'><img src='../docs/images/default_profile_picture.png' alt='User Image'></a>";
                 }
-            ?>
-        </div>
+
+                echo "<a class='user_select' href='../pages/chat_messages.php?otherUserId={$otherUserId}&itemId={$itemId}'>{$otherUser->name} - {$item->name}</a>";
+                echo "</article>";
+            }
+        ?>
     </section>
 
 <?php drawFooter(); ?>

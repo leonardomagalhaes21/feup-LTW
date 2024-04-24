@@ -168,6 +168,22 @@ input, select {
     padding: 0 1em;
 }
 
+#items p {
+    margin: 0.5em 0;
+}
+
+#items h3 {
+    margin: 0.5em 0;
+}
+
+#items h2 {
+    margin: 0.5em 0;
+}
+
+#items button {
+    width: 10em;
+}
+
 /* signup/add publication styling */
 
 #register, #login, #add-publication {
@@ -399,6 +415,96 @@ span.inactive {
     margin-bottom: 2em;
 }
 
+/* chats styling */
+
+.chats, .chat {
+    background-color: var(--white);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 30em;
+}
+
+.chats a.user_select {
+    padding: 1em;
+}
+
+.chats article {
+    width: 100%;
+    border: 1px solid var(--lightgrey);
+    padding: 0.5em;
+}
+
+.chats article img, .chat img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.chat h4 {
+    margin: 0;
+}
+
+.chat header {
+    width: 100%;
+    border-bottom: 1px solid var(--lightgrey);
+    margin-bottom: 1em;
+}
+
+.chat .message_incoming p.message_content {
+    margin: 0;
+    padding: 0.5em;
+    border-radius: 10px;
+    background-color: var(--green);
+    color: var(--white);
+}
+
+.chat .message_outgoing p.message_content {
+    margin: 0;
+    padding: 0.5em;
+    border-radius: 10px;
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+.chat .hint {
+    margin: 0;
+}
+
+.message-form {
+    width: 100%;
+}
+
+.message-input {
+    margin-top: 1em;
+}
+
+.message-input input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid var(--grey);
+    border-radius: 5px;
+    margin-right: 10px;
+    background-color: var(--lightergrey);
+}
+
+.message-input button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+
+.message-input img {
+    border-radius: 0;
+    width: 30px;
+    height: 30px;
+}
+
+.message_incoming, .message_outgoing {
+    max-width: 50%;
+    word-wrap: break-word;
+}
 
 
 /* font styling */
