@@ -30,7 +30,7 @@
         Username: <input type="text" id="username" name="username" value="<?=$user->username?>" required> <!-- Added username field -->
     </label><br>
     <label>
-        Password: <input type="password" id="password" name="password" > <!-- Added password field -->
+        New Password: <input type="password" id="password" name="password" > <!-- Changed password field label -->
     </label><br>
     <label>
         Profile Picture: <input type="file" id="main_image" name="main_image" onchange="previewMainImage(event)">
