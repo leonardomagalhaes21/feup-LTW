@@ -26,7 +26,7 @@
           if ($session->isLoggedIn()) {
         ?>
             <div id="user-icons">
-              <a href="../pages/messages.php"><img src="../docs/images/icon_chat.svg" alt="Messages"></a>
+              <a href="../pages/chats.php"><img src="../docs/images/icon_chat.svg" alt="Chats"></a>
               <a href="../pages/add_publication.php"><img src="../docs/images/icon_add.svg" alt="Add Publication"></a>
               <a href="../pages/cart.php"><img src="../docs/images/icon_cart.svg" alt="Cart"></a>
               <a href="../pages/user-profile.php?idUser=<?=$_SESSION['id']?>"><img src="../docs/images/icon_profile.svg" alt="Profile"></a>
