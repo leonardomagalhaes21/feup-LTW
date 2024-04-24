@@ -19,7 +19,16 @@
     }
 ?>
 
-<form action="/actions/action_edit_profile.php" method="post" enctype="multipart/form-data" onsubmit="return validateForm()" id="edit-profile-form">
+<form action="/actions/action_edit_profile.php" method="post" enctype="multipart/form-data" onsubmit="return validateProfileEditForm()" id="edit-profile-form">
+    <label>
+        Username: <input type="text" id="username" name="username" value="<?=$user->username?>" required>
+    </label><br>
+    <label>
+        New Password: <input type="password" id="password" name="password">
+    </label><br>
+    <label>
+        Confirm Password: <input type="password" id="confirm_password" name="confirm_password">
+    </label><br>
     <label>
         Name: <input type="text" id="name" name="name" value="<?=$user->name?>" required>
     </label><br>

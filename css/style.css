@@ -372,7 +372,7 @@ span.inactive {
 /* edit profile styling */
 
 #edit-profile-form{
-    width: 25em;
+    width: 30em;
     margin: 0 auto;
     padding: 2em;
     background-color: var(--white);
@@ -381,7 +381,7 @@ span.inactive {
 }
 
 #edit-profile-form input{
-    width: 100%;
+    width: 20em;
     padding: 0.5em;
     margin-bottom: 1em;
     border: none;

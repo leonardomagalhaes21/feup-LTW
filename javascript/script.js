@@ -15,6 +15,23 @@ function validateForm() {
     return true;
 }
 
+function validateProfileEditForm() {
+    let password = document.getElementById("password").value;
+    let confirmPassword = document.getElementById("confirm_password").value;
+
+    if ((password && !confirmPassword) || (!password && confirmPassword)) {
+        alert("Both fields must be filled to change your password");
+        return false;
+    }
+
+    if (password !== confirmPassword) {
+        alert("The passwords don't match");
+        return false;
+    }
+
+    return true;
+}
+
 
 function previewMainImage(event) {
     const mainImage = document.getElementById('main_image_preview');

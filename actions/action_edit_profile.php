@@ -18,27 +18,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    // Update user information
     $user->name = $name;
     $user->email = $email;
     $user->username = $username;
 
-    // Check if password is provided and update it
     if (!empty($password)) {
-        // Hash the password before saving it to the database
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $user->password = $hashedPassword;
     }
 
-    // Save user data to the database
-    // Pass password only if it's not empty, otherwise pass null
     if (!empty($password)) {
         $user->save($db, $name, $email, $username, $hashedPassword, $_SESSION['id']);
-    } else {
+    } 
+    else {
         $user->save($db, $name, $email, $username, $user->password, $_SESSION['id']);
     }
 
-    // Process profile image upload
     if(isset($_FILES["main_image"])) {
         $mainImageName = uniqid() . '_' . basename($_FILES["main_image"]["name"]);
         $mainImageTargetFile = $targetDir . $mainImageName;
