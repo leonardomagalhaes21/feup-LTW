@@ -15,11 +15,13 @@ $targetDir = "../docs/userImages/";
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
+    $username = $_POST['username'] ?? '';
 
     $user->name = $name;
     $user->email = $email;
+    $user->username = $username;
 
-    $user->save($db, $name, $email, $_SESSION['id']);
+    $user->save($db, $name, $email, $username, $_SESSION['id']);
 
     if(isset($_FILES["main_image"])) {
         $mainImageName = uniqid() . '_' . basename($_FILES["main_image"]["name"]);

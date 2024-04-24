@@ -27,6 +27,9 @@
         Email: <input type="email" id="email" name="email" value="<?=$user->email?>" required>
     </label><br>
     <label>
+        Username: <input type="text" id="username" name="username" value="<?=$user->username?>" required> <!-- Added username field -->
+    </label><br>
+    <label>
         Profile Picture: <input type="file" id="main_image" name="main_image" onchange="previewMainImage(event)">
     </label>
     <img id="main_image_preview" src="#" alt="Profile Image Preview">
