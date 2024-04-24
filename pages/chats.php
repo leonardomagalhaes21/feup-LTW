@@ -28,24 +28,25 @@ drawHeader($session);
 drawCategories($categories);
 
 // Buscar e exibir mensagens agrupadas por chat
-$userId = $_SESSION['id']; // ID do usuário atual
-$chats = Chat::getMessagesInvolvingUser($db, $userId); // Obtém as mensagens para o chat atual
+$userId = $session->getId(); // ID do usuário atual
+$pairs = Chat::getUsersChats($db, (int) $userId);
 
 ?>
 
 <section>
-    <h2>Messages</h2>
-    <div class="messages">
-        <?php foreach ($chats as $chatData) { ?>
-            <div class="chat">
-                <?php foreach ($chatData['messages'] as $message) { ?>
-                    <div class="message">
-                        <p>From: <?php echo User::getUsernameById($db, $message['idSender']); ?></p>
-                        <p><?php echo $message['message']; ?></p>
-                    </div>
-                <?php } ?>
-            </div>
-        <?php } ?>
+    <h2>Chats</h2>
+    <div class="chats">
+        <?php
+            foreach ($pairs as $pair) {
+                $otherUserId = (int)$pair['otherUserId'];
+                $itemId = (int)$pair['idItem'];
+
+                $otherUser = User::getUserById($db, $otherUserId);
+                $item = Item::getItemById($db, $itemId);
+
+                echo "<a href='../pages/chat_messages.php?otherUserId={$otherUserId}&itemId={$itemId}'>{$otherUser->username} - {$item->name}</a> <br>";
+            }
+        ?>
     </div>
 </section>
 
