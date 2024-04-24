@@ -16,7 +16,7 @@
     $db = getDatabaseConnection();
     $idItem =(int) $_GET['idItem'];
     $idUser = $session->getId();
-    $isAdmin = User::isAdmin($db, $idUser);
+    $isAdmin = User::isAdmin($db,(int) $idUser);
 
     $categories = Category::getCategories($db);
     $item = Item::getItemById($db, $idItem);
