@@ -15,11 +15,19 @@ $targetDir = "../docs/userImages/";
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
+    $idUser = $_SESSION['id'];
 
-    $user->name = $name;
-    $user->email = $email;
-
-    $user->save($db, $name, $email, $_SESSION['id']);
+    if (!empty($password)) {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $db->prepare('UPDATE Users SET name = ?, email = ?, username = ?, password = ? WHERE idUser = ?');
+        $stmt->execute(array($name, $email, $username, $hashedPassword, $idUser));
+    } 
+    else {
+        $stmt = $db->prepare('UPDATE Users SET name = ?, email = ?, username = ? WHERE idUser = ?');
+        $stmt->execute(array($name, $email, $username, $idUser));
+    }
 
     if(isset($_FILES["main_image"])) {
         $mainImageName = uniqid() . '_' . basename($_FILES["main_image"]["name"]);
