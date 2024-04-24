@@ -16,7 +16,7 @@ $user = User::getUserById($db, $_SESSION['id']);
 
 $wishlistItems = Item::getWishlistItems($db, $_SESSION['id']);
 
-drawItems($wishlistItems, $db, false);
+drawItems($wishlistItems, $db, false, false, true);
 
 
 ?>

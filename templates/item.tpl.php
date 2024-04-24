@@ -4,43 +4,60 @@
   require_once(__DIR__ . '/../database/item.class.php')
 ?>
 
-<?php function drawItems(array $items, PDO $db, bool $drawHeader) { ?>
+<?php function drawItems(array $items, PDO $db, bool $drawHeader, bool $isCartPage = false, bool $isInWishlistPage = false) { ?>
 
-    <section id="items">
-        <?php if ($drawHeader){ ?>
-        <h2>Items for Sale</h2>
-        <?php } ?>
-        <?php foreach ($items as $item) { ?>
-            <article>
-                <?php $mainImagePath = $item->getMainImage($db) ?>
-                <a href="../pages/item.php?idItem=<?=$item->idItem?>">
-                    <img src="<?=$mainImagePath?>" alt="<?=$item->name?>">
-                </a>
-                <div class="item-details">
-                    <h2>
-                        <a href="../pages/item.php?idItem=<?=$item->idItem?>"><?=$item->name?></a>
-                    </h2>
-                    <h3>
-                        <?php if (!empty($item->brand) && !empty($item->model)) {
-                            echo "{$item->brand} - {$item->model}";
-                        } 
-                        elseif (!empty($item->brand)) {
-                            echo $item->brand;
-                        } 
-                        elseif (!empty($item->model)) {
-                            echo $item->model;
-                        }
-                        ?>
-                    </h3>
-                    <p><?=$item->introduction?></p>
-                    <p>Price: $<?=$item->price?></p>
-                </div>
-            </article>
-        <?php } ?>
-    </section>
+<section id="items">
+    <?php if ($drawHeader){ ?>
+    <h2>Items in <?php echo $isCartPage ? 'Cart' : ($isInWishlistPage ? 'Wishlist' : 'Sale'); ?></h2>
+    <?php } ?>
+    <?php foreach ($items as $item) { ?>
+        <article>
+            <?php $mainImagePath = $item->getMainImage($db) ?>
+            <a href="../pages/item.php?idItem=<?=$item->idItem?>">
+                <img src="<?=$mainImagePath?>" alt="<?=$item->name?>">
+            </a>
+            <div class="item-details">
+                <h2>
+                    <a href="../pages/item.php?idItem=<?=$item->idItem?>"><?=$item->name?></a>
+                </h2>
+                <h3>
+                    <?php if (!empty($item->brand) && !empty($item->model)) {
+                        echo "{$item->brand} - {$item->model}";
+                    } 
+                    elseif (!empty($item->brand)) {
+                        echo $item->brand;
+                    } 
+                    elseif (!empty($item->model)) {
+                        echo $item->model;
+                    }
+                    ?>
+                </h3>
+                <p><?=$item->introduction?></p>
+                <p>Price: $<?=$item->price?></p>
+                <?php if ($isCartPage) { ?>
+                    <form action="../actions/action_remove_from_cart.php" method="post">
+                        <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                        <button type="submit">Remove from Cart</button>
+                    </form>
+                <?php } elseif ($isInWishlistPage) { ?>
+                    <form action="../actions/action_remove_from_wishlist.php" method="post">
+                        <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                        <button type="submit">Remove from Wishlist</button>
+                    </form>
+                <?php } else { ?>
+                    <form action="../actions/action_add_to_cart.php" method="post">
+                        <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                <?php } ?>
+            </div>
+        </article>
+    <?php } ?>
+</section>
 <?php } ?>
 
-<?php function drawItem(PDO $db, Item $item, bool $isAdmin = false) { ?>
+
+<?php function drawItem(PDO $db, Item $item, bool $isAdmin = false, bool $isInWishlist = false) { ?>
     <section id="item-details">
         <header>
             <button>&#8592; Go Back</button>
@@ -81,8 +98,18 @@
                 <p>Seller: <a href="../pages/user-profile.php?idUser=<?=$item->idSeller?>"><?=User::getUserById($db, $item->idSeller)->name?></a></p>
                 <p><span class="<?=$item->active ? 'active' : 'inactive'?>"><?=$item->active ? 'Active' : 'Inactive'?></span></p>
             </div>
+            <?php if (!$isInWishlist) { ?>
+            <form action="../actions/action_add_to_wishlist.php" method="post">
+                <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                <button type="submit">Add to Wishlist</button>
+            </form>
+            <?php } else { ?>
+            <form action="../actions/action_remove_from_wishlist.php" method="post">
+                <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                <button type="submit">Remove from Wishlist</button>
+            </form>
+            <?php } ?>
         </article>  
-        <!-- Formulário de Mensagem -->
         <div id="message-form">
             <h3>Contact Seller</h3>
             <form action="../utils/sendMessage.php" method="post">
@@ -93,6 +120,7 @@
         </div>
     </section>
 <?php } ?>
+
 
 <?php function drawAddPublication(array $categories, array $sizes, array $conditions) { ?>
     <?php
