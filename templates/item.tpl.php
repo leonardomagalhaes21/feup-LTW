@@ -32,7 +32,6 @@
                     }
                     ?>
                 </h3>
-                <p><?=$item->introduction?></p>
                 <p>Price: $<?=$item->price?></p>
                 <?php if ($isCartPage) { ?>
                     <form action="../actions/action_remove_from_cart.php" method="post">

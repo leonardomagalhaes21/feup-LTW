@@ -210,7 +210,7 @@ INSERT INTO Chats (idSender, idRecipient, message, idItem) VALUES
 (1, 2, 'Ok see you then!', 1),
 (3, 1, 'Estou interessado', 1),
 (1, 3, 'Olá, como posso ajudar?', 1),
-(3, 1, 'Estou interessado', 2),
+(3, 1, 'Estou interessado, me ajuda!', 2),
 (1, 3, 'É de graça pra vc', 2);
 
 INSERT INTO Orders (idBuyer, totalPrice) VALUES
