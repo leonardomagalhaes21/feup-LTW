@@ -25,9 +25,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!empty($password)) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $user->password = $hashedPassword;
-    }
-
-    if (!empty($password)) {
         $user->save($db, $name, $email, $username, $hashedPassword, $_SESSION['id']);
     } 
     else {
