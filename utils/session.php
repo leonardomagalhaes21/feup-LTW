@@ -1,7 +1,8 @@
 <?php
   class Session {
     private array $messages;
-
+    
+    
     public function __construct() {
       session_start();
 
@@ -39,6 +40,27 @@
 
     public function getMessages() {
       return $this->messages;
+    }
+
+    public function getCart(): array {
+      return isset($_SESSION['cart']) && is_array($_SESSION['cart']) ? $_SESSION['cart'] : [];
+    }
+  
+    public function addToCart(int $idItem): void {
+      if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
+          $_SESSION['cart'] = [];
+      }
+      $_SESSION['cart'][] = $idItem;
+    }
+    
+    public function removeFromCart(int $idItem): void {
+      if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
+          return;
+      }
+      $key = array_search($idItem, $_SESSION['cart']);
+      if ($key !== false) {
+          unset($_SESSION['cart'][$key]);
+      }
     }
   }
 ?>

@@ -279,6 +279,15 @@ class Item {
     
         return $orders;
     }
-    
+
+    public static function addToWishlist(PDO $db, int $userId, int $itemId): void {
+        $stmt = $db->prepare('INSERT INTO Wishlists (idUser, idItem) VALUES (?, ?)');
+        $stmt->execute([$userId, $itemId]);
+    }
+
+    public static function removeFromWishlist(PDO $db, int $userId, int $itemId): void {
+        $stmt = $db->prepare('DELETE FROM Wishlists WHERE idUser = ? AND idItem = ?');
+        $stmt->execute([$userId, $itemId]);
+    }
 }
 ?>

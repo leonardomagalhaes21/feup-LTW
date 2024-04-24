@@ -10,7 +10,6 @@
     require_once(__DIR__ . '/../database/size.class.php');
     require_once(__DIR__ . '/../database/condition.class.php');
     require_once(__DIR__ . '/../database/item.class.php');
-
     require_once(__DIR__ . '/../templates/common.tpl.php');
     require_once(__DIR__ . '/../templates/item.tpl.php');
 
