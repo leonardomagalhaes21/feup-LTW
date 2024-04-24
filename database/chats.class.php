@@ -57,6 +57,13 @@ class Chat {
         return $pairs;
     }
 
+    public static function getChatByUserAndItem($db, $userId, $otherUserId, $itemId) {
+        $query = "SELECT * FROM Chats WHERE ((idSender = ? AND idRecipient = ?) OR (idSender = ? AND idRecipient = ?)) AND idItem = ?";
+        $stmt = $db->prepare($query);
+        $stmt->execute(array($userId, $otherUserId, $otherUserId, $userId, $itemId));
+        return $stmt->fetchAll();
+    }
+    
     public static function getMessagesForChat(PDO $db, int $chatId): array {
         $stmt = $db->prepare('SELECT * FROM Chats WHERE idChat = ?');
         $stmt->execute([$chatId]);

@@ -109,10 +109,17 @@
                 <button type="submit">Remove from Wishlist</button>
             </form>
             <?php } ?>
+            
+            <form action="../pages/chat_messages.php" method="get">
+                <input type="hidden" name="otherUserId" value="<?=$item->idSeller?>">
+                <input type="hidden" name="itemId" value="<?=$item->idItem?>">
+                <button type="submit" class="chat-button">Chat with Seller</button>
+            </form>
+
         </article>  
         <div id="message-form">
             <h3>Contact Seller</h3>
-            <form action="../utils/sendMessage.php" method="post">
+            <form action="../actions/action_send_message.php" method="post">
                 <input type="hidden" name="recipient" value="<?=$item->idSeller?>">
                 <textarea name="message" rows="4" cols="50" placeholder="Enter your message here..."></textarea>
                 <input type="submit" value="Send Message">
