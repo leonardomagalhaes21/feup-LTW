@@ -87,9 +87,9 @@ class User {
         return $imagePath ? $imagePath : null;
     }
 
-    public static function save(PDO $db, $name, $email, $idUser) {
-        $stmt = $db->prepare('UPDATE Users SET name = ?, email = ? WHERE idUser = ?');
-        $stmt->execute(array($name, $email, $idUser));
+    public static function save(PDO $db, $name, $email, $username, $idUser) {
+        $stmt = $db->prepare('UPDATE Users SET name = ?, email = ?, username = ? WHERE idUser = ?');
+        $stmt->execute(array($name, $email, $username, $idUser));
     }
     
 }
