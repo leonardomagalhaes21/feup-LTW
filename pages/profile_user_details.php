@@ -27,10 +27,10 @@
         Email: <input type="email" id="email" name="email" value="<?=$user->email?>" required>
     </label><br>
     <label>
-        Username: <input type="text" id="username" name="username" value="<?=$user->username?>" required> <!-- Added username field -->
+        Username: <input type="text" id="username" name="username" value="<?=$user->username?>" required>
     </label><br>
     <label>
-        Password: <input type="password" id="password" name="password" > <!-- Added password field -->
+        New Password: <input type="password" id="password" name="password" > 
     </label><br>
     <label>
         Profile Picture: <input type="file" id="main_image" name="main_image" onchange="previewMainImage(event)">
