@@ -37,7 +37,7 @@
     </article>
 
     <article>
-        <h2>Add New Categories, Sizes, Conditions, ...</h2>
+        <h2>Add New Categories, Sizes, Conditions</h2>
         <div>
             <h3>Add New Category</h3>
             <form action="../actions/action_add_category.php" method="post">
@@ -64,7 +64,7 @@
     </article>
 
     <article>
-        <h2>Remove New Categories, Sizes, Conditions, ...</h2>
+        <h2>Remove New Categories, Sizes, Conditions</h2>
         <div>
             <h3>Remove Category</h3>
             <form action="../actions/action_remove_category.php" method="post">
