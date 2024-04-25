@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $db = getDatabaseConnection();
         $session->addToCart($idItem);
 
-        header("Location: /pages/index.php");
+        header("Location: ../pages/index.php");
         exit();
     }
 }else{

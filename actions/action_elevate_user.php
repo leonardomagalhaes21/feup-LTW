@@ -28,3 +28,4 @@ else {
     header("Location: ../pages/admin-page.php");
     exit();
 }
+?>

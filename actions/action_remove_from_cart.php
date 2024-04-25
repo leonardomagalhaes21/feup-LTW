@@ -12,9 +12,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $db = getDatabaseConnection();
         $session->removeFromCart($idItem);
 
-        header("Location: /pages/cart.php");
+        header("Location: ../pages/cart.php");
         exit();
     }
 }else{
     exit();
 }
+?>

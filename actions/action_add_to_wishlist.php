@@ -12,9 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $db = getDatabaseConnection();
         Item::addToWishlist($db, $_SESSION['id'] , $idItem);
 
-        header("Location: /pages/index.php");
+        header("Location: ../pages/index.php");
         exit();
     }
 }else{
     exit();
 }
+
+?>

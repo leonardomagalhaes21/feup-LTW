@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $category = Category::getCategoryById($db, $categoryId);
     if ($category !== null) {
         $category->removeCategory($db, $category->idCategory);
-        header("Location: /pages/user-profile.php?idUser=" . $_SESSION['id']);
+        header("Location: ../pages/user-profile.php?idUser=" . $_SESSION['id']);
         exit();
     } else {
         echo "Category not found";

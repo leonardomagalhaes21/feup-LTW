@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $highestSizeId = Size::getHighestSizeId($db);
         $size = new Size($highestSizeId + 1, $sizeName);
         $size->save($db);
-        header("Location: /pages/user-profile.php?idUser=" . $_SESSION['id']);
+        header("Location: ../pages/user-profile.php?idUser=" . $_SESSION['id']);
         exit();
     } catch (PDOException $e) {
         exit();
@@ -27,3 +27,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 } else {
     exit();
 }
+
+?>

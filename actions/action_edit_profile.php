@@ -39,32 +39,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $tmp_mainImageName = $_FILES["main_image"]["tmp_name"];
         
         if (empty($tmp_mainImageName)) {
-            header("Location: /pages/user-profile.php?idUser=" . $_SESSION['id']);
+            header("Location: ../pages/user-profile.php?idUser=" . $_SESSION['id']);
             exit();
         }
 
         $mainImageCheck = getimagesize($tmp_mainImageName);
         if ($mainImageCheck === false) {
             $_SESSION['message'] = "File is not an image.";
-            header("Location: /pages/user-profile.php?idUser=" . $_SESSION['id']);
+            header("Location: ../pages/user-profile.php?idUser=" . $_SESSION['id']);
             exit();
         }
 
         if ($_FILES["main_image"]["size"] > 2000000) {
             $_SESSION['message'] = "Main image file is too large.";
-            header("Location: /pages/user-profile.php?idUser=" . $_SESSION['id']);
+            header("Location: ../pages/user-profile.php?idUser=" . $_SESSION['id']);
             exit();
         }
 
         if ($mainImageFileType != "jpg" && $mainImageFileType != "png" && $mainImageFileType != "jpeg") {
             $_SESSION['message'] = "Sorry, only JPG, JPEG, PNG files are allowed.";
-            header("Location: /pages/user-profile.php?idUser=" . $_SESSION['id']);
+            header("Location: ../pages/user-profile.php?idUser=" . $_SESSION['id']);
             exit();
         }
 
         if (!move_uploaded_file($tmp_mainImageName, $mainImageTargetFile)) {
             $_SESSION['message'] = "Sorry, there was an error uploading your main image file.";
-            header("Location: /pages/user-profile.php?idUser=" . $_SESSION['id']);
+            header("Location: ../pages/user-profile.php?idUser=" . $_SESSION['id']);
             exit();
         }
         
@@ -91,13 +91,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
         catch (PDOException $e) {
             $_SESSION['message'] = "Error saving profile image.";
-            header("Location: /pages/user-profile.php?idUser=" . $_SESSION['id']);
+            header("Location: ../pages/user-profile.php?idUser=" . $_SESSION['id']);
             exit();
         }
     }
 }
 
 
-    header("Location: /pages/user-profile.php?idUser=" . $_SESSION['id']);
+    header("Location: ../pages/user-profile.php?idUser=" . $_SESSION['id']);
     exit();
 ?>
