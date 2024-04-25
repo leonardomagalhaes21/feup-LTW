@@ -9,11 +9,15 @@ require_once(__DIR__ . '/../database/category.class.php');
 $db = getDatabaseConnection();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $categoryName = $_POST['categoryName'] ?? '';
-    $category = Category::getCategoryByName($db, $categoryName);
-    $category->removeCategory($db, $category->categoryName);
-    header("Location: /pages/user-profile.php?idUser=" . $_SESSION['id']);
-    exit();
+    $categoryId = (int) $_POST['categoryId'];
+    $category = Category::getCategoryById($db, $categoryId);
+    if ($category !== null) {
+        $category->removeCategory($db, $category->idCategory);
+        header("Location: /pages/user-profile.php?idUser=" . $_SESSION['id']);
+        exit();
+    } else {
+        echo "Category not found";
+    }
 } else {
     exit();
 }

@@ -8,7 +8,7 @@
 
 <section id="items">
     <?php if ($drawHeader){ ?>
-    <h2>Items in <?php echo $isCartPage ? 'Cart' : ($isInWishlistPage ? 'Wishlist' : 'Sale'); ?></h2>
+    <h2>Items <?php echo $isCartPage ? 'Cart' : ($isInWishlistPage ? 'in Wishlist' : 'for Sale'); ?></h2>
     <?php } ?>
     <?php foreach ($items as $item) { ?>
         <article>
@@ -33,21 +33,24 @@
                     ?>
                 </h3>
                 <p>Price: $<?=$item->price?></p>
-                <?php if ($isCartPage) { ?>
-                    <form action="../actions/action_remove_from_cart.php" method="post">
-                        <input type="hidden" name="idItem" value="<?=$item->idItem?>">
-                        <button type="submit">Remove from Cart</button>
-                    </form>
-                <?php } elseif ($isInWishlistPage) { ?>
-                    <form action="../actions/action_remove_from_wishlist.php" method="post">
-                        <input type="hidden" name="idItem" value="<?=$item->idItem?>">
-                        <button type="submit">Remove from Wishlist</button>
-                    </form>
-                <?php } else { ?>
-                    <form action="../actions/action_add_to_cart.php" method="post">
-                        <input type="hidden" name="idItem" value="<?=$item->idItem?>">
-                        <button type="submit">Add to Cart</button>
-                    </form>
+                <?php $isFromUser = (int) $item->idSeller === (int) $_SESSION['id']; ?>
+                <?php if (!$isFromUser && isset($_SESSION['id'])) { ?>
+                    <?php if ($isCartPage || (!$isInWishlistPage && (isset($_SESSION['cart']) && in_array($item->idItem, $_SESSION['cart'])))) { ?>
+                        <form action="../actions/action_remove_from_cart.php" method="post">
+                            <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                            <button type="submit">Remove from Cart</button>
+                        </form>
+                    <?php } elseif ($isInWishlistPage) { ?>
+                        <form action="../actions/action_remove_from_wishlist.php" method="post">
+                            <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                            <button type="submit">Remove from Wishlist</button>
+                        </form>
+                    <?php } else { ?>
+                        <form action="../actions/action_add_to_cart.php" method="post">
+                            <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                            <button type="submit">Add to Cart</button>
+                        </form>
+                    <?php } ?>
                 <?php } ?>
             </div>
         </article>
@@ -56,7 +59,8 @@
 <?php } ?>
 
 
-<?php function drawItem(PDO $db, Item $item, bool $isAdmin = false, bool $isInWishlist = false) { ?>
+
+<?php function drawItem(PDO $db, Item $item, bool $isAdmin = false, bool $isInWishlist = false, bool $isFromUser = false) { ?>
     <section id="item-details">
         <header>
             <button>&#8592; Go Back</button>
@@ -97,33 +101,39 @@
                 <p>Seller: <a href="../pages/user-profile.php?idUser=<?=$item->idSeller?>"><?=User::getUserById($db, $item->idSeller)->name?></a></p>
                 <p><span class="<?=$item->active ? 'active' : 'inactive'?>"><?=$item->active ? 'Active' : 'Inactive'?></span></p>
             </div>
-            <?php if (!$isInWishlist) { ?>
-            <form action="../actions/action_add_to_wishlist.php" method="post">
-                <input type="hidden" name="idItem" value="<?=$item->idItem?>">
-                <button type="submit">Add to Wishlist</button>
-            </form>
-            <?php } else { ?>
-            <form action="../actions/action_remove_from_wishlist.php" method="post">
-                <input type="hidden" name="idItem" value="<?=$item->idItem?>">
-                <button type="submit">Remove from Wishlist</button>
-            </form>
+            <?php if (!$isFromUser && isset($_SESSION['id'])) { ?>
+                <form action="<?php echo $isInWishlist ? '../actions/action_remove_from_wishlist.php' : '../actions/action_add_to_wishlist.php'; ?>" method="post">
+                    <input type="hidden" name="idItem" value="<?php echo $item->idItem; ?>">
+                    <button type="submit">
+                        <?php echo $isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'; ?>
+                    </button>
+                </form>   
+                <form action="../pages/chat_messages.php" method="get">
+                    <input type="hidden" name="otherUserId" value="<?=$item->idSeller?>">
+                    <input type="hidden" name="itemId" value="<?=$item->idItem?>">
+                    <button type="submit" class="chat-button">Chat with Seller</button>
+                </form>
+                <?php if(!isset($_SESSION['cart']) || !in_array($item->idItem, $_SESSION['cart'])) { ?>
+                <form action="../actions/action_add_to_cart.php" method="post">
+                    <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                    <button type="submit">Add to Cart</button>
+                </form>
+                <?php } else { ?>
+                <form action="../actions/action_remove_from_cart.php" method="post">
+                    <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                    <button type="submit">Remove from Cart</button>
+                </form>
+                <?php } ?>
+                </article>
+                <div id="message-form">
+                    <h3>Contact Seller</h3>
+                    <form action="../actions/action_send_message.php" method="post">
+                        <input type="hidden" name="recipient" value="<?=$item->idSeller?>">
+                        <textarea name="message" rows="4" cols="50" placeholder="Enter your message here..."></textarea>
+                        <input type="submit" value="Send Message">
+                    </form>
+                </div>
             <?php } ?>
-            
-            <form action="../pages/chat_messages.php" method="get">
-                <input type="hidden" name="otherUserId" value="<?=$item->idSeller?>">
-                <input type="hidden" name="itemId" value="<?=$item->idItem?>">
-                <button type="submit" class="chat-button">Chat with Seller</button>
-            </form>
-
-        </article>  
-        <div id="message-form">
-            <h3>Contact Seller</h3>
-            <form action="../actions/action_send_message.php" method="post">
-                <input type="hidden" name="recipient" value="<?=$item->idSeller?>">
-                <textarea name="message" rows="4" cols="50" placeholder="Enter your message here..."></textarea>
-                <input type="submit" value="Send Message">
-            </form>
-        </div>
     </section>
 <?php } ?>
 
