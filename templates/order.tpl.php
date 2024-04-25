@@ -28,6 +28,12 @@
                         <li> <a href="../pages/item.php?idItem=<?=$item->idItem?>"><?= $item->name?></a> x <?=$quantity[$item->idItem]?> (<?=$item->price * $quantity[$item->idItem]?>€)</li>
                     <?php } ?>
                 </ul>
+                <?php if($status === 'Pending') { ?>
+                <form action="../actions/action_cancel_order.php" method="post">
+                    <input type="hidden" name="idOrder" value="<?= $order->idOrder ?>">
+                    <button type="submit">Cancel Order</button>
+                </form>
+                <?php } ?>
             </article>
         <?php } ?>
     </section>

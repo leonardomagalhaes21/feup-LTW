@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $highestCategoryId = Category::getHighestCategoryId($db);
         $category = new Category($highestCategoryId + 1, $categoryName);
         $category->save($db);
-        header("Location: /pages/user-profile.php?idUser=" . $_SESSION['id']);
+        header("Location: ../pages/user-profile.php?idUser=" . $_SESSION['id']);
         exit();
     } catch (PDOException $e) {
         exit();

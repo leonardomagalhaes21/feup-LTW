@@ -12,10 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $db = getDatabaseConnection();
         Item::removeFromWishlist($db, (int) $_SESSION['id'],$idItem);
         
-        header("Location: /pages/user-profile.php?idUser={$_SESSION['id']}");
+        header("Location: ../pages/user-profile.php?idUser={$_SESSION['id']}");
         exit();
     }
 }else{
-    header("Location: /pages/user-profile.php?idUser={$_SESSION['id']}");
+    header("Location: ../pages/user-profile.php?idUser={$_SESSION['id']}");
     exit();
 }
+?>

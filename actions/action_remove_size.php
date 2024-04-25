@@ -13,13 +13,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $sizeId = isset($_POST['sizeId']) ? (int)$_POST['sizeId'] : 0;
 
     if ($sizeId === 0) {
-        header("Location: /pages/user-profile.php?idUser=" . $_SESSION['id']);
+        header("Location: ../pages/user-profile.php?idUser=" . $_SESSION['id']);
         exit();
     }
 
     try {
         Size::removeSize($db, $sizeId);
-        header("Location: /pages/user-profile.php?idUser=" . $_SESSION['id']);
+        header("Location: ../pages/user-profile.php?idUser=" . $_SESSION['id']);
         exit();
     } catch (PDOException $e) {
         exit();
