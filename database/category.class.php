@@ -74,9 +74,9 @@ class Category {
         return $id !== null ? (int) $id : 0;
     }
     
-    public static function removeCategory(PDO $db, string $categoryName): void {
-        $stmt = $db->prepare('DELETE FROM Categories WHERE categoryName = ?');
-        $stmt->execute([$categoryName]);
+    public static function removeCategory(PDO $db, int $idCategory): void {
+        $stmt = $db->prepare('DELETE FROM Categories WHERE idCategory = ?');
+        $stmt->execute(array($idCategory));
     }
     
 }

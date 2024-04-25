@@ -87,6 +87,22 @@ class User {
         return $imagePath ? $imagePath : null;
     }
 
+    public static function isInWishlist(PDO $db, int $idUser, int $idItem): bool {
+        $stmt = $db->prepare('SELECT * FROM Wishlists WHERE idUser = ? AND idItem = ?');
+        $stmt->execute(array($idUser, $idItem));
+        $result = $stmt->fetch();
+
+        return $result ? true : false;
+    }
+
+    public static function isFromUser(PDO $db, int $idUser, int $idItem): bool {
+        $stmt = $db->prepare('SELECT * FROM Items WHERE idSeller = ? AND idItem = ?');
+        $stmt->execute(array($idUser, $idItem));
+        $result = $stmt->fetch();
+
+        return $result ? true : false;
+    }
+
     public static function save(PDO $db, $name, $email, $username, $password, $idUser) {
         $stmt = $db->prepare('UPDATE Users SET name = ?, email = ?, username = ?, password = ? WHERE idUser = ?');
         $stmt->execute(array($name, $email, $username, $password, $idUser));

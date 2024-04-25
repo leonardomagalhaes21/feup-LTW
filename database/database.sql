@@ -222,8 +222,8 @@ INSERT INTO OrderItems (idOrder, idItem) VALUES
 (2, 2);
 
 INSERT INTO Wishlists (idUser, idItem) VALUES
-(1, 3),
-(1, 4),
+(3, 3),
+(3, 4),
 (2, 4),
 (2, 1),
 (3, 5);

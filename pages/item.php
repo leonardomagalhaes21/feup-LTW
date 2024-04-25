@@ -15,14 +15,16 @@
 
     $db = getDatabaseConnection();
     $idItem =(int) $_GET['idItem'];
-    $idUser = $session->getId();
-    $isAdmin = User::isAdmin($db,(int) $idUser);
+    $idUser = (int) $session->getId();
+    $isAdmin = User::isAdmin($db,$idUser);
+    $isInWishlist = User::isInWishlist($db, $idUser, $idItem);
+    $isFromUser = User::isFromUser($db, $idUser, $idItem);
 
     $categories = Category::getCategories($db);
     $item = Item::getItemById($db, $idItem);
 
     drawHeader($session);
     drawCategories($categories);
-    drawItem($db, $item, $isAdmin);
+    drawItem($db, $item, $isAdmin, $isInWishlist, $isFromUser);
     drawFooter();
 ?>

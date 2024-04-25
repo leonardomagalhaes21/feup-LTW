@@ -68,12 +68,12 @@
         <div>
             <h3>Remove Category</h3>
             <form action="../actions/action_remove_category.php" method="post">
-                <label for="categoryName">Category Name:</label>
-                <select id="categoryName" name="categoryName" required>
+                <label for="categoryId">Select Category to Remove:</label>
+                <select id="categoryId" name="categoryId" required>
                     <?php
                     $categories = Category::getCategories($db);
                     foreach ($categories as $category) {
-                        echo "<option value='{$category->categoryName}'>{$category->categoryName}</option>";
+                        echo "<option value='{$category->idCategory}'>{$category->categoryName}</option>";
                     }
                     ?>
                 </select>
