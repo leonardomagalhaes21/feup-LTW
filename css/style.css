@@ -394,7 +394,7 @@ span.inactive {
 /* edit profile styling */
 
 #edit-profile-form{
-    width: 30em;
+    max-width: 500px;
     margin: 0 auto;
     padding: 2em;
     background-color: var(--white);
