@@ -315,10 +315,13 @@ span.inactive {
 }
 
 .profile-actions {
+    width: fit-content; 
+    margin: auto; 
     margin-bottom: 1em;
 }
 
 .profile-actions a {
+    display: inline-block;
     padding: 1em;
     margin-right: 1em;
     border: 1px solid var(--lightgrey);
