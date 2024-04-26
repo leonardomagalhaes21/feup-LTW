@@ -61,11 +61,14 @@ body > header h1 a {
 #user-icons {
     margin-top: 1em;
 }
+
+#user-icons a {
+    padding: 0 1em;
+}
   
 #user-icons img {
     width: 40px;
     height: 40px;
-    margin-right: 2em;
 }
 
 /* menu styling */
