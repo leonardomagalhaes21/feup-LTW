@@ -25,6 +25,7 @@
                     I.brand,
                     I.model,
                     I.price,
+                    U.idUser AS buyerId,
                     U.username AS buyerUsername,
                     U.name AS buyerName,
                     U.email AS buyerEmail
@@ -39,7 +40,9 @@
                 JOIN 
                     Users U ON O.idBuyer = U.idUser
                 WHERE 
-                    I.idSeller = ?";
+                    I.idSeller = ? AND
+                    O.status = 'Pending'";
+
     
     $stmt = $db->prepare($query);
     $stmt->execute(array($userId));

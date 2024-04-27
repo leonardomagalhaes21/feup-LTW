@@ -101,7 +101,7 @@
                 <p>Seller: <a href="../pages/user-profile.php?idUser=<?=$item->idSeller?>"><?=User::getUserById($db, $item->idSeller)->name?></a></p>
                 <p><span class="<?=$item->active ? 'active' : 'inactive'?>"><?=$item->active ? 'Active' : 'Inactive'?></span></p>
             </div>
-            <?php if (!$isFromUser && isset($_SESSION['id'])) { ?>
+            <?php if (!$isFromUser && isset($_SESSION['id']) && $item->active) { ?>
                 <form action="<?php echo $isInWishlist ? '../actions/action_remove_from_wishlist.php' : '../actions/action_add_to_wishlist.php'; ?>" method="post">
                     <input type="hidden" name="idItem" value="<?php echo $item->idItem; ?>">
                     <button type="submit">

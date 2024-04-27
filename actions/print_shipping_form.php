@@ -40,7 +40,9 @@ $query = "SELECT
             JOIN
                 Users U ON O.idBuyer = U.idUser
             WHERE 
-                O.idOrder = ? AND OI.idItem = ?";
+                O.idOrder = ? AND 
+                OI.idItem = ? AND 
+                O.status = 'Pending'";
     
 $stmt = $db->prepare($query);
 $stmt->execute(array($orderId, $itemId));
