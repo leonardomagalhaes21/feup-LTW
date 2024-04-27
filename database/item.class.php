@@ -214,21 +214,24 @@ class Item {
         $stmt->execute([$userId]);
         $wishlistItems = [];
         while ($item = $stmt->fetch()) {
-            $wishlistItems[] = new Item(
-                $item['idItem'],
-                $item['idSeller'],
-                $item['name'],
-                $item['introduction'],
-                $item['description'],
-                (int) $item['idCategory'],
-                $item['brand'],
-                $item['model'],
-                (int) $item['idSize'],
-                (int) $item['idCondition'],
-                $item['price'],
-                (bool) $item['active'],
-                (bool) $item['featured']
-            );;
+            $flag = (bool) $item['active'];
+            if ($flag) {
+                $wishlistItems[] = new Item(
+                    $item['idItem'],
+                    $item['idSeller'],
+                    $item['name'],
+                    $item['introduction'],
+                    $item['description'],
+                    (int) $item['idCategory'],
+                    $item['brand'],
+                    $item['model'],
+                    (int) $item['idSize'],
+                    (int) $item['idCondition'],
+                    $item['price'],
+                    (bool) $item['active'],
+                    (bool) $item['featured']
+                );
+            }
         }
     
         return $wishlistItems;

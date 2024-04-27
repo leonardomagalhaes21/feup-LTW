@@ -25,18 +25,19 @@ $query =    "SELECT
                 U.username AS buyerUsername,
                 U.name AS buyerName,
                 U.email AS buyerEmail
-                FROM 
+            FROM 
                 Orders O
-                JOIN 
+            JOIN 
                 CheckoutInfo CI ON O.idOrder = CI.idOrder
-                JOIN 
+            JOIN 
                 OrderItems OI ON O.idOrder = OI.idOrder
-                JOIN 
+            JOIN 
                 Items I ON OI.idItem = I.idItem
-                JOIN 
+            JOIN 
                 Users U ON O.idBuyer = U.idUser
-                WHERE 
-                I.idSeller = ?";
+            WHERE 
+                I.idSeller = ? AND
+                O.status = 'Pending'";
 
 $stmt = $db->prepare($query);
 $stmt->execute(array($userId));
