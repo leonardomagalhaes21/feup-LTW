@@ -24,7 +24,8 @@ $query =    "SELECT
                 U.idUser AS buyerId,
                 U.username AS buyerUsername,
                 U.name AS buyerName,
-                U.email AS buyerEmail
+                U.email AS buyerEmail,
+                OI.sent
             FROM 
                 Orders O
             JOIN 
@@ -37,7 +38,8 @@ $query =    "SELECT
                 Users U ON O.idBuyer = U.idUser
             WHERE 
                 I.idSeller = ? AND
-                O.status = 'Pending'";
+                O.status = 'Pending' AND
+                OI.sent = 0";
 
 $stmt = $db->prepare($query);
 $stmt->execute(array($userId));
@@ -53,6 +55,11 @@ foreach ($orders as $order) {
     echo "<p>Buyer: <a href='../pages/user-profile.php?idUser={$order['buyerId']}'>{$order['buyerName']}</a></p>";
     ?>
     <a href="../actions/print_shipping_form.php?orderId=<?= $order['idOrder'] ?>&itemId=<?= $order['idItem'] ?>" target="_blank">Print Shipping Form</a>
+    <form method="post" action="../actions/action_item_sent.php">
+        <input type="hidden" name="idOrder" value="<?= $orderId ?>">
+        <input type="hidden" name="idItem" value="<?= $itemId ?>">
+        <button type="submit">Mark as Sent</button>
+    </form>
 <?php } ?>
 
 

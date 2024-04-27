@@ -111,6 +111,7 @@ CREATE TABLE OrderItems (
     idOrderItem INTEGER PRIMARY KEY,
     idOrder INTEGER NOT NULL,
     idItem INTEGER NOT NULL,
+    sent BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (idOrder) REFERENCES Orders(idOrder),
     FOREIGN KEY (idItem) REFERENCES Items(idItem)
 );
@@ -151,6 +152,21 @@ BEGIN
     WHERE idItem = (SELECT idItem FROM OrderItems WHERE idOrder = NEW.idOrder);
 END;
 
+CREATE TRIGGER UpdateOrderStatusToDone
+AFTER UPDATE OF sent ON OrderItems
+FOR EACH ROW
+WHEN NEW.sent = 1
+BEGIN
+    UPDATE Orders 
+    SET status = 'Done' 
+    WHERE idOrder = NEW.idOrder
+    AND NOT EXISTS (
+        SELECT idItem 
+        FROM OrderItems 
+        WHERE idOrder = NEW.idOrder 
+        AND sent = FALSE
+    );
+END;
 
 
 
