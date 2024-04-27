@@ -512,6 +512,51 @@ span.inactive {
     word-wrap: break-word;
 }
 
+/* checkout styling */
+
+#checkout{
+    width: 25em;
+    margin: 0 auto;
+    padding: 2em;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#checkout input{
+    width: 20em;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    border: none;
+    border-bottom: 1px solid var(--black);
+    border-radius: 0;
+    transition: border-color 0.3s;
+}
+
+#checkout input:focus{
+    outline: none;
+    border-bottom: 1px solid var(--blue);
+}
+
+#checkout label:last-of-type{
+    margin-bottom: 2em;
+}
+
+#checkout select {
+    padding: 8px;
+    border: 1px solid var(--grey);
+    border-radius: 4px;
+    background-color: var(--white);
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+}
+
+#checkout select:focus {
+    border-color: var(--blue);
+}
+
+
 
 /* font styling */
 

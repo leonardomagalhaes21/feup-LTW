@@ -175,7 +175,7 @@ form {
 #orders {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 /* edit profile layout */
@@ -231,5 +231,15 @@ form {
 
 .message-input {
     display: flex;
+    align-items: center;
+}
+
+/* checkout layout */
+
+#checkout {
+    grid-area: signup;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
