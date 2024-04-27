@@ -123,6 +123,16 @@ CREATE TABLE Wishlists (
     FOREIGN KEY (idItem) REFERENCES Items(idItem)
 );
 
+CREATE TABLE CheckoutInfo (
+    idCheckout INTEGER PRIMARY KEY AUTOINCREMENT,
+    idOrder INTEGER NOT NULL,
+    address TEXT NOT NULL,
+    city TEXT NOT NULL,
+    zipCode TEXT NOT NULL,
+    paymentMethod TEXT NOT NULL,
+    FOREIGN KEY (idOrder) REFERENCES Orders(idOrder)
+);
+
 
 CREATE TRIGGER UpdateItemStatusAfterOrder
 AFTER INSERT ON OrderItems

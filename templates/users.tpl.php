@@ -30,6 +30,7 @@
             <a href="#" id="wishlist">Wishlist</a>
             <a href="#" id="your-items">Your Items</a>
             <a href="#" id="your-orders">Your Orders</a>
+            <a href="#" id="orders-to-ship">Orders to Ship</a>
             <?php if ($user->isAdmin) { ?>
                 <a href="../pages/admin-page.php">Admin Panel</a>
             <?php } ?>
@@ -74,6 +75,11 @@
             document.getElementById('your-orders').addEventListener('click', function(e) {
                 e.preventDefault();
                 loadContent('profile_your_orders.php');
+            });
+
+            document.getElementById('orders-to-ship').addEventListener('click', function(e) {
+                e.preventDefault();
+                loadContent('profile_orders_to_ship.php');
             });
         });
     </script>

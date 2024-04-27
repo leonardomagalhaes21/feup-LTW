@@ -27,12 +27,16 @@ foreach ($cartItems as $idItem) {
 drawItems($items, $db, false, true);
 
 ?>
-<section id="checkout">
+<section id="cart">
     <h2>Checkout</h2>
     <div class="total-price">
         <p>Total: $<?= number_format($totalPrice, 2) ?></p>
     </div>
-    <button onclick="checkout()">Checkout</button>
+    <?php if (count($items) > 0) { ?>
+    <a href="../pages/checkout.php">Checkout</a>
+    <?php } else { ?>
+    <p>Your cart is empty</p>
+    <?php } ?>
 </section>
 <?php
 
