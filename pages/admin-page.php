@@ -18,7 +18,7 @@ if (!User::isAdmin($db, $session->getId())) {
     exit();
 }
 
-drawHeader($session);
+
 drawAdminDashboard($db);
-drawFooter();
+
 ?>  
