@@ -41,7 +41,6 @@
     </div>
     <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // Função para carregar conteúdo via AJAX
     function loadContent(url, containerId) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
@@ -59,38 +58,38 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById('user-details').addEventListener('click', function(e) {
         e.preventDefault(); 
-        document.getElementById('admin-content-container').innerHTML = ''; // Limpa o conteúdo do container de admin
+        document.getElementById('admin-content-container').innerHTML = '';
         loadContent('profile_user_details.php', 'content-container'); 
     });
 
     document.getElementById('wishlist').addEventListener('click', function(e) {
         e.preventDefault();
-        document.getElementById('admin-content-container').innerHTML = ''; // Limpa o conteúdo do container de admin
+        document.getElementById('admin-content-container').innerHTML = '';
         loadContent('wishlist.php', 'content-container');
     });
 
     document.getElementById('your-items').addEventListener('click', function(e) {
         e.preventDefault();
-        document.getElementById('admin-content-container').innerHTML = ''; // Limpa o conteúdo do container de admin
+        document.getElementById('admin-content-container').innerHTML = '';
         loadContent('profile_your_items.php', 'content-container');
     });
 
     document.getElementById('your-orders').addEventListener('click', function(e) {
         e.preventDefault();
-        document.getElementById('admin-content-container').innerHTML = ''; // Limpa o conteúdo do container de admin
+        document.getElementById('admin-content-container').innerHTML = '';
         loadContent('profile_your_orders.php', 'content-container');
     });
 
     document.getElementById('orders-to-ship').addEventListener('click', function(e) {
         e.preventDefault();
-        document.getElementById('admin-content-container').innerHTML = ''; // Limpa o conteúdo do container de admin
+        document.getElementById('admin-content-container').innerHTML = '';
         loadContent('profile_orders_to_ship.php', 'content-container');
     });
 
     <?php if ($user->isAdmin) { ?>
         document.getElementById('admin-page').addEventListener('click', function(e) {
             e.preventDefault(); 
-            document.getElementById('content-container').innerHTML = ''; // Limpa o conteúdo do container anterior
+            document.getElementById('content-container').innerHTML = '';
             loadContent('admin-page.php', 'admin-content-container');
         });
     <?php } ?>
