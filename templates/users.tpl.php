@@ -32,57 +32,71 @@
             <a href="#" id="your-orders">Your Orders</a>
             <a href="#" id="orders-to-ship">Orders to Ship</a>
             <?php if ($user->isAdmin) { ?>
-                <a href="../pages/admin-page.php">Admin Panel</a>
+                <a href="#" id="admin-page">Admin Panel</a>
             <?php } ?>
             <a href="../actions/action_logout.php">Logout</a>
         </div>
         <div id="content-container"></div>
+        <div id="admin-content-container"></div>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            function loadContent(url) {
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', url, true);
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === 4) {
-                        if (xhr.status === 200) {
-                            document.getElementById('content-container').innerHTML = xhr.responseText;
-                        } else {
-                            console.error(xhr.statusText);
-                        }
-                    }
-                };
-                xhr.send();
+document.addEventListener("DOMContentLoaded", function() {
+    function loadContent(url, containerId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    document.getElementById(containerId).innerHTML = xhr.responseText;
+                } else {
+                    console.error(xhr.statusText);
+                }
             }
+        };
+        xhr.send();
+    }
 
-            loadContent('profile_user_details.php');
+    document.getElementById('user-details').addEventListener('click', function(e) {
+        e.preventDefault(); 
+        document.getElementById('admin-content-container').innerHTML = '';
+        loadContent('profile_user_details.php', 'content-container'); 
+    });
 
-            document.getElementById('user-details').addEventListener('click', function(e) {
-                e.preventDefault(); 
-                loadContent('profile_user_details.php'); 
-            });
+    document.getElementById('wishlist').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('admin-content-container').innerHTML = '';
+        loadContent('wishlist.php', 'content-container');
+    });
 
-            document.getElementById('wishlist').addEventListener('click', function(e) {
-                e.preventDefault();
-                loadContent('wishlist.php');
-            });
+    document.getElementById('your-items').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('admin-content-container').innerHTML = '';
+        loadContent('profile_your_items.php', 'content-container');
+    });
 
-            document.getElementById('your-items').addEventListener('click', function(e) {
-                e.preventDefault();
-                loadContent('profile_your_items.php');
-            });
+    document.getElementById('your-orders').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('admin-content-container').innerHTML = '';
+        loadContent('profile_your_orders.php', 'content-container');
+    });
 
-            document.getElementById('your-orders').addEventListener('click', function(e) {
-                e.preventDefault();
-                loadContent('profile_your_orders.php');
-            });
+    document.getElementById('orders-to-ship').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('admin-content-container').innerHTML = '';
+        loadContent('profile_orders_to_ship.php', 'content-container');
+    });
 
-            document.getElementById('orders-to-ship').addEventListener('click', function(e) {
-                e.preventDefault();
-                loadContent('profile_orders_to_ship.php');
-            });
+    <?php if ($user->isAdmin) { ?>
+        document.getElementById('admin-page').addEventListener('click', function(e) {
+            e.preventDefault(); 
+            document.getElementById('content-container').innerHTML = '';
+            loadContent('admin-page.php', 'admin-content-container');
         });
-    </script>
+    <?php } ?>
+});
+</script>
+
+
     <?php } ?>
 </section>
 <?php } ?>
