@@ -59,9 +59,9 @@ $chats = Chat::getChatByUserAndItem($db, (int)$userId, (int)$otherUserId, (int)$
     </header>
         <?php foreach ($chats as $chat) { ?>
             <div class="message_<?php echo $chat['idSender'] === $userId ? 'outgoing' : 'incoming'; ?>">
-                <h4><?= htmlspecialchars(User::getUserById($db, $chat['idSender'])->name) ?></h4>
-                <p class="message_content"><?= htmlspecialchars($chat['message']) ?></p>
-                <p class="hint"><?= htmlspecialchars(date('d/m/Y H:i', strtotime($chat['timestamp']))) ?></p>
+                <h4><?= htmlentities(User::getUserById($db, $chat['idSender'])->name) ?></h4>
+                <p class="message_content"><?= htmlentities($chat['message']) ?></p>
+                <p class="hint"><?= htmlentities(date('d/m/Y H:i', strtotime($chat['timestamp']))) ?></p>
             </div>
         <?php } ?>   
         <form action="../actions/action_send_message.php" method="post" class="message-form">

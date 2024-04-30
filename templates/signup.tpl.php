@@ -8,7 +8,7 @@
         <h2>Login</h2>
         <?php
         if (isset($_SESSION['error'])) {
-            echo htmlspecialchars($_SESSION['error']);
+            echo htmlentities($_SESSION['error']);
             unset($_SESSION['error']);
         }
         ?>
@@ -29,7 +29,7 @@
         <h2>Register</h2>
         <?php
         if (isset($_SESSION['error'])) {
-            echo htmlspecialchars($_SESSION['error']);
+            echo htmlentities($_SESSION['error']);
             unset($_SESSION['error']);
         }
         ?>

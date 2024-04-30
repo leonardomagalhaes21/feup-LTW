@@ -56,18 +56,18 @@ if (!$order) {
 $content = "
     <h1>Shipping Form</h1>
     <h2>Order Details</h2>
-    <p>Order ID: {$order['idOrder']}</p>
-    <p>Order Date: {$order['orderDate']}</p>
-    <p>Item: {$order['itemName']}</p>
-    <p>Brand: {$order['brand']}</p>
-    <p>Model: {$order['model']}</p>
-    <p>Price: {$order['price']}</p>
+    <p>Order ID: " . $order['idOrder'] . "</p>
+    <p>Order Date: " . htmlentities($order['orderDate']) . "</p>
+    <p>Item: " . htmlentities($order['itemName']) . "</p>
+    <p>Brand: " . htmlentities($order['brand']) . "</p>
+    <p>Model: " . htmlentities($order['model']) . "</p>
+    <p>Price: " . htmlentities((string)$order['price']) . "</p>
     <h2>Buyer Information</h2>
-    <p>Username: {$order['buyerUsername']}</p>
-    <p>Name: {$order['buyerName']}</p>
-    <p>Email: {$order['buyerEmail']}</p>
+    <p>Username: " . htmlentities($order['buyerUsername']) . "</p>
+    <p>Name: " . htmlentities($order['buyerName']) . "</p>
+    <p>Email: " . htmlentities($order['buyerEmail']) . "</p>
     <h2>Shipping Address</h2>
-    <p>{$order['address']}, {$order['city']}, {$order['zipCode']}</p>";
+    <p>" . htmlentities($order['address']) . ", " . htmlentities($order['city']) . ", " . htmlentities($order['zipCode']) . "</p>";
 
 echo $content;
 

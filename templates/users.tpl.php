@@ -13,14 +13,14 @@
 <section id="user-profile">
     <div class="profile-info">
         <?php if ($profileImage) { ?>
-            <img src="<?= htmlspecialchars((string)$profileImage) ?>" alt="<?= htmlspecialchars($user->name) ?> Profile Picture">
+            <img src="<?= htmlentities((string)$profileImage) ?>" alt="<?= htmlentities($user->name) ?> Profile Picture">
         <?php } else { ?>
-            <img src="../docs/images/default_profile_picture.png" alt="<?= htmlspecialchars($user->name) ?> Profile Picture">
+            <img src="../docs/images/default_profile_picture.png" alt="<?= htmlentities($user->name) ?> Profile Picture">
         <?php } ?>
         <div class="profile-details">
-            <h2><?= htmlspecialchars($user->name) ?></h2>
-            <p>Email: <?= htmlspecialchars($user->email) ?></p>
-            <p>Username: <?= htmlspecialchars($user->username) ?> </p>
+            <h2><?= htmlentities($user->name) ?></h2>
+            <p>Email: <?= htmlentities($user->email) ?></p>
+            <p>Username: <?= htmlentities($user->username) ?> </p>
         </div>
     </div>
     <?php if ($condition) { ?>

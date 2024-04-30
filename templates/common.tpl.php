@@ -51,7 +51,7 @@
         <label class="hamburger" for="hamburger"></label>
         <ul>
             <?php foreach ($categories as $category) { ?>
-                <li><a href="../pages/index.php?category=<?= $category->idCategory ?>"><?= $category->categoryName ?></a></li>
+                <li><a href="../pages/index.php?category=<?= $category->idCategory ?>"><?= htmlspecialchars_decode(htmlentities($category->categoryName)) ?></a></li>
             <?php } ?>
         </ul>
     </nav>
@@ -67,7 +67,7 @@
         <select id="category" name="category">
             <option value="all" selected>All</option>
             <?php foreach ($categories as $category) { ?>
-                <option value="<?= $category->idCategory ?>"><?= $category->categoryName ?></option>
+                <option value="<?php echo $category->idCategory; ?>"><?php echo htmlspecialchars_decode(htmlentities($category->categoryName)); ?></option>
             <?php } ?>
         </select>
         <br>
@@ -75,7 +75,7 @@
         <select id="size" name="size">
             <option value="all" selected>All</option>
             <?php foreach ($sizes as $size) { ?>
-                <option value="<?= $size->idSize ?>"><?= $size->sizeName ?></option>
+                <option value="<?php echo $size->idSize; ?>"><?php echo htmlentities($size->sizeName); ?></option>
             <?php } ?>
         </select>
         <br>
@@ -83,7 +83,7 @@
         <select id="condition" name="condition">
             <option value="all" selected>All</option>
             <?php foreach ($conditions as $condition) { ?>
-                <option value="<?= $condition->idCondition ?>"><?= $condition->conditionName ?></option>
+                <option value="<?php echo $condition->idCondition; ?>"><?php echo htmlentities($condition->conditionName); ?></option>
             <?php } ?>
         </select>
         <br>

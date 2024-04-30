@@ -9,14 +9,14 @@
         <?php foreach ($orders as $order) {
             $items = $order->getItems($db);
             $buyer = $order->getBuyer();
-            $date = htmlspecialchars((string)$order->orderDate);
-            $status = htmlspecialchars((string)$order->status);
+            $date = htmlentities((string)$order->orderDate);
+            $status = htmlentities((string)$order->status);
             ?>
             <article>
-                <h2>Order #<?= htmlspecialchars((string)$order->idOrder) ?></h2>
+                <h2>Order #<?= $order->idOrder ?></h2>
                 <p>Date: <?= $date ?></p>
                 <p>Status: <span class="status <?= strtolower($status) ?>"><?= $status ?></span></p>
-                <p>Total price: <?= htmlspecialchars((string)$order->totalPrice) ?>€</p>
+                <p>Total price: <?= htmlentities((string)$order->totalPrice) ?>€</p>
                 <ul>
                     <?php foreach ($items as $item) { ?>
                         <?php
@@ -25,12 +25,12 @@
                         }, $items));
                         ?>
 
-                        <li> <a href="../pages/item.php?idItem=<?= htmlspecialchars((string)$item->idItem) ?>"><?= htmlspecialchars($item->name) ?></a> x <?= $quantity[$item->idItem] ?> (<?= $item->price * $quantity[$item->idItem] ?>€)</li>
+                        <li> <a href="../pages/item.php?idItem=<?= $item->idItem ?>"><?= htmlentities($item->name) ?></a> x <?= $quantity[$item->idItem] ?> (<?= $item->price * $quantity[$item->idItem] ?>€)</li>
                     <?php } ?>
                 </ul>
                 <?php if($status === 'Pending') { ?>
                 <form action="../actions/action_cancel_order.php" method="post">
-                    <input type="hidden" name="idOrder" value="<?= htmlspecialchars((string)$order->idOrder) ?>">
+                    <input type="hidden" name="idOrder" value="<?= $order->idOrder ?>">
                     <button type="submit">Cancel Order</button>
                 </form>
                 <?php } ?>

@@ -32,7 +32,7 @@ foreach ($cartItems as $idItem) {
 <section id="checkout">
     <h2>Checkout</h2>
     <div class="total-price">
-        <p>Total: $<?= htmlspecialchars(number_format($totalPrice, 2)) ?></p>
+        <p>Total: $<?= htmlentities((string)number_format($totalPrice, 2)) ?></p>
     </div>
     <form action="../actions/action_complete_order.php" method="post">
         <label>
@@ -52,7 +52,7 @@ foreach ($cartItems as $idItem) {
                 <option value="paypal">PayPal</option>
             </select>
         </label><br>
-        <input type="hidden" name="total_price" value="<?= htmlspecialchars($totalPrice) ?>">
+        <input type="hidden" name="total_price" value="<?= htmlentities((string)$totalPrice) ?>">
         <button type="submit">Complete Order</button>
     </form>
 

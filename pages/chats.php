@@ -45,9 +45,9 @@
                 $item = Item::getItemById($db, $itemId);
                 $otherUserImage = $otherUser->getProfileImage($db);
 
-                $otherUserImageSrc = htmlspecialchars((string)$otherUserImage);
-                $otherUserName = htmlspecialchars((string)$otherUser->name);
-                $itemName = htmlspecialchars((string)$item->name);
+                $otherUserImageSrc = htmlentities((string)$otherUserImage);
+                $otherUserName = htmlentities((string)$otherUser->name);
+                $itemName = htmlentities((string)$item->name);
 
                 if ($otherUserImageSrc) {
                     echo "<a href='../pages/chat_messages.php?otherUserId={$otherUserId}&itemId={$itemId}'><img src='{$otherUserImageSrc}' alt='User Image'></a>";

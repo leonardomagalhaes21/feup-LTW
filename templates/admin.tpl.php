@@ -43,7 +43,7 @@
                     <?php
                     $categories = Category::getCategories($db);
                     foreach ($categories as $category) {
-                        echo "<option value='" . htmlspecialchars($category->idCategory, ENT_QUOTES) . "'>" . htmlspecialchars($category->categoryName, ENT_QUOTES) . "</option>";
+                        echo "<option value='" . $category->idCategory . "'>" . htmlspecialchars_decode(htmlentities($category->categoryName)) . "</option>";
                     }
                     ?>
                 </select>
@@ -58,7 +58,7 @@
                     <?php
                     $sizes = Size::getSizes($db);
                     foreach ($sizes as $size) {
-                        echo "<option value='" . htmlspecialchars($size->idSize, ENT_QUOTES) . "'>" . htmlspecialchars($size->sizeName, ENT_QUOTES) . "</option>";
+                        echo "<option value='" . $size->idSize . "'>" . htmlentities($size->sizeName) . "</option>";
                     }
                     ?>
                 </select>
@@ -73,7 +73,7 @@
                     <?php
                     $conditions = Condition::getConditions($db);
                     foreach ($conditions as $condition) {
-                        echo "<option value='" . htmlspecialchars($condition->idCondition, ENT_QUOTES) . "'>" . htmlspecialchars($condition->conditionName, ENT_QUOTES) . "</option>";
+                        echo "<option value='" . $condition->idCondition . "'>" . htmlentities($condition->conditionName) . "</option>";
                     }
                     ?>
                 </select>
@@ -85,7 +85,7 @@
         <form action="../actions/action_elevate_user.php" method="post">
             <?php  
                 if (isset($_SESSION['message'])) {
-                    echo "<p>" . htmlspecialchars($_SESSION['message'], ENT_QUOTES) . "</p>";
+                    echo "<p>" . htmlentities($_SESSION['message']) . "</p>";
                     unset($_SESSION['message']);
                 }
             ?>
@@ -98,10 +98,10 @@
 
                 foreach ($users as $user) {
                     if ($user->isAdmin){
-                        echo "<div><input type='radio' id='user_{$user->idUser}' name='user_id' value='{$user->idUser}'><label for='user_{$user->idUser}'>" . htmlspecialchars($user->username, ENT_QUOTES) . " (" . htmlspecialchars($user->name, ENT_QUOTES) . ") - <strong>Admin</strong></label></div>";
+                        echo "<div><input type='radio' id='user_{$user->idUser}' name='user_id' value='{$user->idUser}'><label for='user_{$user->idUser}'>" . htmlentities($user->username) . " (" . htmlentities($user->name) . ") - <strong>Admin</strong></label></div>";
                     }
                     else {
-                        echo "<div><input type='radio' id='user_{$user->idUser}' name='user_id' value='{$user->idUser}'><label for='user_{$user->idUser}'>" . htmlspecialchars($user->username, ENT_QUOTES) . " (" . htmlspecialchars($user->name, ENT_QUOTES) . ")</label></div>";
+                        echo "<div><input type='radio' id='user_{$user->idUser}' name='user_id' value='{$user->idUser}'><label for='user_{$user->idUser}'>" . htmlentities($user->username) . " (" . htmlentities($user->name) . ")</label></div>";
                     
                     }
                 }
