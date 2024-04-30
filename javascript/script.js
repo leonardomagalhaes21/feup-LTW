@@ -87,3 +87,8 @@ function showSlides(n) {
 
 let slideIndex = 1;
 showSlides(slideIndex);
+
+function goBack() {
+    window.history.back();
+}
+

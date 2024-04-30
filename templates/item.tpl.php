@@ -12,42 +12,42 @@
     <?php } ?>
     <?php foreach ($items as $item) { ?>
         <article>
-            <?php $mainImagePath = $item->getMainImage($db) ?>
-            <a href="../pages/item.php?idItem=<?=$item->idItem?>">
-                <img src="<?=$mainImagePath?>" alt="<?=$item->name?>">
+            <?php $mainImagePath = htmlspecialchars($item->getMainImage($db)); ?>
+            <a href="../pages/item.php?idItem=<?=htmlspecialchars((string)$item->idItem)?>">
+                <img src="<?=$mainImagePath?>" alt="<?=htmlspecialchars($item->name)?>">
             </a>
             <div class="item-details">
                 <h2>
-                    <a href="../pages/item.php?idItem=<?=$item->idItem?>"><?=$item->name?></a>
+                    <a href="../pages/item.php?idItem=<?=htmlspecialchars((string)$item->idItem)?>"><?=htmlspecialchars($item->name)?></a>
                 </h2>
                 <h3>
                     <?php if (!empty($item->brand) && !empty($item->model)) {
-                        echo "{$item->brand} - {$item->model}";
+                        echo htmlspecialchars("{$item->brand} - {$item->model}");
                     } 
                     elseif (!empty($item->brand)) {
-                        echo $item->brand;
+                        echo htmlspecialchars($item->brand);
                     } 
                     elseif (!empty($item->model)) {
-                        echo $item->model;
+                        echo htmlspecialchars($item->model);
                     }
                     ?>
                 </h3>
-                <p>Price: $<?=$item->price?></p>
+                <p>Price: $<?=htmlspecialchars((string)$item->price)?></p>
                 <?php $isFromUser = (int) $item->idSeller === (int) $_SESSION['id']; ?>
                 <?php if (!$isFromUser && isset($_SESSION['id'])) { ?>
                     <?php if ($isCartPage || (!$isInWishlistPage && (isset($_SESSION['cart']) && in_array($item->idItem, $_SESSION['cart'])))) { ?>
                         <form action="../actions/action_remove_from_cart.php" method="post">
-                            <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                            <input type="hidden" name="idItem" value="<?=htmlspecialchars((string)$item->idItem)?>">
                             <button type="submit">Remove from Cart</button>
                         </form>
                     <?php } elseif ($isInWishlistPage) { ?>
                         <form action="../actions/action_remove_from_wishlist.php" method="post">
-                            <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                            <input type="hidden" name="idItem" value="<?=htmlspecialchars((string)$item->idItem)?>">
                             <button type="submit">Remove from Wishlist</button>
                         </form>
                     <?php } else { ?>
                         <form action="../actions/action_add_to_cart.php" method="post">
-                            <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                            <input type="hidden" name="idItem" value="<?=htmlspecialchars((string)$item->idItem)?>">
                             <button type="submit">Add to Cart</button>
                         </form>
                     <?php } ?>
@@ -63,68 +63,90 @@
 <?php function drawItem(PDO $db, Item $item, bool $isAdmin = false, bool $isInWishlist = false, bool $isFromUser = false) { ?>
     <section id="item-details">
         <header>
-            <button>&#8592; Go Back</button>
+        <button onclick="goBack()">&#8592; Go Back</button>
             <h2>Item Overview</h2>
             <?php if ($isAdmin) { ?>
                 <form action="../actions/action_item_change_featured.php" method="post">
-                    <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                    <input type="hidden" name="idItem" value="<?=htmlspecialchars((string)$item->idItem)?>">
                     <button type="submit"><?=($item->featured ? 'Remove from Featured' : 'Set as Featured')?></button>
                 </form>
             <?php } ?>
         </header>
         <article>
             <?php 
-            $mainImagePath = $item->getMainImage($db);
+            $mainImagePath = htmlspecialchars($item->getMainImage($db));
             $secondaryImages = $item->getSecondaryImages($db);
             ?>
             <div class="slideshow">
                 <?php 
-                echo '<div class="image-slide"><img src="' . $mainImagePath . '" alt="' . $item->name . '"></div>';
+                echo '<div class="image-slide"><img src="' . $mainImagePath . '" alt="' . htmlspecialchars($item->name) . '"></div>';
     
                 foreach ($secondaryImages as $image) {
-                    echo '<div class="image-slide"><img src="' . $image['imagePath'] . '" alt="' . $item->name . '"></div>';
+                    echo '<div class="image-slide"><img src="' . htmlspecialchars($image['imagePath']) . '" alt="' . htmlspecialchars($item->name) . '"></div>';
                 }
                 ?>
                 <button onclick="plusSlides(-1)">&#10094;</button>
                 <button onclick="plusSlides(1)">&#10095;</button>
             </div>
             <div class="item-info">
-                <h3><?=$item->name?></h3>
-                <h4><?=$item->introduction?></h4>
-                <p><?=$item->description?></p>
-                <p>Brand: <?=$item->brand?></p>
-                <p>Model: <?=$item->model?></p>
-                <p>Price: $<?=$item->price?></p>             
-                <p>Category: <?=Category::getCategoryById($db, $item->idCategory)->categoryName?></p>
-                <p>Condition: <?=Condition::getConditionById($db, $item->idCondition)->conditionName?></p>
-                <p>Size: <?=Size::getSizeById($db, $item->idSize)->sizeName?></p>
-                <p>Seller: <a href="../pages/user-profile.php?idUser=<?=$item->idSeller?>"><?=User::getUserById($db, $item->idSeller)->name?></a></p>
-                <p><span class="<?=$item->active ? 'active' : 'inactive'?>"><?=$item->active ? 'Active' : 'Inactive'?></span></p>
+                <h3><?=htmlspecialchars($item->name)?></h3>
+                <h4><?=htmlspecialchars($item->introduction)?></h4>
+                <p><?=htmlspecialchars($item->description)?></p>
+                <p>Brand: <?=htmlspecialchars($item->brand)?></p>
+                <p>Model: <?=htmlspecialchars($item->model)?></p>
+                <p>Price: $<?=htmlspecialchars((string)$item->price)?></p>             
+                <p>Category: <?=htmlspecialchars(Category::getCategoryById($db, $item->idCategory)->categoryName)?></p>
+                <p>Condition: <?=htmlspecialchars(Condition::getConditionById($db, $item->idCondition)->conditionName)?></p>
+                <p>Size: <?=htmlspecialchars(Size::getSizeById($db, $item->idSize)->sizeName)?></p>
+                <p>Seller: <a href="../pages/user-profile.php?idUser=<?=htmlspecialchars((string)$item->idSeller)?>"><?=htmlspecialchars(User::getUserById($db, $item->idSeller)->name)?></a></p>
+                <p><span class="<?=htmlspecialchars($item->active ? 'active' : 'inactive')?>"><?=htmlspecialchars($item->active ? 'Active' : 'Inactive')?></span></p>
             </div>
             <?php if (!$isFromUser && isset($_SESSION['id']) && $item->active) { ?>
                 <form action="<?php echo $isInWishlist ? '../actions/action_remove_from_wishlist.php' : '../actions/action_add_to_wishlist.php'; ?>" method="post">
-                    <input type="hidden" name="idItem" value="<?php echo $item->idItem; ?>">
+                    <input type="hidden" name="idItem" value="<?php echo htmlspecialchars((string)$item->idItem); ?>">
                     <button type="submit">
                         <?php echo $isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'; ?>
                     </button>
                 </form>   
                 <form action="../pages/chat_messages.php" method="get">
-                    <input type="hidden" name="otherUserId" value="<?=$item->idSeller?>">
-                    <input type="hidden" name="itemId" value="<?=$item->idItem?>">
+                    <input type="hidden" name="otherUserId" value="<?=htmlspecialchars((string)$item->idSeller)?>">
+                    <input type="hidden" name="itemId" value="<?=htmlspecialchars((string)$item->idItem)?>">
                     <button type="submit" class="chat-button">Chat with Seller</button>
                 </form>
                 <?php if(!isset($_SESSION['cart']) || !in_array($item->idItem, $_SESSION['cart'])) { ?>
                 <form action="../actions/action_add_to_cart.php" method="post">
-                    <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                    <input type="hidden" name="idItem" value="<?=htmlspecialchars((string)$item->idItem)?>">
                     <button type="submit">Add to Cart</button>
                 </form>
                 <?php } else { ?>
                 <form action="../actions/action_remove_from_cart.php" method="post">
-                    <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                    <input type="hidden" name="idItem" value="<?=htmlspecialchars((string)$item->idItem)?>">
                     <button type="submit">Remove from Cart</button>
                 </form>
                 <?php } ?>
                 </article>
+            <?php } ?>
+            <?php if($isAdmin && (isset($_SESSION['id']) && $_SESSION['id'] != $item->idSeller)){?>
+                    <form action="../pages/edit_item.php" method="get">
+                        <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                        <button type="submit">Edit Item</button>
+                    </form>
+                    <form action="../actions/action_remove_item.php" method="post">
+                        <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                        <button type="submit">Remove Item</button>
+                    </form>
+            <?php }?>
+            <?php if (isset($_SESSION['id']) && $_SESSION['id'] == $item->idSeller) { ?>
+                <div class="seller-options">
+                    <form action="../pages/edit_item.php" method="get">
+                        <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                        <button type="submit">Edit Item</button>
+                    </form>
+                    <form action="../actions/action_remove_item.php" method="post">
+                        <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                        <button type="submit">Remove Item</button>
+                    </form>
+                </div>
             <?php } ?>
     </section>
 <?php } ?>
@@ -133,7 +155,7 @@
 <?php function drawAddPublication(array $categories, array $sizes, array $conditions) { ?>
     <?php
         if (isset($_SESSION['message'])) {
-            echo "<p>{$_SESSION['message']}</p>";
+            echo "<p>".htmlspecialchars($_SESSION['message'])."</p>";
             unset($_SESSION['message']);
         }
     ?>
@@ -162,7 +184,7 @@
                 Category:
                 <select id="idCategory" name="idCategory" required>
                     <?php foreach ($categories as $category) { ?>
-                        <option value="<?php echo $category->idCategory; ?>"><?php echo $category->categoryName; ?></option>
+                        <option value="<?php echo htmlspecialchars((string)$category->idCategory); ?>"><?php echo htmlspecialchars($category->categoryName); ?></option>
                     <?php } ?>
                 </select>
             </label><br>
@@ -170,7 +192,7 @@
                 Condition:
                 <select id="idCondition" name="idCondition" required>
                     <?php foreach ($conditions as $condition) { ?>
-                        <option value="<?php echo $condition->idCondition; ?>"><?php echo $condition->conditionName; ?></option>
+                        <option value="<?php echo htmlspecialchars((string)$condition->idCondition); ?>"><?php echo htmlspecialchars($condition->conditionName); ?></option>
                     <?php } ?>
                 </select>
             </label><br>
@@ -178,7 +200,7 @@
                 Size:
                 <select id="idSize" name="idSize" required>
                     <?php foreach ($sizes as $size) { ?>
-                        <option value="<?php echo $size->idSize; ?>"><?php echo $size->sizeName; ?></option>
+                        <option value="<?php echo htmlspecialchars((string)$size->idSize); ?>"><?php echo htmlspecialchars($size->sizeName); ?></option>
                     <?php } ?>
                 </select>
             </label><br>

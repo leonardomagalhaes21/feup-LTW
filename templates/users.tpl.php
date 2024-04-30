@@ -13,14 +13,14 @@
 <section id="user-profile">
     <div class="profile-info">
         <?php if ($profileImage) { ?>
-            <img src="<?=$profileImage?>" alt="<?=$user->name?> Profile Picture">
+            <img src="<?= htmlspecialchars((string)$profileImage) ?>" alt="<?= htmlspecialchars($user->name) ?> Profile Picture">
         <?php } else { ?>
-            <img src="../docs/images/default_profile_picture.png" alt="<?=$user->name?> Profile Picture">
+            <img src="../docs/images/default_profile_picture.png" alt="<?= htmlspecialchars($user->name) ?> Profile Picture">
         <?php } ?>
         <div class="profile-details">
-            <h2><?=$user->name?></h2>
-            <p>Email: <?=$user->email?></p>
-            <p>Username: <?=$user->username?> </p>
+            <h2><?= htmlspecialchars($user->name) ?></h2>
+            <p>Email: <?= htmlspecialchars($user->email) ?></p>
+            <p>Username: <?= htmlspecialchars($user->username) ?> </p>
         </div>
     </div>
     <?php if ($condition) { ?>
@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
         e.preventDefault(); 
         document.getElementById('admin-content-container').innerHTML = '';
         loadContent('profile_user_details.php', 'content-container'); 
+        //meter  entities para ver segurança no inner html
     });
 
     document.getElementById('wishlist').addEventListener('click', function(e) {

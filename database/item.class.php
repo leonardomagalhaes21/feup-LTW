@@ -292,5 +292,23 @@ class Item {
         $stmt = $db->prepare('DELETE FROM Wishlists WHERE idUser = ? AND idItem = ?');
         $stmt->execute([$userId, $itemId]);
     }
+
+    public static function updateItem(PDO $db, Item $item): void {
+        try {
+            $stmt = $db->prepare('UPDATE Items SET name = ?, introduction = ?, description = ?, idCategory = ?, brand = ?, model = ?, idSize = ?, idCondition = ?, price = ?, active = ? WHERE idItem = ?');
+            $stmt->execute([$item->name, $item->introduction, $item->description, $item->idCategory, $item->brand, $item->model, $item->idSize, $item->idCondition, $item->price, $item->active, $item->idItem]);
+        } catch (PDOException $e) {
+            echo 'Error updating item: ' . $e->getMessage();
+        }
+    }
+
+    public static function deleteItem(PDO $db, int $itemId): void {
+        try {
+            $stmt = $db->prepare('DELETE FROM Items WHERE idItem = ?');
+            $stmt->execute([$itemId]);
+        } catch (PDOException $e) {
+            echo 'Error deleting item: ' . $e->getMessage();
+        }
+    }
 }
 ?>

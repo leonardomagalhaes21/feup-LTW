@@ -30,7 +30,7 @@ drawItems($items, $db, false, true);
 <section id="cart">
     <h2>Checkout</h2>
     <div class="total-price">
-        <p>Total: $<?= number_format($totalPrice, 2) ?></p>
+        <p>Total: $<?= htmlspecialchars(number_format($totalPrice, 2)) ?></p>
     </div>
     <?php if (count($items) > 0) { ?>
     <a href="../pages/checkout.php">Checkout</a>

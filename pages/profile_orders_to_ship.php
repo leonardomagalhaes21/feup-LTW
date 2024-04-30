@@ -49,15 +49,15 @@ foreach ($orders as $order) {
     $orderId = $order['idOrder'];
     $itemId = $order['idItem'];
 
-    echo "<h2>Shipping Form for Order #{$orderId}</h2>";
-    echo "<p>Item: <a href='../pages/item.php?idItem={$order['idItem']}'>{$order['itemName']}</a></p>";
-    echo "<p>Price: {$order['price']}</p>";
-    echo "<p>Buyer: <a href='../pages/user-profile.php?idUser={$order['buyerId']}'>{$order['buyerName']}</a></p>";
+    echo "<h2>Shipping Form for Order #" . htmlspecialchars((string)$orderId) . "</h2>";
+    echo "<p>Item: <a href='../pages/item.php?idItem=" . htmlspecialchars((string)$order['idItem']) . "'>" . htmlspecialchars($order['itemName']) . "</a></p>";
+    echo "<p>Price: " . htmlspecialchars((string)$order['price']) . "</p>";
+    echo "<p>Buyer: <a href='../pages/user-profile.php?idUser=" . htmlspecialchars((string)$order['buyerId']) . "'>" . htmlspecialchars($order['buyerName']) . "</a></p>";
     ?>
-    <a href="../actions/print_shipping_form.php?orderId=<?= $order['idOrder'] ?>&itemId=<?= $order['idItem'] ?>" target="_blank">Print Shipping Form</a>
+    <a href="../actions/print_shipping_form.php?orderId=<?= htmlspecialchars((string)$order['idOrder']) ?>&itemId=<?= htmlspecialchars((string)$order['idItem']) ?>" target="_blank">Print Shipping Form</a>
     <form method="post" action="../actions/action_item_sent.php">
-        <input type="hidden" name="idOrder" value="<?= $orderId ?>">
-        <input type="hidden" name="idItem" value="<?= $itemId ?>">
+        <input type="hidden" name="idOrder" value="<?= htmlspecialchars((string)$orderId) ?>">
+        <input type="hidden" name="idItem" value="<?= htmlspecialchars((string)$itemId) ?>">
         <button type="submit">Mark as Sent</button>
     </form>
 <?php } ?>

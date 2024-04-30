@@ -44,14 +44,19 @@
                 $otherUser = User::getUserById($db, $otherUserId);
                 $item = Item::getItemById($db, $itemId);
                 $otherUserImage = $otherUser->getProfileImage($db);
-                if ($otherUserImage) {
-                    echo "<a href='../pages/chat_messages.php?otherUserId={$otherUserId}&itemId={$itemId}'><img src='{$otherUserImage}' alt='User Image'></a>";
-                } 
+
+                $otherUserImageSrc = htmlspecialchars((string)$otherUserImage);
+                $otherUserName = htmlspecialchars((string)$otherUser->name);
+                $itemName = htmlspecialchars((string)$item->name);
+
+                if ($otherUserImageSrc) {
+                    echo "<a href='../pages/chat_messages.php?otherUserId={$otherUserId}&itemId={$itemId}'><img src='{$otherUserImageSrc}' alt='User Image'></a>";
+                }
                 else {
                     echo "<a href='../pages/chat_messages.php?otherUserId={$otherUserId}&itemId={$itemId}'><img src='../docs/images/default_profile_picture.png' alt='User Image'></a>";
                 }
 
-                echo "<a class='user_select' href='../pages/chat_messages.php?otherUserId={$otherUserId}&itemId={$itemId}'>{$otherUser->name} - {$item->name}</a>";
+                echo "<a class='user_select' href='../pages/chat_messages.php?otherUserId={$otherUserId}&itemId={$itemId}'>{$otherUserName} - {$itemName}</a>";
                 echo "</article>";
             }
         ?>

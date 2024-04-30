@@ -43,7 +43,7 @@
                     <?php
                     $categories = Category::getCategories($db);
                     foreach ($categories as $category) {
-                        echo "<option value='{$category->idCategory}'>{$category->categoryName}</option>";
+                        echo "<option value='" . htmlspecialchars($category->idCategory, ENT_QUOTES) . "'>" . htmlspecialchars($category->categoryName, ENT_QUOTES) . "</option>";
                     }
                     ?>
                 </select>
@@ -58,7 +58,7 @@
                     <?php
                     $sizes = Size::getSizes($db);
                     foreach ($sizes as $size) {
-                        echo "<option value='{$size->idSize}'>{$size->sizeName}</option>";
+                        echo "<option value='" . htmlspecialchars($size->idSize, ENT_QUOTES) . "'>" . htmlspecialchars($size->sizeName, ENT_QUOTES) . "</option>";
                     }
                     ?>
                 </select>
@@ -73,7 +73,7 @@
                     <?php
                     $conditions = Condition::getConditions($db);
                     foreach ($conditions as $condition) {
-                        echo "<option value='{$condition->idCondition}'>{$condition->conditionName}</option>";
+                        echo "<option value='" . htmlspecialchars($condition->idCondition, ENT_QUOTES) . "'>" . htmlspecialchars($condition->conditionName, ENT_QUOTES) . "</option>";
                     }
                     ?>
                 </select>
@@ -85,7 +85,7 @@
         <form action="../actions/action_elevate_user.php" method="post">
             <?php  
                 if (isset($_SESSION['message'])) {
-                    echo "<p>{$_SESSION['message']}</p>";
+                    echo "<p>" . htmlspecialchars($_SESSION['message'], ENT_QUOTES) . "</p>";
                     unset($_SESSION['message']);
                 }
             ?>
@@ -98,10 +98,10 @@
 
                 foreach ($users as $user) {
                     if ($user->isAdmin){
-                        echo "<div><input type='radio' id='user_{$user->idUser}' name='user_id' value='{$user->idUser}'><label for='user_{$user->idUser}'>{$user->username} ({$user->name}) - <strong>Admin</strong></label></div>";
+                        echo "<div><input type='radio' id='user_{$user->idUser}' name='user_id' value='{$user->idUser}'><label for='user_{$user->idUser}'>" . htmlspecialchars($user->username, ENT_QUOTES) . " (" . htmlspecialchars($user->name, ENT_QUOTES) . ") - <strong>Admin</strong></label></div>";
                     }
                     else {
-                        echo "<div><input type='radio' id='user_{$user->idUser}' name='user_id' value='{$user->idUser}'><label for='user_{$user->idUser}'>{$user->username} ({$user->name})</label></div>";
+                        echo "<div><input type='radio' id='user_{$user->idUser}' name='user_id' value='{$user->idUser}'><label for='user_{$user->idUser}'>" . htmlspecialchars($user->username, ENT_QUOTES) . " (" . htmlspecialchars($user->name, ENT_QUOTES) . ")</label></div>";
                     
                     }
                 }

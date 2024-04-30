@@ -21,11 +21,11 @@
 
     if ($_SERVER["REQUEST_METHOD"] === "GET") {
         
-        $search = isset($_GET["search"]) ? $_GET["search"] : '';
-        $category = isset($_GET["category"]) ? $_GET["category"] : 'all';
-        $size = isset($_GET["size"]) ? $_GET["size"] : 'all';
-        $condition = isset($_GET["condition"]) ? $_GET["condition"] : 'all';
-        $order = isset($_GET["order"]) ? $_GET["order"] : 'default';
+        $search = isset($_GET["search"]) ? htmlspecialchars($_GET["search"]) : '';
+        $category = isset($_GET["category"]) ? htmlspecialchars($_GET["category"]) : 'all';
+        $size = isset($_GET["size"]) ? htmlspecialchars($_GET["size"]) : 'all';
+        $condition = isset($_GET["condition"]) ? htmlspecialchars($_GET["condition"]) : 'all';
+        $order = isset($_GET["order"]) ? htmlspecialchars($_GET["order"]) : 'default';
 
         if(empty($search) && $category === 'all' && $size === 'all' && $condition === 'all' && $order === 'default') {
             $items = Item::getFeaturedItems($db);
