@@ -405,7 +405,11 @@ span.inactive {
     align-items: center;
 }
 
-
+#edit-profile-form > * {
+    width: 100%;
+    max-width: 20em;
+    margin-bottom: 1em;
+}
 
 #edit-profile-form input, #edit-item-form input{
     width: 20em;
