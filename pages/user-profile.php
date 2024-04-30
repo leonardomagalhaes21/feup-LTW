@@ -15,7 +15,7 @@
 
     $user = User::getUserById($db, $idUser);
 
-    drawHeader($session);
+    drawHeader($session, "user-profile");
     drawProfile($db, $user);
     drawFooter();
 ?>

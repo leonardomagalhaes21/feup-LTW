@@ -110,11 +110,6 @@
             <button type="submit">Elevate to Admin</button>
         </form>
     </article>
-
-    <article>
-        <h2>System Operation Overview</h2>
-    </article>
-
 </section>
 
 <?php } ?>

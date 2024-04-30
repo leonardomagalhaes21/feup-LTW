@@ -391,9 +391,9 @@ span.inactive {
     color: var(--red);
 }
 
-/* edit profile styling */
+/* edit profile/item styling */
 
-#edit-profile-form{
+#edit-profile-form, #edit-item-form{
     max-width: 500px;
     margin: 0 auto;
     padding: 2em;
@@ -402,7 +402,7 @@ span.inactive {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#edit-profile-form input{
+#edit-profile-form input, #edit-item-form input{
     width: 20em;
     padding: 0.5em;
     margin-bottom: 1em;
@@ -412,12 +412,12 @@ span.inactive {
     transition: border-color 0.3s;
 }
 
-#edit-profile-form input:focus{
+#edit-profile-form input:focus, #edit-item-form input:focus{
     outline: none;
     border-bottom: 1px solid var(--blue);
 }
 
-#edit-profile-form label:last-of-type{
+#edit-profile-form label:last-of-type, #edit-item-form label:last-of-type{
     margin-bottom: 2em;
 }
 
