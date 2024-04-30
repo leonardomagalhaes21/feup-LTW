@@ -59,7 +59,7 @@ class User {
     public static function isAdmin(PDO $db, int $idUser): bool {
         $stmt = $db->prepare('SELECT isAdmin FROM Users WHERE idUser = ?');
         $stmt->execute(array($idUser));
-        $isAdmin = $stmt->fetch()['isAdmin'];
+        $isAdmin = $stmt->fetchColumn();
 
         return (bool) $isAdmin;
     }

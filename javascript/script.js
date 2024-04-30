@@ -27,6 +27,29 @@ function validateForm() {
     return true;
 }
 
+function validateEditItemForm() {
+    let name = document.getElementById("name").value;
+    let brand = document.getElementById("brand").value;
+    let model = document.getElementById("model").value;
+
+    if (name.length > 25) {
+        alert("Name cannot exceed 25 characters!");
+        return false;
+    }
+
+    if (brand.length > 15) {
+        alert("Brand cannot exceed 15 characters!");
+        return false;
+    }
+
+    if (model.length > 15) {
+        alert("Model cannot exceed 15 characters!");
+        return false;
+    }
+
+    return true;
+}
+
 function validateProfileEditForm() {
     let password = document.getElementById("password").value;
     let confirmPassword = document.getElementById("confirm_password").value;

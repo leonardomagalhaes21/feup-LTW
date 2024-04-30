@@ -33,7 +33,7 @@
                     ?>
                 </h3>
                 <p>Price: $<?=htmlentities((string)$item->price)?></p>
-                <?php $isFromUser = (int) $item->idSeller === (int) $_SESSION['id']; ?>
+                <?php $isFromUser = isset($_SESSION['id']) && (int) $item->idSeller === (int) $_SESSION['id']; ?>
                 <?php if (!$isFromUser && isset($_SESSION['id'])) { ?>
                     <?php if ($isCartPage || (!$isInWishlistPage && (isset($_SESSION['cart']) && in_array($item->idItem, $_SESSION['cart'])))) { ?>
                         <form action="../actions/action_remove_from_cart.php" method="post">

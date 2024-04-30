@@ -106,9 +106,9 @@ form {
     align-items: center;
 }
 
-/* signup/add publication layout */
+/* signup/add publication/edit item layout */
 
-#register, #login, #add-publication {
+#register, #login, #add-publication, #edit-item {
     grid-area: signup;
     display: flex;
     flex-direction: column;
@@ -178,9 +178,9 @@ form {
     justify-content: center;
 }
 
-/* edit profile layout */
+/* edit profile/item layout */
 
-#edit-profile-form {
+#edit-profile-form, #edit-item-form {
     display: flex;
     flex-direction: column;
     align-items: center;
