@@ -10,10 +10,14 @@ DROP TABLE IF EXISTS Sizes;
 DROP TABLE IF EXISTS Conditions;
 DROP TABLE IF EXISTS Items;
 DROP TABLE IF EXISTS Images;
+DROP TABLE IF EXISTS ItemImages;
+DROP TABLE IF EXISTS UserImage;
 DROP TABLE IF EXISTS Chats;
 DROP TABLE IF EXISTS Orders;
 DROP TABLE IF EXISTS OrderItems;
 DROP TABLE IF EXISTS Wishlists;
+DROP TABLE IF EXISTS CheckoutInfo;
+DROP TABLE IF EXISTS Ratings;
 
 DROP TRIGGER IF EXISTS UpdateItemStatusAfterOrder;
 DROP TRIGGER IF EXISTS ReactivateItemOnOrderCancel;
@@ -132,6 +136,16 @@ CREATE TABLE CheckoutInfo (
     zipCode TEXT NOT NULL,
     paymentMethod TEXT NOT NULL,
     FOREIGN KEY (idOrder) REFERENCES Orders(idOrder)
+);
+
+CREATE TABLE Ratings (
+    idRating INTEGER PRIMARY KEY AUTOINCREMENT,
+    idUser INTEGER NOT NULL,
+    rating INTEGER NOT NULL,
+    comment TEXT,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT CHECK_Rating CHECK (rating BETWEEN 1 AND 5),
+    FOREIGN KEY (idUser) REFERENCES Users(idUser)
 );
 
 
@@ -388,3 +402,8 @@ INSERT INTO Wishlists (idUser, idItem) VALUES
 (2, 4),
 (2, 1),
 (3, 5);
+
+INSERT INTO Ratings (idUser, rating, comment) VALUES
+(1, 5, 'Great seller!'),
+(2, 4, 'Good experience, would buy again!'),
+(3, 3, 'Item was as described.');
