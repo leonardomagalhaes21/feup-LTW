@@ -1,6 +1,7 @@
 <?php 
     declare(strict_types = 1); 
     require_once(__DIR__ . '/../database/users.class.php');
+    require_once(__DIR__ . '/../database/rating.class.php');
 ?>
 
 <?php 
@@ -39,11 +40,59 @@
         <div id="content-container"></div>
         <div id="admin-content-container"></div>
     </div>
+    <?php } ?>
+    <?php if ($loggedId !== null && $loggedId !== $user->idUser) { ?>
+    <form action="../actions/action_submit_rating.php" method="POST">
+        <input type="hidden" name="idUser" value="<?=$user->idUser?>">
+        <div class="rating">
+            <p>Rate this user:</p>
+            <div class="stars">
+                <input type="radio" id="star5" name="rating" value="5" required>
+                <label for="star5"></label>
+                <input type="radio" id="star4" name="rating" value="4">
+                <label for="star4"></label>
+                <input type="radio" id="star3" name="rating" value="3">
+                <label for="star3"></label>
+                <input type="radio" id="star2" name="rating" value="2">
+                <label for="star2"></label>
+                <input type="radio" id="star1" name="rating" value="1">
+                <label for="star1"></label>
+            </div>
+        </div>
+
+        <div class="comment">
+            <textarea name="comment" placeholder="Leave a comment here"></textarea>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    <?php } ?>
+    <?php if (isset($_SESSION['message'])) { ?>
+        <p><?= htmlentities($_SESSION['message']) ?></p>
+        <?php unset($_SESSION['message']); ?>
+    <?php } ?> 
     <script>
         let isAdmin = <?= $user->isAdmin ?>;
     </script>
 
 
-    <?php } ?>
-</section>
+<?php } ?>
+
+<?php function drawComments($db, $userId, $limit) { //TODO melhorar muito isto ?>
+    <div class = "comments">
+        <?php
+        $comments = Rating::getRatingsByUser($db, $userId, $limit);
+        if ($comments) {
+            foreach ($comments as $comment) {
+                $rating = htmlentities((string)$comment['rating']);
+                $commentText = htmlentities($comment['comment']);
+                ?>
+                <p> Rating: <?= $rating ?> </p>
+                <?php if ($commentText) { ?>
+                    <p> Comment: <?= $commentText ?> </p>
+                <?php }
+            }
+        }
+        ?>
+    </div>
+    </section>
 <?php } ?>

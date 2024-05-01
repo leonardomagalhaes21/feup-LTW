@@ -329,6 +329,45 @@ span.inactive {
     background-color: var(--lightergrey)
 }
 
+.rating p {
+    margin-right: 10px;
+}
+
+.stars {
+    direction: rtl;
+}
+
+.stars input {
+    display: none;
+}
+
+.stars label {
+    font-size: 2em;
+    color: var(--yellow);
+    cursor: pointer;
+}
+
+.stars label:before {
+    content: '\2606';
+}
+
+.stars input:checked ~ label:before {
+    content: '\2605';
+}
+
+.stars label:hover:before,
+.stars label:hover ~ label:before {
+    content: '\2605';
+    color: var(--yellow);
+}
+
+.comment textarea {
+    width: 100%;
+    padding: 1em;
+    border: 1px solid var(--grey);
+    border-radius: 5px;
+}
+
 /* admin styling */
 
 #admin {

@@ -17,5 +17,6 @@
 
     drawHeader($session, "user-profile");
     drawProfile($db, $user);
+    drawComments($db, $user->idUser, 15);
     drawFooter();
 ?>
