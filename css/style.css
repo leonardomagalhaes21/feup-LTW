@@ -368,6 +368,27 @@ span.inactive {
     border-radius: 5px;
 }
 
+.comments {
+    margin-top: 2em;
+    max-width: 35em;
+}
+
+.comment-info {
+    border: 1px solid var(--lightgrey);
+    border-radius: 5px;
+    padding: 0.5em;
+    background-color: var(--lightergrey);
+    word-wrap: break-word;
+}
+
+.comment-info p {
+    margin: 0.5em;
+}
+
+.comment-stars {
+    color: var(--yellow);
+}
+
 /* admin styling */
 
 #admin {

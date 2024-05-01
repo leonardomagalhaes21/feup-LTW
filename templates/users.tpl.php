@@ -9,6 +9,7 @@
         $loggedId = $_SESSION['id'] ?? null;
         $condition = $loggedId === $user->idUser;
         $profileImage = $user->getProfileImage($db);
+        $averageRating = Rating::getAverageRating($db, $user->idUser);
 ?>
 
 <section id="user-profile">
@@ -22,6 +23,9 @@
             <h2><?= htmlentities($user->name) ?></h2>
             <p>Email: <?= htmlentities($user->email) ?></p>
             <p>Username: <?= htmlentities($user->username) ?> </p>
+            <?php if ($averageRating !== null && $averageRating !== 0.0) { ?>
+                <p>Rating: <?= number_format((float)htmlentities((string)$averageRating), 1)?> / 5 </p>
+            <?php } ?>
         </div>
     </div>
     <?php if ($condition) { ?>
@@ -81,15 +85,20 @@
     <div class = "comments">
         <?php
         $comments = Rating::getRatingsByUser($db, $userId, $limit);
-        if ($comments) {
+        if ($comments) { ?>
+            <h3> Ratings and Comments </h3>
+            <?php
             foreach ($comments as $comment) {
                 $rating = htmlentities((string)$comment['rating']);
                 $commentText = htmlentities($comment['comment']);
                 ?>
-                <p> Rating: <?= $rating ?> </p>
-                <?php if ($commentText) { ?>
-                    <p> Comment: <?= $commentText ?> </p>
-                <?php }
+                <div class="comment-info">
+                    <p><span class="comment-stars"><?= str_repeat('&#9733;',(int) $rating) ?></span> </p>
+                    <?php if ($commentText) { ?>
+                        <p><?= $commentText ?> </p>
+                    <?php } ?>
+                </div>
+                <?php
             }
         }
         ?>

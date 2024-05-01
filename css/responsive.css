@@ -136,4 +136,8 @@
     .profile-actions a {
       margin: 1em;
     }
+
+    .comments {
+      max-width: 100%;
+    }
 }

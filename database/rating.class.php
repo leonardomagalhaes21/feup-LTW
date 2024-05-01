@@ -40,5 +40,13 @@ class Rating {
         $stmt->execute(array($userId, $limit));
         return $stmt->fetchAll();
     }
+
+    public static function getAverageRating(PDO $db, int $userId): ?float {
+        $stmt = $db->prepare('SELECT avg(rating) FROM Ratings WHERE idUser = ?');
+        $stmt->execute(array($userId));
+        $avg = $stmt->fetchColumn();
+
+        return $avg === false ? null : (float)$avg;
+    }
 }
 ?>
