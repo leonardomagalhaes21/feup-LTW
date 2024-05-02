@@ -142,13 +142,12 @@ input, select {
     border-radius: 5px;
 }
 
-
-
 /* items styling */
 
 #items > article {
     background-color: var(--lightgrey);
     margin-bottom: 1em;
+    margin-top: 1em;
     border-radius: 10px;
     transition: 0.3s ease;
     max-height: 15em;
@@ -172,15 +171,15 @@ input, select {
 }
 
 #items p {
-    margin: 0.5em 0;
+    margin: 0.5em 0 0 0;
 }
 
 #items h3 {
-    margin: 0.5em 0;
+    margin: 0.5em 0 0 0;
 }
 
 #items h2 {
-    margin: 0.5em 0;
+    margin: 0.5em 0 0 0;
 }
 
 #items button {

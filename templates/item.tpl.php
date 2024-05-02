@@ -63,7 +63,7 @@
 <?php function drawItem(PDO $db, Item $item, bool $isAdmin = false, bool $isInWishlist = false, bool $isFromUser = false) { ?>
     <section id="item-details">
         <header>
-        <button onclick="goBack()">&#8592; Go Back</button>
+            <button onclick="goBack()">&#8592; Go Back</button>
             <h2>Item Overview</h2>
             <?php if ($isAdmin) { ?>
                 <form action="../actions/action_item_change_featured.php" method="post">
@@ -101,7 +101,9 @@
                 <p>Seller: <a href="../pages/user-profile.php?idUser=<?=$item->idSeller?>"><?=htmlentities(User::getUserById($db, $item->idSeller)->name)?></a></p>
                 <p><span class="<?=htmlentities($item->active ? 'active' : 'inactive')?>"><?=htmlentities($item->active ? 'Active' : 'Inactive')?></span></p>
             </div>
-            <?php if (!$isFromUser && isset($_SESSION['id']) && $item->active) { ?>
+        </article>
+        <?php if (!$isFromUser && isset($_SESSION['id']) && $item->active) { ?>
+            <div class="buttons">
                 <form action="<?php echo $isInWishlist ? '../actions/action_remove_from_wishlist.php' : '../actions/action_add_to_wishlist.php'; ?>" method="post">
                     <input type="hidden" name="idItem" value="<?php echo $item->idItem; ?>">
                     <button type="submit">
@@ -124,20 +126,10 @@
                     <button type="submit">Remove from Cart</button>
                 </form>
                 <?php } ?>
-                </article>
-            <?php } ?>
-            <?php if($isAdmin && (isset($_SESSION['id']) && $_SESSION['id'] != $item->idSeller)){?>
-                    <form action="../pages/edit_item.php" method="get">
-                        <input type="hidden" name="idItem" value="<?=$item->idItem?>">
-                        <button type="submit">Edit Item</button>
-                    </form>
-                    <form action="../actions/action_remove_item.php" method="post">
-                        <input type="hidden" name="idItem" value="<?=$item->idItem?>">
-                        <button type="submit">Remove Item</button>
-                    </form>
-            <?php }?>
-            <?php if (isset($_SESSION['id']) && $_SESSION['id'] == $item->idSeller) { ?>
-                <div class="seller-options">
+            </div>
+        <?php } ?>
+        <?php if($isAdmin && (isset($_SESSION['id']) && $_SESSION['id'] != $item->idSeller)){?>
+                <div class="buttons">
                     <form action="../pages/edit_item.php" method="get">
                         <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                         <button type="submit">Edit Item</button>
@@ -147,7 +139,19 @@
                         <button type="submit">Remove Item</button>
                     </form>
                 </div>
-            <?php } ?>
+        <?php }?>
+        <?php if (isset($_SESSION['id']) && $_SESSION['id'] == $item->idSeller) { ?>
+            <div class="buttons">
+                <form action="../pages/edit_item.php" method="get">
+                    <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                    <button type="submit">Edit Item</button>
+                </form>
+                <form action="../actions/action_remove_item.php" method="post">
+                    <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                    <button type="submit">Remove Item</button>
+                </form>
+            </div>
+        <?php } ?>
     </section>
 <?php } ?>
 
