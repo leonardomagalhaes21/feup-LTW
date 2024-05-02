@@ -13,53 +13,22 @@
 
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/category.class.php');
-    require_once(__DIR__ . '/../database/item.class.php');
-    require_once(__DIR__ . '/../database/users.class.php'); // Adicionado para buscar o nome do remetente
     require_once(__DIR__ . '/../database/chats.class.php'); // Importa a classe Chat
 
     require_once(__DIR__ . '/../templates/common.tpl.php');
+    require_once(__DIR__ . '/../templates/chat.tpl.php');
 
     $db = getDatabaseConnection();
 
     $categories = Category::getCategories($db);
-    $items = Item::getItems($db, 10); //limitado a 10 items por enquanto
-
-    drawHeader($session);
-    drawCategories($categories);
-
     // Buscar e exibir mensagens agrupadas por chat
     $userId = $session->getId(); // ID do usuário atual
     $pairs = Chat::getUsersChats($db, (int) $userId);
 
+    drawHeader($session);
+    drawCategories($categories);
+    drawChats($pairs, $db);
+    drawFooter();
+
 ?>
 
-    <section class="chats">
-        <h2>Chats</h2>
-        <?php
-            foreach ($pairs as $pair) {
-                echo "<article>";
-                $otherUserId = (int)$pair['otherUserId'];
-                $itemId = (int)$pair['idItem'];
-
-                $otherUser = User::getUserById($db, $otherUserId);
-                $item = Item::getItemById($db, $itemId);
-                $otherUserImage = $otherUser->getProfileImage($db);
-
-                $otherUserImageSrc = htmlentities((string)$otherUserImage);
-                $otherUserName = htmlentities((string)$otherUser->name);
-                $itemName = htmlentities((string)$item->name);
-
-                if ($otherUserImageSrc) {
-                    echo "<a href='../pages/chat_messages.php?otherUserId={$otherUserId}&itemId={$itemId}'><img src='{$otherUserImageSrc}' alt='User Image'></a>";
-                }
-                else {
-                    echo "<a href='../pages/chat_messages.php?otherUserId={$otherUserId}&itemId={$itemId}'><img src='../docs/images/default_profile_picture.png' alt='User Image'></a>";
-                }
-
-                echo "<a class='user_select' href='../pages/chat_messages.php?otherUserId={$otherUserId}&itemId={$itemId}'>{$otherUserName} - {$itemName}</a>";
-                echo "</article>";
-            }
-        ?>
-    </section>
-
-<?php drawFooter(); ?>

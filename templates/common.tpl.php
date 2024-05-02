@@ -16,7 +16,6 @@
       <link rel="stylesheet" href="../css/layout.css">
       <link rel="stylesheet" href="../css/responsive.css">
       <script src="../javascript/<?=$jsPage?>.js" defer></script>
-      <script src="index.js"></script>
     </head>
     <body>
       <header>
