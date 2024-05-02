@@ -223,4 +223,82 @@
     </section>
 <?php } ?>
 
+<?php function drawCart($totalPrice, $items) { ?>
+    <section id="cart">
+        <h2>Checkout</h2>
+        <div class="total-price">
+            <p>Total: $<?= htmlentities((string)number_format($totalPrice, 2)) ?></p>
+        </div>
+        <?php if (count($items) > 0) { ?>
+            <form action="../pages/checkout.php" method="get">
+                <button type="submit">Checkout</button>
+            </form>
+        <?php } else { ?>
+            <p>Your cart is empty</p>
+        <?php } ?>
+    </section>
+<?php } ?>
+
+<?php function drawCheckout($totalPrice) { ?>
+    <section id="checkout">
+        <h2>Checkout</h2>
+        <div class="total-price">
+            <p>Total: $<?= htmlentities((string)number_format($totalPrice, 2)) ?></p>
+        </div>
+        <form action="../actions/action_complete_order.php" method="post">
+            <label>
+                Address: <input type="text" id="address" name="address" required>
+            </label><br>
+            <label>
+                City: <input type="text" id="city" name="city" required>
+            </label><br>
+            <label>
+                Zip Code: <input type="text" id="zipcode" name="zipcode" required>
+            </label><br>
+            <label>
+                Payment Method:
+                <select id="payment_method" name="payment_method" required>
+                    <option value="credit_card">Credit Card</option>
+                    <option value="mbway">MBWay</option>
+                    <option value="paypal">PayPal</option>
+                </select>
+            </label><br>
+            <input type="hidden" name="total_price" value="<?= htmlentities((string)$totalPrice) ?>">
+            <button type="submit">Complete Order</button>
+        </form>
+
+    </section>
+<?php } ?>
+
+<?php function drawEditItem($item) { ?>
+    <section id="edit-item"> 
+        <h2>Edit Item</h2>
+        <form id="edit-item-form" action="../actions/action_update_item.php" method="post" onsubmit="return validateEditItemForm()">
+            <input type="hidden" name="idItem" value="<?= $item->idItem ?>">
+            <label for="name">Name:
+                <input type="text" id="name" name="name" value="<?= htmlentities($item->name) ?>">
+            </label><br>
+            <label for="description">Description:
+                <input type="text" id="description" name="description" value="<?= htmlentities($item->description) ?>">
+            </label><br>
+            <label for="price">Price:
+                <input type="number" id="price" name="price" value="<?= htmlentities((string)$item->price) ?>">
+            </label><br>
+            <label for="brand">Brand:
+                <input type="text" id="brand" name="brand" value="<?= htmlentities($item->brand) ?>">
+            </label><br>
+            <label for="category">Category:
+                <input type="text" id="category" name="category" value="<?= $item->idCategory ?>">
+            </label><br>
+            <label for="model">Model:
+                <input type="text" id="model" name="model" value="<?= htmlentities($item->model) ?>">
+            </label><br>
+            <label for="condition">Condition:
+                <input type="text" id="condition" name="condition" value="<?= $item->idCondition ?>">
+            </label><br>
+            <button type="submit">Save Changes</button>
+        </form>
+    </section>
+<?php } ?>
+
 
