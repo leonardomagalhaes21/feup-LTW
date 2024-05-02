@@ -29,7 +29,7 @@
             <div id="user-icons">
               <a href="../pages/chats.php"><img src="../docs/images/icon_chat.svg" alt="Chats"></a>
               <a href="../pages/add_publication.php"><img src="../docs/images/icon_add.svg" alt="Add Publication"></a>
-              <a href="../pages/cart.php"><img src="../docs/images/icon_cart.svg" alt="Cart"></a>
+              <a href="../pages/cart.php" id="cart-link"><img src="../docs/images/icon_cart.svg" alt="Cart"></a>
               <a href="../pages/user-profile.php?idUser=<?=$_SESSION['id']?>"><img src="../docs/images/icon_profile.svg" alt="Profile"></a>
             </div>
         <?php 
@@ -47,7 +47,6 @@
 
 <?php function drawCategories($categories) { ?>
     <nav id="menu">
-        <!-- just for the hamburguer menu in responsive layout -->
         <input type="checkbox" id="hamburger"> 
         <label class="hamburger" for="hamburger"></label>
         <ul>
