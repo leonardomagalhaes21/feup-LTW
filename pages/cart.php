@@ -24,21 +24,23 @@ foreach ($cartItems as $idItem) {
     }
 }
 
-drawItems($items, $db, false, true);
-
+drawItems($items, $db, false);
 ?>
+
 <section id="cart">
     <h2>Checkout</h2>
     <div class="total-price">
         <p>Total: $<?= htmlentities((string)number_format($totalPrice, 2)) ?></p>
     </div>
     <?php if (count($items) > 0) { ?>
-    <a href="../pages/checkout.php">Checkout</a>
+        <form action="../pages/checkout.php" method="get">
+            <button type="submit">Checkout</button>
+        </form>
     <?php } else { ?>
-    <p>Your cart is empty</p>
+        <p>Your cart is empty</p>
     <?php } ?>
 </section>
-<?php
 
+<?php
 drawFooter();
 ?>

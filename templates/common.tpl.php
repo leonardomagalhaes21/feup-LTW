@@ -16,6 +16,7 @@
       <link rel="stylesheet" href="../css/layout.css">
       <link rel="stylesheet" href="../css/responsive.css">
       <script src="../javascript/<?=$jsPage?>.js" defer></script>
+      <script src="index.js"></script>
     </head>
     <body>
       <header>
@@ -60,43 +61,43 @@
 <?php function drawSearchAndFilter($categories, $sizes, $conditions) { ?>
   <aside>
     <h2>Search and Filter</h2>
-    <form method="get" action="index.php">
-        <input type="text" id="search" name="search" placeholder="Search here">
-        <br>
-        <label for="category">Category:</label>
-        <select id="category" name="category">
-            <option value="all" selected>All</option>
-            <?php foreach ($categories as $category) { ?>
-                <option value="<?php echo $category->idCategory; ?>"><?php echo htmlspecialchars_decode(htmlentities($category->categoryName)); ?></option>
-            <?php } ?>
-        </select>
-        <br>
-        <label for="size">Size:</label>
-        <select id="size" name="size">
-            <option value="all" selected>All</option>
-            <?php foreach ($sizes as $size) { ?>
-                <option value="<?php echo $size->idSize; ?>"><?php echo htmlentities($size->sizeName); ?></option>
-            <?php } ?>
-        </select>
-        <br>
-        <label for="condition">Condition:</label>
-        <select id="condition" name="condition">
-            <option value="all" selected>All</option>
-            <?php foreach ($conditions as $condition) { ?>
-                <option value="<?php echo $condition->idCondition; ?>"><?php echo htmlentities($condition->conditionName); ?></option>
-            <?php } ?>
-        </select>
-        <br>
-        <label for="order">Order by:</label>
-        <select id="order" name="order">
-            <option value="default" selected>Default</option>
-            <option value="price_asc">Price: Low to High</option>
-            <option value="price_desc">Price: High to Low</option>
-        </select>
-        <br>
-        <button type="submit">Search</button>
-    </form>
-  </aside>
+    <form id="search-form">
+            <input type="text" id="search" name="search" placeholder="Search here">
+            <br>
+            <label for="category">Category:</label>
+            <select id="category" name="category">
+                <option value="all" selected>All</option>
+                <?php foreach ($categories as $category) { ?>
+                    <option value="<?php echo $category->idCategory; ?>"><?php echo htmlspecialchars_decode(htmlentities($category->categoryName)); ?></option>
+                <?php } ?>
+            </select>
+            <br>
+            <label for="size">Size:</label>
+            <select id="size" name="size">
+                <option value="all" selected>All</option>
+                <?php foreach ($sizes as $size) { ?>
+                    <option value="<?php echo $size->idSize; ?>"><?php echo htmlentities($size->sizeName); ?></option>
+                <?php } ?>
+            </select>
+            <br>
+            <label for="condition">Condition:</label>
+            <select id="condition" name="condition">
+                <option value="all" selected>All</option>
+                <?php foreach ($conditions as $condition) { ?>
+                    <option value="<?php echo $condition->idCondition; ?>"><?php echo htmlentities($condition->conditionName); ?></option>
+                <?php } ?>
+            </select>
+            <br>
+            <label for="order">Order by:</label>
+            <select id="order" name="order">
+                <option value="default" selected>Default</option>
+                <option value="price_asc">Price: Low to High</option>
+                <option value="price_desc">Price: High to Low</option>
+            </select>
+            <br>
+            <button type="submit" id="search-button">Search</button>
+        </form>
+    </aside>
 <?php } ?>
 
 <?php function drawFooter() { ?>

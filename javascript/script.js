@@ -114,4 +114,3 @@ showSlides(slideIndex);
 function goBack() {
     window.history.back();
 }
-
