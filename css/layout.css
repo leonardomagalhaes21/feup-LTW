@@ -182,9 +182,9 @@ form {
     flex-wrap: wrap;
 }
 
-/* order layout */
+/* order/shipping layout */
 
-#orders {
+#orders, #shipping-forms {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

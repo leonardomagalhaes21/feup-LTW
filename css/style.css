@@ -420,13 +420,13 @@ span.inactive {
 
 }
 
-/* order styling */
+/* order/shipping styling */
 
-#orders {
+#orders, #shipping-forms {
     gap: 2em;
 }
 
-#orders article {
+#orders article, #shipping-forms article {
     background-color: var(--lightgrey);
     margin-bottom: 1em;
     border-radius: 10px;
@@ -434,8 +434,12 @@ span.inactive {
     padding: 1em;
 }
 
-#orders > article:hover {
+#orders > article:hover, #shipping-forms > article:hover {
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+#shipping-forms button {
+    margin-top: 1em;
 }
 
 .status.pending {

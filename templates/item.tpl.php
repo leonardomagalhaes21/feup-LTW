@@ -4,58 +4,74 @@
   require_once(__DIR__ . '/../database/item.class.php')
 ?>
 
-<?php function drawItems(array $items, PDO $db, bool $drawHeader, bool $isCartPage = false, bool $isInWishlistPage = false) { ?>
+<?php function drawItems(array $items, PDO $db, bool $drawHeader, bool $isCartPage = false, bool $isInWishlistPage = false) { 
+    $showMore = isset($_GET['showMore']) ? (int)$_GET['showMore'] : 10;
 
-<section id="items">
-    <?php if ($drawHeader){ ?>
-    <h2>Items <?php echo $isCartPage ? 'Cart' : ($isInWishlistPage ? 'in Wishlist' : 'for Sale'); ?></h2>
-    <?php } ?>
-    <?php foreach ($items as $item) { ?>
-        <article>
-            <?php $mainImagePath = htmlentities($item->getMainImage($db)); ?>
-            <a href="../pages/item.php?idItem=<?=$item->idItem?>">
-                <img src="<?=$mainImagePath?>" alt="<?=htmlentities($item->name)?>">
-            </a>
-            <div class="item-details">
-                <h2>
-                    <a href="../pages/item.php?idItem=<?=$item->idItem?>"><?=htmlentities($item->name)?></a>
-                </h2>
-                <h3>
-                    <?php if (!empty($item->brand) && !empty($item->model)) {
-                        echo htmlentities("{$item->brand} - {$item->model}");
-                    } 
-                    elseif (!empty($item->brand)) {
-                        echo htmlentities($item->brand);
-                    } 
-                    elseif (!empty($item->model)) {
-                        echo htmlentities($item->model);
-                    }
-                    ?>
-                </h3>
-                <p>Price: $<?=htmlentities((string)$item->price)?></p>
-                <?php $isFromUser = isset($_SESSION['id']) && (int) $item->idSeller === (int) $_SESSION['id']; ?>
-                <?php if (!$isFromUser && isset($_SESSION['id'])) { ?>
-                    <?php if ($isCartPage || (!$isInWishlistPage && (isset($_SESSION['cart']) && in_array($item->idItem, $_SESSION['cart'])))) { ?>
-                        <form action="../actions/action_remove_from_cart.php" method="post">
-                            <input type="hidden" name="idItem" value="<?=$item->idItem?>">
-                            <button type="submit">Remove from Cart</button>
-                        </form>
-                    <?php } elseif ($isInWishlistPage) { ?>
-                        <form action="../actions/action_remove_from_wishlist.php" method="post">
-                            <input type="hidden" name="idItem" value="<?=$item->idItem?>">
-                            <button type="submit">Remove from Wishlist</button>
-                        </form>
-                    <?php } else { ?>
-                        <form action="../actions/action_add_to_cart.php" method="post">
-                            <input type="hidden" name="idItem" value="<?=$item->idItem?>">
-                            <button type="submit">Add to Cart</button>
-                        </form>
+    ?>
+    <section id="items">
+        <?php if ($drawHeader){ ?>
+        <h2>Items <?php echo $isCartPage ? 'Cart' : ($isInWishlistPage ? 'in Wishlist' : 'for Sale'); ?></h2>
+        <?php } ?>
+        <?php 
+        $itemsNum = 0;
+        foreach ($items as $index => $item) { 
+            if ($itemsNum >= $showMore) {
+                break;
+            }
+            ?>
+            <article>
+                <?php $mainImagePath = htmlentities($item->getMainImage($db)); ?>
+                <a href="../pages/item.php?idItem=<?=$item->idItem?>">
+                    <img src="<?=$mainImagePath?>" alt="<?=htmlentities($item->name)?>">
+                </a>
+                <div class="item-details">
+                    <h2>
+                        <a href="../pages/item.php?idItem=<?=$item->idItem?>"><?=htmlentities($item->name)?></a>
+                    </h2>
+                    <h3>
+                        <?php if (!empty($item->brand) && !empty($item->model)) {
+                            echo htmlentities("{$item->brand} - {$item->model}");
+                        } 
+                        elseif (!empty($item->brand)) {
+                            echo htmlentities($item->brand);
+                        } 
+                        elseif (!empty($item->model)) {
+                            echo htmlentities($item->model);
+                        }
+                        ?>
+                    </h3>
+                    <p>Price: <?=htmlentities((string)$item->price)?>€</p>
+                    <?php $isFromUser = isset($_SESSION['id']) && (int) $item->idSeller === (int) $_SESSION['id']; ?>
+                    <?php if (!$isFromUser && isset($_SESSION['id'])) { ?>
+                        <?php if ($isCartPage || (!$isInWishlistPage && (isset($_SESSION['cart']) && in_array($item->idItem, $_SESSION['cart'])))) { ?>
+                            <form action="../actions/action_remove_from_cart.php" method="post">
+                                <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                                <button type="submit">Remove from Cart</button>
+                            </form>
+                        <?php } elseif ($isInWishlistPage) { ?>
+                            <form action="../actions/action_remove_from_wishlist.php" method="post">
+                                <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                                <button type="submit">Remove from Wishlist</button>
+                            </form>
+                        <?php } else { ?>
+                            <form action="../actions/action_add_to_cart.php" method="post">
+                                <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                                <button type="submit">Add to Cart</button>
+                            </form>
+                        <?php } ?>
                     <?php } ?>
-                <?php } ?>
-            </div>
-        </article>
-    <?php } ?>
-</section>
+                </div>
+            </article>
+            <?php
+            $itemsNum++;
+        } ?>
+        <?php if (count($items) > $showMore) { ?>
+            <form method="get" action="<?= $_SERVER['PHP_SELF'] ?>">
+                <input type="hidden" name="showMore" value="<?= $showMore + 10 ?>">
+                <button type="submit">Show More</button>
+            </form>
+        <?php } ?>
+    </section>
 <?php } ?>
 
 
@@ -94,7 +110,7 @@
                 <p><?=htmlentities($item->description)?></p>
                 <p>Brand: <?=htmlentities($item->brand)?></p>
                 <p>Model: <?=htmlentities($item->model)?></p>
-                <p>Price: $<?=htmlentities((string)$item->price)?></p>             
+                <p>Price: <?=htmlentities((string)$item->price)?>€</p>             
                 <p>Category: <?=htmlspecialchars_decode(htmlentities(Category::getCategoryById($db, $item->idCategory)->categoryName))?></p>
                 <p>Condition: <?=htmlentities(Condition::getConditionById($db, $item->idCondition)->conditionName)?></p>
                 <p>Size: <?=htmlentities(Size::getSizeById($db, $item->idSize)->sizeName)?></p>
@@ -243,7 +259,7 @@
     <section id="checkout">
         <h2>Checkout</h2>
         <div class="total-price">
-            <p>Total: $<?= htmlentities((string)number_format($totalPrice, 2)) ?></p>
+            <p>Total: <?= htmlentities((string)number_format($totalPrice, 2)) ?>€</p>
         </div>
         <form action="../actions/action_complete_order.php" method="post">
             <label>
