@@ -286,7 +286,7 @@
     </section>
 <?php } ?>
 
-<?php function drawEditItem($item) { ?>
+<?php function drawEditItem($item, $categories, $conditions, $sizes) { ?>
     <section id="edit-item"> 
         <h2>Edit Item</h2>
         <form id="edit-item-form" action="../actions/action_update_item.php" method="post" onsubmit="return validateEditItemForm()">
@@ -304,17 +304,33 @@
                 <input type="text" id="brand" name="brand" value="<?= htmlentities($item->brand) ?>">
             </label><br>
             <label for="category">Category:
-                <input type="text" id="category" name="category" value="<?= $item->idCategory ?>">
+                <select id="category" name="category" required>
+                    <?php foreach ($categories as $category) { ?>
+                        <option value="<?php echo $category->idCategory; ?>"><?php echo htmlspecialchars_decode(htmlentities($category->categoryName)); ?></option>
+                    <?php } ?>
+                </select>
             </label><br>
             <label for="model">Model:
                 <input type="text" id="model" name="model" value="<?= htmlentities($item->model) ?>">
             </label><br>
             <label for="condition">Condition:
-                <input type="text" id="condition" name="condition" value="<?= $item->idCondition ?>">
+                <select id="condition" name="condition" required>
+                    <?php foreach ($conditions as $condition) { ?>
+                        <option value="<?php echo $condition->idCondition; ?>"><?php echo htmlentities($condition->conditionName); ?></option>
+                    <?php } ?>
+                </select>
+            </label><br>
+            <label for="size">Size:
+                <select id="size" name="size" required>
+                    <?php foreach ($sizes as $size) { ?>
+                        <option value="<?php echo $size->idSize; ?>"><?php echo htmlentities($size->sizeName); ?></option>
+                    <?php } ?>
+                </select>
             </label><br>
             <button type="submit">Save Changes</button>
         </form>
     </section>
 <?php } ?>
+
 
 
