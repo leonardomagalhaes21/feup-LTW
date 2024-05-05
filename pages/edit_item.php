@@ -5,10 +5,20 @@ $session = new Session();
 
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/item.class.php');
+require_once(__DIR__ . '/../database/category.class.php');
+require_once(__DIR__ . '/../database/condition.class.php');
+require_once(__DIR__ . '/../database/size.class.php');
+
 require_once(__DIR__ . '/../templates/common.tpl.php');
 require_once(__DIR__ . '/../templates/item.tpl.php');
 
 $db = getDatabaseConnection();
+
+$categories = Category::getCategories($db);
+$conditions = Condition::getConditions($db);
+$sizes = Size::getSizes($db);
+
+
 drawHeader($session);
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['idItem'])) {
     $itemId = intval($_GET['idItem']);
@@ -17,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['idItem'])) {
     
 
     if ($item) {
-        drawEditItem($item);
+        drawEditItem($item, $categories, $conditions, $sizes);
         drawFooter();
     } else {
         header("Location: ../pages/index.php");
