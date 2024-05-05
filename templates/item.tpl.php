@@ -297,6 +297,9 @@
             <label for="description">Description:
                 <input type="text" id="description" name="description" value="<?= htmlentities($item->description) ?>">
             </label><br>
+            <label for="introduction">Introduction:
+                <input type="text" id="introduction" name="introduction" value="<?= htmlentities($item->introduction)?>">
+            </label><br>
             <label for="price">Price:
                 <input type="number" id="price" name="price" value="<?= htmlentities((string)$item->price) ?>">
             </label><br>
