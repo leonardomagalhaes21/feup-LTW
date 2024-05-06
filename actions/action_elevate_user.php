@@ -1,9 +1,7 @@
 <?php
 require_once(__DIR__ . '/../utils/session.php');
 $session = new Session();
-if ($_SESSION['csrf'] !== $_POST['csrf']) {
-    exit();
-}
+
 
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/users.class.php');
@@ -12,6 +10,9 @@ $db = getDatabaseConnection();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["user_id"])) {
     $userId = $_POST["user_id"];
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        exit();
+    }
 
     if (User::isAdmin($db, $userId)){
         $_SESSION['message'] = "User is already an admin";

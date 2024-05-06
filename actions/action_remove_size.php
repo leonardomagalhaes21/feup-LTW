@@ -13,6 +13,9 @@ require_once(__DIR__ . '/../database/size.class.php');
 $db = getDatabaseConnection();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        exit();
+    }
     $sizeId = isset($_POST['sizeId']) ? (int)$_POST['sizeId'] : 0;
 
     if ($sizeId === 0) {

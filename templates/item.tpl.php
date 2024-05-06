@@ -4,58 +4,78 @@
   require_once(__DIR__ . '/../database/item.class.php')
 ?>
 
-<?php function drawItems(array $items, PDO $db, bool $drawHeader, bool $isCartPage = false, bool $isInWishlistPage = false) { ?>
+<?php function drawItems(array $items, PDO $db, bool $drawHeader, bool $isCartPage = false, bool $isInWishlistPage = false) { 
+    $showMore = isset($_GET['showMore']) ? (int)$_GET['showMore'] : 10;
 
-<section id="items">
-    <?php if ($drawHeader){ ?>
-    <h2>Items <?php echo $isCartPage ? 'Cart' : ($isInWishlistPage ? 'in Wishlist' : 'for Sale'); ?></h2>
-    <?php } ?>
-    <?php foreach ($items as $item) { ?>
-        <article>
-            <?php $mainImagePath = htmlentities($item->getMainImage($db)); ?>
-            <a href="../pages/item.php?idItem=<?=$item->idItem?>">
-                <img src="<?=$mainImagePath?>" alt="<?=htmlentities($item->name)?>">
-            </a>
-            <div class="item-details">
-                <h2>
-                    <a href="../pages/item.php?idItem=<?=$item->idItem?>"><?=htmlentities($item->name)?></a>
-                </h2>
-                <h3>
-                    <?php if (!empty($item->brand) && !empty($item->model)) {
-                        echo htmlentities("{$item->brand} - {$item->model}");
-                    } 
-                    elseif (!empty($item->brand)) {
-                        echo htmlentities($item->brand);
-                    } 
-                    elseif (!empty($item->model)) {
-                        echo htmlentities($item->model);
-                    }
-                    ?>
-                </h3>
-                <p>Price: $<?=htmlentities((string)$item->price)?></p>
-                <?php $isFromUser = isset($_SESSION['id']) && (int) $item->idSeller === (int) $_SESSION['id']; ?>
-                <?php if (!$isFromUser && isset($_SESSION['id'])) { ?>
-                    <?php if ($isCartPage || (!$isInWishlistPage && (isset($_SESSION['cart']) && in_array($item->idItem, $_SESSION['cart'])))) { ?>
-                        <form action="../actions/action_remove_from_cart.php" method="post" value="<?=$_SESSION['csrf']?>">
-                            <input type="hidden" name="idItem" value="<?=$item->idItem?>">
-                            <button type="submit">Remove from Cart</button>
-                        </form>
-                    <?php } elseif ($isInWishlistPage) { ?>
-                        <form action="../actions/action_remove_from_wishlist.php" method="post" value="<?=$_SESSION['csrf']?>">
-                            <input type="hidden" name="idItem" value="<?=$item->idItem?>">
-                            <button type="submit">Remove from Wishlist</button>
-                        </form>
-                    <?php } else { ?>
-                        <form action="../actions/action_add_to_cart.php" method="post" value="<?=$_SESSION['csrf']?>">
-                            <input type="hidden" name="idItem" value="<?=$item->idItem?>">
-                            <button type="submit">Add to Cart</button>
-                        </form>
+    ?>
+    <section id="items">
+        <?php if ($drawHeader){ ?>
+        <h2>Items <?php echo $isCartPage ? 'Cart' : ($isInWishlistPage ? 'in Wishlist' : 'for Sale'); ?></h2>
+        <?php } ?>
+        <?php 
+        $itemsNum = 0;
+        foreach ($items as $index => $item) { 
+            if ($itemsNum >= $showMore) {
+                break;
+            }
+            ?>
+            <article>
+                <?php $mainImagePath = htmlentities($item->getMainImage($db)); ?>
+                <a href="../pages/item.php?idItem=<?=$item->idItem?>">
+                    <img src="<?=$mainImagePath?>" alt="<?=htmlentities($item->name)?>">
+                </a>
+                <div class="item-details">
+                    <h2>
+                        <a href="../pages/item.php?idItem=<?=$item->idItem?>"><?=htmlentities($item->name)?></a>
+                    </h2>
+                    <h3>
+                        <?php if (!empty($item->brand) && !empty($item->model)) {
+                            echo htmlentities("{$item->brand} - {$item->model}");
+                        } 
+                        elseif (!empty($item->brand)) {
+                            echo htmlentities($item->brand);
+                        } 
+                        elseif (!empty($item->model)) {
+                            echo htmlentities($item->model);
+                        }
+                        ?>
+                    </h3>
+                    <p>Price: <?=htmlentities((string)$item->price)?>€</p>
+                    <?php $isFromUser = isset($_SESSION['id']) && (int) $item->idSeller === (int) $_SESSION['id']; ?>
+                    <?php if (!$isFromUser && isset($_SESSION['id'])) { ?>
+                        <?php if ($isCartPage || (!$isInWishlistPage && (isset($_SESSION['cart']) && in_array($item->idItem, $_SESSION['cart'])))) { ?>
+                            <form action="../actions/action_remove_from_cart.php" method="post">
+                                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                                <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                                <button type="submit">Remove from Cart</button>
+                            </form>
+                        <?php } elseif ($isInWishlistPage) { ?>
+                            <form action="../actions/action_remove_from_wishlist.php" method="post">
+                                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                                <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                                <button type="submit">Remove from Wishlist</button>
+                            </form>
+                        <?php } else { ?>
+                            <form action="../actions/action_add_to_cart.php" method="post">
+                                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                                <input type="hidden" name="idItem" value="<?=$item->idItem?>">
+                                <button type="submit">Add to Cart</button>
+                            </form>
+                        <?php } ?>
                     <?php } ?>
-                <?php } ?>
-            </div>
-        </article>
-    <?php } ?>
-</section>
+                </div>
+            </article>
+            <?php
+            $itemsNum++;
+        } ?>
+        <?php if (count($items) > $showMore) { ?>
+            <form method="get" action="<?= $_SERVER['PHP_SELF'] ?>">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                <input type="hidden" name="showMore" value="<?= $showMore + 10 ?>">
+                <button type="submit">Show More</button>
+            </form>
+        <?php } ?>
+    </section>
 <?php } ?>
 
 
@@ -66,7 +86,8 @@
             <button onclick="goBack()">&#8592; Go Back</button>
             <h2>Item Overview</h2>
             <?php if ($isAdmin) { ?>
-                <form action="../actions/action_item_change_featured.php" method="post" value="<?=$_SESSION['csrf']?>">
+                <form action="../actions/action_item_change_featured.php" method="post">
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                     <button type="submit"><?=($item->featured ? 'Remove from Featured' : 'Set as Featured')?></button>
                 </form>
@@ -94,7 +115,7 @@
                 <p><?=htmlentities($item->description)?></p>
                 <p>Brand: <?=htmlentities($item->brand)?></p>
                 <p>Model: <?=htmlentities($item->model)?></p>
-                <p>Price: $<?=htmlentities((string)$item->price)?></p>             
+                <p>Price: <?=htmlentities((string)$item->price)?>€</p>             
                 <p>Category: <?=htmlspecialchars_decode(htmlentities(Category::getCategoryById($db, $item->idCategory)->categoryName))?></p>
                 <p>Condition: <?=htmlentities(Condition::getConditionById($db, $item->idCondition)->conditionName)?></p>
                 <p>Size: <?=htmlentities(Size::getSizeById($db, $item->idSize)->sizeName)?></p>
@@ -104,24 +125,28 @@
         </article>
         <?php if (!$isFromUser && isset($_SESSION['id']) && $item->active) { ?>
             <div class="buttons">
-                <form action="<?php echo $isInWishlist ? '../actions/action_remove_from_wishlist.php' : '../actions/action_add_to_wishlist.php'; ?>" method="post" value="<?=$_SESSION['csrf']?>">
+                <form action="<?php echo $isInWishlist ? '../actions/action_remove_from_wishlist.php' : '../actions/action_add_to_wishlist.php'; ?>" method="post">
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <input type="hidden" name="idItem" value="<?php echo $item->idItem; ?>">
                     <button type="submit">
                         <?php echo $isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'; ?>
                     </button>
                 </form>   
-                <form action="../pages/chat_messages.php" method="get" value="<?=$_SESSION['csrf']?>">
+                <form action="../pages/chat_messages.php" method="get">
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <input type="hidden" name="otherUserId" value="<?=$item->idSeller?>">
                     <input type="hidden" name="itemId" value="<?=$item->idItem?>">
                     <button type="submit" class="chat-button">Chat with Seller</button>
                 </form>
                 <?php if(!isset($_SESSION['cart']) || !in_array($item->idItem, $_SESSION['cart'])) { ?>
-                <form action="../actions/action_add_to_cart.php" method="post" value="<?=$_SESSION['csrf']?>">
+                <form action="../actions/action_add_to_cart.php" method="post">
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                     <button type="submit">Add to Cart</button>
                 </form>
                 <?php } else { ?>
-                <form action="../actions/action_remove_from_cart.php" method="post" value="<?=$_SESSION['csrf']?>">
+                <form action="../actions/action_remove_from_cart.php" method="post">
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                     <button type="submit">Remove from Cart</button>
                 </form>
@@ -130,11 +155,13 @@
         <?php } ?>
         <?php if($isAdmin && (isset($_SESSION['id']) && $_SESSION['id'] != $item->idSeller)){?>
                 <div class="buttons">
-                    <form action="../pages/edit_item.php" method="get" value="<?=$_SESSION['csrf']?>">
+                    <form action="../pages/edit_item.php" method="get">
+                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                         <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                         <button type="submit">Edit Item</button>
                     </form>
-                    <form action="../actions/action_remove_item.php" method="post" value="<?=$_SESSION['csrf']?>">
+                    <form action="../actions/action_remove_item.php" method="post">
+                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                         <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                         <button type="submit">Remove Item</button>
                     </form>
@@ -142,11 +169,13 @@
         <?php }?>
         <?php if (isset($_SESSION['id']) && $_SESSION['id'] == $item->idSeller) { ?>
             <div class="buttons">
-                <form action="../pages/edit_item.php" method="get" value="<?=$_SESSION['csrf']?>">
+                <form action="../pages/edit_item.php" method="get">
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                     <button type="submit">Edit Item</button>
                 </form>
-                <form action="../actions/action_remove_item.php" method="post" value="<?=$_SESSION['csrf']?>">
+                <form action="../actions/action_remove_item.php" method="post">
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                     <button type="submit">Remove Item</button>
                 </form>
@@ -165,7 +194,8 @@
     ?>
     <section id = "add-publication">
         <h1>Add New Publication</h1>
-        <form action="../actions/action_add_publication.php" method="post" enctype="multipart/form-data" onsubmit="return validateForm()" value="<?=$_SESSION['csrf']?>">
+        <form action="../actions/action_add_publication.php" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <label>
                 Name: <input type="text" id="name" name="name" required>
             </label><br>
@@ -222,5 +252,105 @@
         </form>
     </section>
 <?php } ?>
+
+<?php function drawCart($totalPrice, $items) { ?>
+    <section id="cart">
+        <h2>Checkout</h2>
+        <div class="total-price">
+            <p>Total: <?= htmlentities((string)number_format($totalPrice, 2)) ?>€</p>
+        </div>
+        <?php if (count($items) > 0) { ?>
+            <form action="../pages/checkout.php" method="get">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                <button type="submit">Checkout</button>
+            </form>
+        <?php } else { ?>
+            <p>Your cart is empty</p>
+        <?php } ?>
+    </section>
+<?php } ?>
+
+<?php function drawCheckout($totalPrice) { ?>
+    <section id="checkout">
+        <h2>Checkout</h2>
+        <div class="total-price">
+            <p>Total: <?= htmlentities((string)number_format($totalPrice, 2)) ?>€</p>
+        </div>
+        <form action="../actions/action_complete_order.php" method="post">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+            <label>
+                Address: <input type="text" id="address" name="address" required>
+            </label><br>
+            <label>
+                City: <input type="text" id="city" name="city" required>
+            </label><br>
+            <label>
+                Zip Code: <input type="text" id="zipcode" name="zipcode" required>
+            </label><br>
+            <label>
+                Payment Method:
+                <select id="payment_method" name="payment_method" required>
+                    <option value="credit_card">Credit Card</option>
+                    <option value="mbway">MBWay</option>
+                    <option value="paypal">PayPal</option>
+                </select>
+            </label><br>
+            <input type="hidden" name="total_price" value="<?= htmlentities((string)$totalPrice) ?>">
+            <button type="submit">Complete Order</button>
+        </form>
+
+    </section>
+<?php } ?>
+
+<?php function drawEditItem($item, $categories, $conditions, $sizes) { ?>
+    <section id="edit-item"> 
+        <h2>Edit Item</h2>
+        <form id="edit-item-form" action="../actions/action_update_item.php" method="post" onsubmit="return validateEditItemForm()">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+            <input type="hidden" name="idItem" value="<?= $item->idItem ?>">
+            <label for="name">Name:
+                <input type="text" id="name" name="name" value="<?= htmlentities($item->name) ?>">
+            </label><br>
+            <label for="description">Description:
+                <input type="text" id="description" name="description" value="<?= htmlentities($item->description) ?>">
+            </label><br>
+            <label for="introduction">Introduction:
+                <input type="text" id="introduction" name="introduction" value="<?= htmlentities($item->introduction)?>">
+            </label><br>
+            <label for="price">Price:
+                <input type="number" id="price" name="price" value="<?= htmlentities((string)$item->price) ?>">
+            </label><br>
+            <label for="brand">Brand:
+                <input type="text" id="brand" name="brand" value="<?= htmlentities($item->brand) ?>">
+            </label><br>
+            <label for="category">Category:
+                <select id="category" name="category" required>
+                    <?php foreach ($categories as $category) { ?>
+                        <option value="<?php echo $category->idCategory; ?>"><?php echo htmlspecialchars_decode(htmlentities($category->categoryName)); ?></option>
+                    <?php } ?>
+                </select>
+            </label><br>
+            <label for="model">Model:
+                <input type="text" id="model" name="model" value="<?= htmlentities($item->model) ?>">
+            </label><br>
+            <label for="condition">Condition:
+                <select id="condition" name="condition" required>
+                    <?php foreach ($conditions as $condition) { ?>
+                        <option value="<?php echo $condition->idCondition; ?>"><?php echo htmlentities($condition->conditionName); ?></option>
+                    <?php } ?>
+                </select>
+            </label><br>
+            <label for="size">Size:
+                <select id="size" name="size" required>
+                    <?php foreach ($sizes as $size) { ?>
+                        <option value="<?php echo $size->idSize; ?>"><?php echo htmlentities($size->sizeName); ?></option>
+                    <?php } ?>
+                </select>
+            </label><br>
+            <button type="submit">Save Changes</button>
+        </form>
+    </section>
+<?php } ?>
+
 
 

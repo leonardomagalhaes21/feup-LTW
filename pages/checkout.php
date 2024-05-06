@@ -11,7 +11,6 @@ $db = getDatabaseConnection();
 $session = new Session();
 $cartItems = $session->getCart();
 
-drawHeader($session);
 
 $items = [];
 $totalPrice = 0;
@@ -27,37 +26,9 @@ foreach ($cartItems as $idItem) {
         }
     }
 }
-?>
 
-<section id="checkout">
-    <h2>Checkout</h2>
-    <div class="total-price">
-        <p>Total: $<?= htmlentities((string)number_format($totalPrice, 2)) ?></p>
-    </div>
-    <form action="../actions/action_complete_order.php" method="post" value="<?=$_SESSION['csrf']?>">
-        <label>
-            Address: <input type="text" id="address" name="address" required>
-        </label><br>
-        <label>
-            City: <input type="text" id="city" name="city" required>
-        </label><br>
-        <label>
-            Zip Code: <input type="text" id="zipcode" name="zipcode" required>
-        </label><br>
-        <label>
-            Payment Method:
-            <select id="payment_method" name="payment_method" required>
-                <option value="credit_card">Credit Card</option>
-                <option value="mbway">MBWay</option>
-                <option value="paypal">PayPal</option>
-            </select>
-        </label><br>
-        <input type="hidden" name="total_price" value="<?= htmlentities((string)$totalPrice) ?>">
-        <button type="submit">Complete Order</button>
-    </form>
-
-</section>
-
-<?php
+drawHeader($session);
+drawCheckout($totalPrice);
 drawFooter();
+
 ?>

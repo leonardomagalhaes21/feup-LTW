@@ -13,6 +13,9 @@ require_once(__DIR__ . '/../database/size.class.php');
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $sizeName = $_POST['sizeName'] ?? '';
 
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        exit();
+    }
     if (empty($sizeName)) {
         exit();
     }

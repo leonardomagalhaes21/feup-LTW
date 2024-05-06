@@ -5,9 +5,20 @@ $session = new Session();
 
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/item.class.php');
+require_once(__DIR__ . '/../database/category.class.php');
+require_once(__DIR__ . '/../database/condition.class.php');
+require_once(__DIR__ . '/../database/size.class.php');
+
 require_once(__DIR__ . '/../templates/common.tpl.php');
+require_once(__DIR__ . '/../templates/item.tpl.php');
 
 $db = getDatabaseConnection();
+
+$categories = Category::getCategories($db);
+$conditions = Condition::getConditions($db);
+$sizes = Size::getSizes($db);
+
+
 drawHeader($session);
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['idItem'])) {
     $itemId = intval($_GET['idItem']);
@@ -16,39 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['idItem'])) {
     
 
     if ($item) {
-        ?>
-        <body>
-            <section id="edit-item"> 
-                <h2>Edit Item</h2>
-                <form id="edit-item-form" action="../actions/action_update_item.php" method="post" onsubmit="return validateEditItemForm()" value="<?=$_SESSION['csrf']?>">
-                    <input type="hidden" name="idItem" value="<?= $item->idItem ?>">
-                    <label for="name">Name:
-                        <input type="text" id="name" name="name" value="<?= htmlentities($item->name) ?>">
-                    </label><br>
-                    <label for="description">Description:
-                        <input type="text" id="description" name="description" value="<?= htmlentities($item->description) ?>">
-                    </label><br>
-                    <label for="price">Price:
-                        <input type="number" id="price" name="price" value="<?= htmlentities((string)$item->price) ?>">
-                    </label><br>
-                    <label for="brand">Brand:
-                        <input type="text" id="brand" name="brand" value="<?= htmlentities($item->brand) ?>">
-                    </label><br>
-                    <label for="category">Category:
-                        <input type="text" id="category" name="category" value="<?= $item->idCategory ?>">
-                    </label><br>
-                    <label for="model">Model:
-                        <input type="text" id="model" name="model" value="<?= htmlentities($item->model) ?>">
-                    </label><br>
-                    <label for="condition">Condition:
-                        <input type="text" id="condition" name="condition" value="<?= $item->idCondition ?>">
-                    </label><br>
-                    <button type="submit">Save Changes</button>
-                </form>
-            </section>
-        </body>
-        </html>
-        <?php
+        drawEditItem($item, $categories, $conditions, $sizes);
+        drawFooter();
     } else {
         header("Location: ../pages/index.php");
         exit;

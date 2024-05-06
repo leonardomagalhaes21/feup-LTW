@@ -12,6 +12,9 @@ $db = getDatabaseConnection();
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        exit();
+    }
     $idOrder = (int) $_POST['idOrder'];
     $idItem = (int) $_POST['idItem'];
     $stmt = $db->prepare("UPDATE OrderItems SET sent = 1 WHERE idOrder = ? AND idItem = ?");

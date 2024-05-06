@@ -3,9 +3,6 @@
 
     require_once(__DIR__ . '/../utils/session.php');
     $session = new Session();
-    if ($_SESSION['csrf'] !== $_POST['csrf']) {
-        exit();
-    }
 
     if (!$session->isLoggedIn()) {
         header("Location: ../pages/login.php");
@@ -18,6 +15,9 @@
     $db = getDatabaseConnection();
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        if ($_SESSION['csrf'] !== $_POST['csrf']) {
+            exit();
+        }
         try {
             $userId = $session->getId();
             $otherUserId = $_POST['otherUserId'] ?? null;

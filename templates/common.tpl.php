@@ -16,7 +16,6 @@
       <link rel="stylesheet" href="../css/layout.css">
       <link rel="stylesheet" href="../css/responsive.css">
       <script src="../javascript/<?=$jsPage?>.js" defer></script>
-      <script src="index.js"></script>
     </head>
     <body>
       <header>
@@ -29,7 +28,7 @@
             <div id="user-icons">
               <a href="../pages/chats.php"><img src="../docs/images/icon_chat.svg" alt="Chats"></a>
               <a href="../pages/add_publication.php"><img src="../docs/images/icon_add.svg" alt="Add Publication"></a>
-              <a href="../pages/cart.php" id="cart-link"><img src="../docs/images/icon_cart.svg" alt="Cart"></a>
+              <a href="../pages/cart.php"><img src="../docs/images/icon_cart.svg" alt="Cart"></a>
               <a href="../pages/user-profile.php?idUser=<?=$_SESSION['id']?>"><img src="../docs/images/icon_profile.svg" alt="Profile"></a>
             </div>
         <?php 
@@ -47,6 +46,7 @@
 
 <?php function drawCategories($categories) { ?>
     <nav id="menu">
+        <!-- just for the hamburguer menu in responsive layout -->
         <input type="checkbox" id="hamburger"> 
         <label class="hamburger" for="hamburger"></label>
         <ul>
@@ -60,7 +60,8 @@
 <?php function drawSearchAndFilter($categories, $sizes, $conditions) { ?>
   <aside>
     <h2>Search and Filter</h2>
-    <form id="search-form" value="<?=$_SESSION['csrf']?>">
+      <form id="search-form">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <input type="text" id="search" name="search" placeholder="Search here">
             <br>
             <label for="category">Category:</label>

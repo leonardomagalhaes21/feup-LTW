@@ -18,6 +18,9 @@
     $db = getDatabaseConnection();
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        if ($_SESSION['csrf'] !== $_POST['csrf']) {
+            exit();
+        }
         try {
             $rating = $_POST['rating'];
             $comment = $_POST['comment'];

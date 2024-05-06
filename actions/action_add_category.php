@@ -12,7 +12,9 @@ require_once(__DIR__ . '/../database/category.class.php');
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $categoryName = $_POST['categoryName'] ?? '';
-
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        exit();
+    }
     if (empty($categoryName)) {
         exit();
     }

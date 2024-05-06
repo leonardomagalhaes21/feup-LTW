@@ -14,7 +14,9 @@ $db = getDatabaseConnection();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $idItem = $_POST['idItem'] ?? '';
-
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        exit();
+    }
     if (empty($idItem)) {
         exit();
     }

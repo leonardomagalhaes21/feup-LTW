@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 require_once(__DIR__ . '/../utils/session.php');
 $session = new Session();
-if ($_SESSION['csrf'] !== $_POST['csrf']) {
-    exit();
-}
 
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/condition.class.php');
@@ -13,6 +10,9 @@ require_once(__DIR__ . '/../database/condition.class.php');
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $conditionName = $_POST['conditionName'] ?? '';
 
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        exit();
+    }
     if (empty($conditionName)) {
         exit();
     }

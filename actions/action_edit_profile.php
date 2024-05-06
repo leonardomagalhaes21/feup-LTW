@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 require_once(__DIR__ . '/../utils/session.php');
 $session = new Session();
-if ($_SESSION['csrf'] !== $_POST['csrf']) {
-    exit();
-}
 
 require_once (__DIR__ . '/../database/connection.db.php');
 require_once (__DIR__ . '/../database/users.class.php');
@@ -16,6 +13,9 @@ $user = User::getUserById($db, $_SESSION['id']);
 $targetDir = "../docs/userImages/";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        exit();
+    }
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
     $username = $_POST['username'] ?? '';

@@ -13,6 +13,9 @@ require_once(__DIR__ . '/../database/item.class.php');
 $db = getDatabaseConnection();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        exit();
+    }
     $idItem = isset($_POST['idItem']) ? (int)$_POST['idItem'] : 0;
 
     if ($idItem === 0) {
