@@ -60,7 +60,7 @@
 <?php function drawSearchAndFilter($categories, $sizes, $conditions) { ?>
   <aside>
     <h2>Search and Filter</h2>
-    <form id="search-form">
+    <form id="search-form" value="<?=$_SESSION['csrf']?>">
             <input type="text" id="search" name="search" placeholder="Search here">
             <br>
             <label for="category">Category:</label>

@@ -33,7 +33,7 @@
             unset($_SESSION['error']);
         }
         ?>
-        <form action="../actions/action_register.php" method="post">
+        <form action="../actions/action_register.php" method="post" value="<?=$_SESSION['csrf']?>">
             <label>
                 Username <input type="text" name="username" required>
             </label>

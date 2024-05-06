@@ -34,7 +34,7 @@ foreach ($cartItems as $idItem) {
     <div class="total-price">
         <p>Total: $<?= htmlentities((string)number_format($totalPrice, 2)) ?></p>
     </div>
-    <form action="../actions/action_complete_order.php" method="post">
+    <form action="../actions/action_complete_order.php" method="post" value="<?=$_SESSION['csrf']?>">
         <label>
             Address: <input type="text" id="address" name="address" required>
         </label><br>

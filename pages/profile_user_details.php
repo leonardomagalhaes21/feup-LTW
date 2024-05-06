@@ -19,7 +19,7 @@
     }
 ?>
 
-<form action="/actions/action_edit_profile.php" method="post" enctype="multipart/form-data" onsubmit="return validateProfileEditForm()" id="edit-profile-form">
+<form action="/actions/action_edit_profile.php" method="post" enctype="multipart/form-data" onsubmit="return validateProfileEditForm()" id="edit-profile-form" value="<?=$_SESSION['csrf']?>">
     <label>
         Username: <input type="text" id="username" name="username" value="<?=$user->username?>" required>
     </label><br>

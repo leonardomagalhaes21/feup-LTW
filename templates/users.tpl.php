@@ -46,7 +46,7 @@
     </div>
     <?php } ?>
     <?php if ($loggedId !== null && $loggedId !== $user->idUser) { ?>
-    <form action="../actions/action_submit_rating.php" method="POST">
+    <form action="../actions/action_submit_rating.php" method="POST" value="<?=$_SESSION['csrf']?>">
         <input type="hidden" name="idUser" value="<?=$user->idUser?>">
         <div class="rating">
             <p>Rate this user:</p>

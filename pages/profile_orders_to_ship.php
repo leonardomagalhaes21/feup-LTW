@@ -55,7 +55,7 @@ foreach ($orders as $order) {
     echo "<p>Buyer: <a href='../pages/user-profile.php?idUser=" . $order['buyerId'] . "'>" . htmlentities($order['buyerName']) . "</a></p>";
     ?>
     <a href="../actions/print_shipping_form.php?orderId=<?= $order['idOrder'] ?>&itemId=<?= $order['idItem'] ?>" target="_blank">Print Shipping Form</a>
-    <form method="post" action="../actions/action_item_sent.php">
+    <form method="post" action="../actions/action_item_sent.php" value="<?=$_SESSION['csrf']?>">
         <input type="hidden" name="idOrder" value="<?= $orderId ?>">
         <input type="hidden" name="idItem" value="<?= $itemId ?>">
         <button type="submit">Mark as Sent</button>

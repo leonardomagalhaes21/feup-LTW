@@ -64,7 +64,7 @@ $chats = Chat::getChatByUserAndItem($db, (int)$userId, (int)$otherUserId, (int)$
                 <p class="hint"><?= htmlentities(date('d/m/Y H:i', strtotime($chat['timestamp']))) ?></p>
             </div>
         <?php } ?>   
-        <form action="../actions/action_send_message.php" method="post" class="message-form">
+        <form action="../actions/action_send_message.php" method="post" class="message-form" value="<?=$_SESSION['csrf']?>">
             <input type="hidden" name="otherUserId" value="<?php echo $otherUserId; ?>">
             <input type="hidden" name="itemId" value="<?php echo $itemId; ?>">
             <div class="message-input">

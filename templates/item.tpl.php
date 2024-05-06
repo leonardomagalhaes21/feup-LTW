@@ -36,17 +36,17 @@
                 <?php $isFromUser = isset($_SESSION['id']) && (int) $item->idSeller === (int) $_SESSION['id']; ?>
                 <?php if (!$isFromUser && isset($_SESSION['id'])) { ?>
                     <?php if ($isCartPage || (!$isInWishlistPage && (isset($_SESSION['cart']) && in_array($item->idItem, $_SESSION['cart'])))) { ?>
-                        <form action="../actions/action_remove_from_cart.php" method="post">
+                        <form action="../actions/action_remove_from_cart.php" method="post" value="<?=$_SESSION['csrf']?>">
                             <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                             <button type="submit">Remove from Cart</button>
                         </form>
                     <?php } elseif ($isInWishlistPage) { ?>
-                        <form action="../actions/action_remove_from_wishlist.php" method="post">
+                        <form action="../actions/action_remove_from_wishlist.php" method="post" value="<?=$_SESSION['csrf']?>">
                             <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                             <button type="submit">Remove from Wishlist</button>
                         </form>
                     <?php } else { ?>
-                        <form action="../actions/action_add_to_cart.php" method="post">
+                        <form action="../actions/action_add_to_cart.php" method="post" value="<?=$_SESSION['csrf']?>">
                             <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                             <button type="submit">Add to Cart</button>
                         </form>
@@ -66,7 +66,7 @@
             <button onclick="goBack()">&#8592; Go Back</button>
             <h2>Item Overview</h2>
             <?php if ($isAdmin) { ?>
-                <form action="../actions/action_item_change_featured.php" method="post">
+                <form action="../actions/action_item_change_featured.php" method="post" value="<?=$_SESSION['csrf']?>">
                     <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                     <button type="submit"><?=($item->featured ? 'Remove from Featured' : 'Set as Featured')?></button>
                 </form>
@@ -104,24 +104,24 @@
         </article>
         <?php if (!$isFromUser && isset($_SESSION['id']) && $item->active) { ?>
             <div class="buttons">
-                <form action="<?php echo $isInWishlist ? '../actions/action_remove_from_wishlist.php' : '../actions/action_add_to_wishlist.php'; ?>" method="post">
+                <form action="<?php echo $isInWishlist ? '../actions/action_remove_from_wishlist.php' : '../actions/action_add_to_wishlist.php'; ?>" method="post" value="<?=$_SESSION['csrf']?>">
                     <input type="hidden" name="idItem" value="<?php echo $item->idItem; ?>">
                     <button type="submit">
                         <?php echo $isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'; ?>
                     </button>
                 </form>   
-                <form action="../pages/chat_messages.php" method="get">
+                <form action="../pages/chat_messages.php" method="get" value="<?=$_SESSION['csrf']?>">
                     <input type="hidden" name="otherUserId" value="<?=$item->idSeller?>">
                     <input type="hidden" name="itemId" value="<?=$item->idItem?>">
                     <button type="submit" class="chat-button">Chat with Seller</button>
                 </form>
                 <?php if(!isset($_SESSION['cart']) || !in_array($item->idItem, $_SESSION['cart'])) { ?>
-                <form action="../actions/action_add_to_cart.php" method="post">
+                <form action="../actions/action_add_to_cart.php" method="post" value="<?=$_SESSION['csrf']?>">
                     <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                     <button type="submit">Add to Cart</button>
                 </form>
                 <?php } else { ?>
-                <form action="../actions/action_remove_from_cart.php" method="post">
+                <form action="../actions/action_remove_from_cart.php" method="post" value="<?=$_SESSION['csrf']?>">
                     <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                     <button type="submit">Remove from Cart</button>
                 </form>
@@ -130,11 +130,11 @@
         <?php } ?>
         <?php if($isAdmin && (isset($_SESSION['id']) && $_SESSION['id'] != $item->idSeller)){?>
                 <div class="buttons">
-                    <form action="../pages/edit_item.php" method="get">
+                    <form action="../pages/edit_item.php" method="get" value="<?=$_SESSION['csrf']?>">
                         <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                         <button type="submit">Edit Item</button>
                     </form>
-                    <form action="../actions/action_remove_item.php" method="post">
+                    <form action="../actions/action_remove_item.php" method="post" value="<?=$_SESSION['csrf']?>">
                         <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                         <button type="submit">Remove Item</button>
                     </form>
@@ -142,11 +142,11 @@
         <?php }?>
         <?php if (isset($_SESSION['id']) && $_SESSION['id'] == $item->idSeller) { ?>
             <div class="buttons">
-                <form action="../pages/edit_item.php" method="get">
+                <form action="../pages/edit_item.php" method="get" value="<?=$_SESSION['csrf']?>">
                     <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                     <button type="submit">Edit Item</button>
                 </form>
-                <form action="../actions/action_remove_item.php" method="post">
+                <form action="../actions/action_remove_item.php" method="post" value="<?=$_SESSION['csrf']?>">
                     <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                     <button type="submit">Remove Item</button>
                 </form>
@@ -165,7 +165,7 @@
     ?>
     <section id = "add-publication">
         <h1>Add New Publication</h1>
-        <form action="../actions/action_add_publication.php" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+        <form action="../actions/action_add_publication.php" method="post" enctype="multipart/form-data" onsubmit="return validateForm()" value="<?=$_SESSION['csrf']?>">
             <label>
                 Name: <input type="text" id="name" name="name" required>
             </label><br>

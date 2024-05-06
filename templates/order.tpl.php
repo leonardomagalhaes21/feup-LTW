@@ -29,7 +29,7 @@
                     <?php } ?>
                 </ul>
                 <?php if($status === 'Pending') { ?>
-                <form action="../actions/action_cancel_order.php" method="post">
+                <form action="../actions/action_cancel_order.php" method="post" value="<?=$_SESSION['csrf']?>">
                     <input type="hidden" name="idOrder" value="<?= $order->idOrder ?>">
                     <button type="submit">Cancel Order</button>
                 </form>

@@ -33,7 +33,7 @@ drawItems($items, $db, false);
         <p>Total: $<?= htmlentities((string)number_format($totalPrice, 2)) ?></p>
     </div>
     <?php if (count($items) > 0) { ?>
-        <form action="../pages/checkout.php" method="get">
+        <form action="../pages/checkout.php" method="get" value="<?=$_SESSION['csrf']?>">
             <button type="submit">Checkout</button>
         </form>
     <?php } else { ?>

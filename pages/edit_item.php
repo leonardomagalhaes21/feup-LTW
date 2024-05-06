@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['idItem'])) {
         <body>
             <section id="edit-item"> 
                 <h2>Edit Item</h2>
-                <form id="edit-item-form" action="../actions/action_update_item.php" method="post" onsubmit="return validateEditItemForm()">
+                <form id="edit-item-form" action="../actions/action_update_item.php" method="post" onsubmit="return validateEditItemForm()" value="<?=$_SESSION['csrf']?>">
                     <input type="hidden" name="idItem" value="<?= $item->idItem ?>">
                     <label for="name">Name:
                         <input type="text" id="name" name="name" value="<?= htmlentities($item->name) ?>">
