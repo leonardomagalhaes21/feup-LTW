@@ -14,6 +14,9 @@ $db = getDatabaseConnection();
 
 $orderId = (int)$_GET['orderId'];
 $itemId = (int)$_GET['itemId'];
+if ($_SESSION['csrf'] !== $_GET['csrf']) {
+    exit();
+}
 
 $query = "SELECT 
                 O.idOrder,

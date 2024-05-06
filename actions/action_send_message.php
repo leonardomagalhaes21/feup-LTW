@@ -15,6 +15,9 @@
     $db = getDatabaseConnection();
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        if ($_SESSION['csrf'] !== $_POST['csrf']) {
+            exit();
+        }
         try {
             $userId = $session->getId();
             $otherUserId = $_POST['otherUserId'] ?? null;

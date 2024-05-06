@@ -11,6 +11,7 @@
         <div>
             <h3>Add New Category</h3>
             <form action="../actions/action_add_category.php" method="post">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <label for="categoryName">Category Name:</label>
                 <input type="text" id="categoryName" name="categoryName" required>
                 <button type="submit">Add Category</button>
@@ -19,6 +20,7 @@
         <div>
             <h3>Add New Size</h3>
             <form action="../actions/action_add_size.php" method="post">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <label for="sizeName">Size Name:</label>
                 <input type="text" id="sizeName" name="sizeName" required>
                 <button type="submit">Add Size</button>
@@ -27,6 +29,7 @@
         <div>
             <h3>Add New Condition</h3>
             <form action="../actions/action_add_condition.php" method="post">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <label for="conditionName">Condition Name:</label>
                 <input type="text" id="conditionName" name="conditionName" required>
                 <button type="submit">Add Condition</button>
@@ -38,6 +41,7 @@
         <div>
             <h3>Remove Category</h3>
             <form action="../actions/action_remove_category.php" method="post">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <label for="categoryId">Select Category to Remove:</label>
                 <select id="categoryId" name="categoryId" required>
                     <?php
@@ -54,6 +58,7 @@
             <h3>Remove Size</h3>
             <form action="../actions/action_remove_size.php" method="post">
                 <label for="sizeId">Select Size to Remove:</label>
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <select id="sizeId" name="sizeId" required>
                     <?php
                     $sizes = Size::getSizes($db);
@@ -69,6 +74,7 @@
             <h3>Remove Condition</h3>
             <form action="../actions/action_remove_condition.php" method="post">
                 <label for="conditionId">Select Condition to Remove:</label>
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <select id="conditionId" name="conditionId" required>
                     <?php
                     $conditions = Condition::getConditions($db);
@@ -83,6 +89,7 @@
     <article>
         <h2>Elevate User to Admin Status</h2>
         <form action="../actions/action_elevate_user.php" method="post">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <?php  
                 if (isset($_SESSION['message'])) {
                     echo "<p>" . htmlentities($_SESSION['message']) . "</p>";

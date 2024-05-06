@@ -13,6 +13,9 @@
         $lastname = $_POST["lastname"];
         $email = $_POST["email"];
         $password = $_POST["password"];
+        if ($_SESSION['csrf'] !== $_POST['csrf']) {
+            exit();
+        }
         
         $name = $firstname . ' ' . $lastname;
         

@@ -10,6 +10,9 @@ require_once(__DIR__ . '/../database/condition.class.php');
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $conditionName = $_POST['conditionName'] ?? '';
 
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        exit();
+    }
     if (empty($conditionName)) {
         exit();
     }

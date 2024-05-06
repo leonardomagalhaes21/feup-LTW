@@ -35,5 +35,3 @@ drawChatMessages($db, $chats, $userId, $otherUserId, $itemId);
 drawFooter();
 
 ?>
-
-

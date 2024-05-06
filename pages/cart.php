@@ -25,7 +25,9 @@ foreach ($cartItems as $idItem) {
 }
 
 drawItems($items, $db, false);
+
 drawCart($totalPrice, $items);
+
 drawFooter();
 
 ?>

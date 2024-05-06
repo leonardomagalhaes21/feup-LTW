@@ -47,6 +47,7 @@
     <?php } ?>
     <?php if ($loggedId !== null && $loggedId !== $user->idUser) { ?>
     <form action="../actions/action_submit_rating.php" method="POST">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <input type="hidden" name="idUser" value="<?=$user->idUser?>">
         <div class="rating">
             <p>Rate this user:</p>
@@ -114,6 +115,7 @@
     ?>
 
     <form action="/actions/action_edit_profile.php" method="post" enctype="multipart/form-data" onsubmit="return validateProfileEditForm()" id="edit-profile-form">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <label>
             Username: <input type="text" id="username" name="username" value="<?=$user->username?>" required>
         </label><br>

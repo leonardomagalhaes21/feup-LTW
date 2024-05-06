@@ -2,13 +2,13 @@
 declare(strict_types=1);
 require_once(__DIR__ . '/../utils/session.php');
 $session = new Session();
-
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/item.class.php');
 
 $db = getDatabaseConnection();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idItem'])) {
+    
     $itemId = intval($_POST['idItem']);
     $name = $_POST['name'];
     $description = $_POST['description'];
@@ -19,7 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idItem'])) {
     $model = $_POST['model'];
     $condition = intval($_POST['condition']);
     $size = intval($_POST['size']);
-
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        exit();
+    }
     $item = Item::getItemById($db, $itemId);
 
     if ($item) {

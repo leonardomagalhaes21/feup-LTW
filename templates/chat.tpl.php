@@ -70,6 +70,7 @@
                 </div>
             <?php } ?>   
             <form action="../actions/action_send_message.php" method="post" class="message-form">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <input type="hidden" name="otherUserId" value="<?php echo $otherUserId; ?>">
                 <input type="hidden" name="itemId" value="<?php echo $itemId; ?>">
                 <div class="message-input">

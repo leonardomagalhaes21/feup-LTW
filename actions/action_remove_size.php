@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 require_once(__DIR__ . '/../utils/session.php');
 $session = new Session();
+if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    exit();
+}
 
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/size.class.php');
@@ -10,6 +13,9 @@ require_once(__DIR__ . '/../database/size.class.php');
 $db = getDatabaseConnection();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        exit();
+    }
     $sizeId = isset($_POST['sizeId']) ? (int)$_POST['sizeId'] : 0;
 
     if ($sizeId === 0) {

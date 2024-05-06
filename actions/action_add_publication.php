@@ -3,6 +3,9 @@
 
     require_once(__DIR__ . '/../utils/session.php');
     $session = new Session();
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        exit();
+    }
 
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/item.class.php');
@@ -29,6 +32,9 @@
         $mainImageTargetFile = $targetDir . $mainImageName;
         $mainImageFileType = strtolower(pathinfo($mainImageTargetFile, PATHINFO_EXTENSION));
 
+        if ($_SESSION['csrf'] !== $_POST['csrf']) {
+            exit();
+        }
         $tmp_mainImageName = $_FILES["main_image"]["tmp_name"];
 
         $mainImageCheck = getimagesize($tmp_mainImageName);

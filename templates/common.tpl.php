@@ -61,6 +61,7 @@
   <aside>
     <h2>Search and Filter</h2>
       <form id="search-form">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <input type="text" id="search" name="search" placeholder="Search here">
             <br>
             <label for="category">Category:</label>

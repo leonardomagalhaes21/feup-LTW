@@ -3,7 +3,7 @@
 
   require_once(__DIR__ . '/../utils/session.php');
   $session = new Session();
-
+  
   require_once(__DIR__ . '/../database/connection.db.php');
   require_once(__DIR__ . '/../database/users.class.php');
 
@@ -11,7 +11,9 @@
 
   $username = $_POST["username"];
   $password = $_POST["password"];
-
+  if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    exit();
+}
   try {
       if (User::userExists($username, $password)) {
           $_SESSION['id'] = User::getUserByUsername($db, $username)->idUser;

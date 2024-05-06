@@ -13,6 +13,9 @@ $user = User::getUserById($db, $_SESSION['id']);
 $targetDir = "../docs/userImages/";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        exit();
+    }
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
     $username = $_POST['username'] ?? '';
