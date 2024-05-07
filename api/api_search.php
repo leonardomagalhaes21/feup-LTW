@@ -8,9 +8,7 @@
     require_once(__DIR__ . '/../database/item.class.php');
 
     $db = getDatabaseConnection();
- 
-    if (!$session->isLoggedIn()) 
-        header('Location: ../pages/login.php');
+    
 
     $search = isset($_GET["search"]) ? htmlentities($_GET["search"]) : '';
     $category = isset($_GET["category"]) ? htmlentities($_GET["category"]) : 'all';

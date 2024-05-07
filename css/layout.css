@@ -288,3 +288,28 @@ form {
     justify-content: center;
     align-items: center;
 }
+
+/* shipping form layout */
+
+#print-shipping-form {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+#shipping-form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.shipping-address {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+}

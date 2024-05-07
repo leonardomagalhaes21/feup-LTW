@@ -43,4 +43,12 @@
     drawSearchAndFilter($categories, $sizes, $conditions);
     drawItems($items, $db, true);
     drawFooter();
+
+    $isLogged = json_encode(isset($_SESSION['id']));
+    $temp = json_encode($_SESSION['csrf']);
+
 ?>
+    <script>
+        let isLogged = <?= $isLogged ?>;
+        let temp = <?= $temp ?>;
+    </script>
