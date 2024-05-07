@@ -89,7 +89,7 @@
             <p><strong>Item:</strong> <a href="../pages/item.php?idItem=<?= $order['idItem'] ?>"><?= htmlentities($order['itemName']) ?></a></p>
             <p><strong>Price:</strong> <?= htmlentities((string)$order['price']) ?>€</p>
             <p><strong>Buyer:</strong> <a href="../pages/user-profile.php?idUser=<?= $order['buyerId'] ?>"><?= htmlentities($order['buyerName']) ?></a></p>
-            <a href="../actions/print_shipping_form.php?orderId=<?= $order['idOrder'] ?>&itemId=<?= $order['idItem'] ?>" target="_blank">Print Shipping Form</a>
+            <a href="../pages/print_shipping_form.php?orderId=<?= $order['idOrder'] ?>&itemId=<?= $order['idItem'] ?>&csrf=<?=$_SESSION['csrf']?>" target="_blank">Print Shipping Form</a>
             <form method="post" action="../actions/action_item_sent.php">
                 <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <input type="hidden" name="idOrder" value="<?= $orderId ?>">

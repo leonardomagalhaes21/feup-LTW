@@ -25,7 +25,7 @@ function searchItems(formData) {
 
             response.forEach(function(item) {
                 let itemElement = document.createElement('article');
-                itemElement.innerHTML = `
+                let itemDetails = `
                     <a href="../pages/item.php?idItem=${item.id}">
                         <img src="${item.image}" alt="${item.name}">
                     </a>
@@ -34,12 +34,36 @@ function searchItems(formData) {
                             <a href="../pages/item.php?idItem=${item.id}">${item.name}</a>
                         </h2>
                         <h3>${item.brand} - ${item.model}</h3>
-                        <p>Price: ${item.price}€</p>
-                        <form action="../actions/action_add_to_cart.php" method="post">
-                            <input type="hidden" name="idItem" value="${item.id}">
-                            <button type="submit">Add to Cart</button>
-                        </form>
-                    </div>`;
+                        <p>Price: ${item.price}€</p>`;
+                
+                if (isLogged) {
+                    let formElement = document.createElement('form');
+                    formElement.setAttribute('action', '../actions/action_add_to_cart.php');
+                    formElement.setAttribute('method', 'post');
+
+                    let csrfInput = document.createElement('input');
+                    csrfInput.setAttribute('type', 'hidden');
+                    csrfInput.setAttribute('name', 'csrf');
+                    csrfInput.setAttribute('value', temp);
+                    formElement.appendChild(csrfInput);
+
+                    let idItemInput = document.createElement('input');
+                    idItemInput.setAttribute('type', 'hidden');
+                    idItemInput.setAttribute('name', 'idItem');
+                    idItemInput.setAttribute('value', item.id);
+                    formElement.appendChild(idItemInput);
+
+                    let addToCartButton = document.createElement('button');
+                    addToCartButton.setAttribute('type', 'submit');
+                    addToCartButton.textContent = 'Add to Cart';
+
+                    formElement.appendChild(addToCartButton);
+
+                    itemDetails += formElement.outerHTML;
+                }
+
+                itemDetails += `</div>`;
+                itemElement.innerHTML = itemDetails;
                 itemsSection.appendChild(itemElement);
             });
         } 

@@ -628,6 +628,20 @@ span.inactive {
     border-color: var(--blue);
 }
 
+/* shipping form styling */
+
+#shipping-form {
+    background-color: var(--white);
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    gap: 3em;
+}
+
+.shipping-order-detail {
+    flex: 1;
+    padding-right: 2em;
+}
 
 
 /* font styling */
