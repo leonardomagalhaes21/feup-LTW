@@ -31,13 +31,13 @@
     <?php if ($condition) { ?>
     <div class="profile-content">
         <div class="profile-actions">
-            <a href="#" id="user-details">User Details</a>
-            <a href="#" id="wishlist">Wishlist</a>
-            <a href="#" id="your-items">Your Items</a>
-            <a href="#" id="your-orders">Your Orders</a>
-            <a href="#" id="orders-to-ship">Orders to Ship</a>
+            <a href="../pages/profile_user_details.php" id="user-details">User Details</a>
+            <a href="../pages/wishlist.php" id="wishlist">Wishlist</a>
+            <a href="../pages/profile_your_items.php" id="your-items">Your Items</a>
+            <a href="../pages/profile_your_orders.php" id="your-orders">Your Orders</a>
+            <a href="../pages/profile_orders_to_ship.php" id="orders-to-ship">Orders to Ship</a>
             <?php if ($user->isAdmin) { ?>
-                <a href="#" id="admin-page">Admin Panel</a>
+                <a href="../pages/admin-page.php" id="admin-page">Admin Panel</a>
             <?php } ?>
             <a href="../actions/action_logout.php">Logout</a>
         </div>

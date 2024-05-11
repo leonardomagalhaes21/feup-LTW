@@ -38,7 +38,7 @@
         $items = Item::getFeaturedItems($db);
     }
 
-    drawHeader($session, 'search-items');
+    drawHeader($session, ['cart', 'search-items']);
     drawCategories($categories);
     drawSearchAndFilter($categories, $sizes, $conditions);
     drawItems($items, $db, true);
