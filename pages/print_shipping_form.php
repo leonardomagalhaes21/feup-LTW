@@ -87,7 +87,7 @@ $qrCode = "http://api.qrserver.com/v1/create-qr-code/?data=". urlencode($shippin
             <p><strong>Item:</strong> <?= htmlentities($order['itemName']) ?></p>
             <p><strong>Brand:</strong> <?= htmlentities($order['brand']) ?></p>
             <p><strong>Model:</strong> <?= htmlentities($order['model']) ?></p>
-            <p><strong>Price:</strong> <?= htmlentities((string)$order['price']) ?></p>
+            <p><strong>Price:</strong> $<?= htmlentities((string)$order['price']) ?></p>
             <h2>Buyer Information</h2>
             <p><strong>Username:</strong> <?= htmlentities($order['buyerUsername']) ?></p>
             <p><strong>Name:</strong> <?= htmlentities($order['buyerName']) ?></p>

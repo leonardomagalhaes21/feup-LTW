@@ -44,7 +44,7 @@
                     <?php $isFromUser = isset($_SESSION['id']) && (int) $item->idSeller === (int) $_SESSION['id']; ?>
                     <?php if (!$isFromUser && isset($_SESSION['id'])) { ?>
                         <?php if ($isCartPage || (!$isInWishlistPage && (isset($_SESSION['cart']) && in_array($item->idItem, $_SESSION['cart'])))) { ?>
-                            <form action="../actions/action_remove_from_cart.php" method="post">
+                            <form action="../actions/action_remove_from_cart.php" class="remove-from-cart" method="post">
                                 <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                                 <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                                 <button type="submit">Remove from Cart</button>
@@ -56,7 +56,7 @@
                                 <button type="submit">Remove from Wishlist</button>
                             </form>
                         <?php } else { ?>
-                            <form action="../actions/action_add_to_cart.php" method="post">
+                            <form action="../actions/action_add_to_cart.php" class="add-to-cart" method="post">
                                 <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                                 <input type="hidden" name="idItem" value="<?=$item->idItem?>">
                                 <button type="submit">Add to Cart</button>

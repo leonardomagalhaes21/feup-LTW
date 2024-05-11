@@ -71,6 +71,10 @@ body > header h1 a {
     height: 40px;
 }
 
+#checkout-button {
+    display: none;
+}
+
 /* menu styling */
 
 #menu {

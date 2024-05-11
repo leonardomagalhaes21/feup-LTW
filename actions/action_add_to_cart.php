@@ -12,9 +12,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
     if (isset($_POST['idItem'])) {
         $idItem = (int)$_POST['idItem'];
+        
+        $cartItems = $session->getCart();
 
-        $db = getDatabaseConnection();
-        $session->addToCart($idItem);
+        if (!in_array($idItem, $cartItems)) {
+            $db = getDatabaseConnection();
+            $session->addToCart($idItem);
+        }
 
         header("Location: ../pages/index.php");
         exit();

@@ -4,7 +4,7 @@
     //drawHeader($isLoggedIn);
 ?>
 
-<?php function drawHeader($session, $jsPage = "script") { ?>
+<?php function drawHeader($session, $jsPages = array("script")) { ?>
   <!DOCTYPE html>
   <html lang="en">
     <head>
@@ -15,7 +15,9 @@
       <link rel="stylesheet" href="../css/style.css">
       <link rel="stylesheet" href="../css/layout.css">
       <link rel="stylesheet" href="../css/responsive.css">
-      <script src="../javascript/<?=$jsPage?>.js" defer></script>
+      <?php foreach ($jsPages as $jsPage) { ?>
+        <script src="../javascript/<?=$jsPage?>.js" defer></script>
+      <?php } ?>
     </head>
     <body>
       <header>
@@ -28,9 +30,18 @@
             <div id="user-icons">
               <a href="../pages/chats.php"><img src="../docs/images/icon_chat.svg" alt="Chats"></a>
               <a href="../pages/add_publication.php"><img src="../docs/images/icon_add.svg" alt="Add Publication"></a>
-              <a href="../pages/cart.php"><img src="../docs/images/icon_cart.svg" alt="Cart"></a>
+              <a href="../pages/cart.php" id="cart-icon"><img src="../docs/images/icon_cart.svg" alt="Cart"></a>
               <a href="../pages/user-profile.php?idUser=<?=$_SESSION['id']?>"><img src="../docs/images/icon_profile.svg" alt="Profile"></a>
             </div>
+            <div id="cart-items">
+              <ul>
+
+              </ul>
+            </div>
+            <form id="checkout-form" action="../pages/checkout.php" method="get">
+              <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+              <button id="checkout-button" type="submit">Checkout</button>
+            </form>
         <?php 
           } else {
         ?>
