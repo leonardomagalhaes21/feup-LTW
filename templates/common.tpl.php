@@ -33,9 +33,11 @@
               <a href="../pages/cart.php" id="cart-icon"><img src="../docs/images/icon_cart.svg" alt="Cart"></a>
               <a href="../pages/user-profile.php?idUser=<?=$_SESSION['id']?>"><img src="../docs/images/icon_profile.svg" alt="Profile"></a>
             </div>
-            <div id="cart-items">
-              <ul>
-              </ul>
+            <div id="cart-flex">
+              <div id="cart-items" style="display: none;">
+                <ul>
+                </ul>
+              </div>
             </div>
             <form id="checkout-form" action="../pages/checkout.php" method="get">
               <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
