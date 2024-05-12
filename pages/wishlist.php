@@ -16,7 +16,20 @@ $user = User::getUserById($db, $_SESSION['id']);
 
 $wishlistItems = Item::getWishlistItems($db, $_SESSION['id']);
 
+if(isset($_GET['section'])) {
+    $section = $_GET['section'];
+    if($section === 'container') {
+        drawItems($wishlistItems, $db, false, false, true);
+        exit();
+    }
+}
+
+drawHeader($session, ["user-profile"]);
+drawProfileTop($db, $user);
 drawItems($wishlistItems, $db, false, false, true);
+drawProfileBotton($db, $user);
+drawComments($db, $user->idUser, 15);
+drawFooter();
 
 
 ?>
