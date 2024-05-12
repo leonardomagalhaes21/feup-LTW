@@ -16,7 +16,8 @@
     $user = User::getUserById($db, $idUser);
 
     drawHeader($session, ["user-profile"]);
-    drawProfile($db, $user);
+    drawProfileTop($db, $user);
+    drawProfileBotton($db, $user);
     drawComments($db, $user->idUser, 15);
     drawFooter();
 ?>

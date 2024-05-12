@@ -11,7 +11,6 @@ require_once (__DIR__ . '/../database/order.class.php');
 
 require_once(__DIR__ . '/../templates/common.tpl.php');
 require_once(__DIR__ . '/../templates/users.tpl.php');
-require_once(__DIR__ . '/../templates/item.tpl.php');
 require_once(__DIR__ . '/../templates/order.tpl.php');
 
 $db = getDatabaseConnection();
@@ -22,7 +21,19 @@ $user = User::getUserById($db, $userId);
 
 $orders = Item::getOrdersFromUser($db, $userId);
 
-drawOrders($orders, $db);
+if(isset($_GET['section'])) {
+    $section = $_GET['section'];
+    if($section === 'container') {
+        drawOrders($orders, $db);
+        exit();
+    }
+}
 
+drawHeader($session, ["user-profile"]);
+drawProfileTop($db, $user);
+drawOrders($orders, $db);
+drawProfileBotton($db, $user);
+drawComments($db, $user->idUser, 15);
+drawFooter();
 
 ?>

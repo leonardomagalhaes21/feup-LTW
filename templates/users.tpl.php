@@ -4,45 +4,51 @@
     require_once(__DIR__ . '/../database/rating.class.php');
 ?>
 
-<?php 
-    function drawProfile($db, $user) {
-        $loggedId = $_SESSION['id'] ?? null;
-        $condition = $loggedId === $user->idUser;
-        $profileImage = $user->getProfileImage($db);
-        $averageRating = Rating::getAverageRating($db, $user->idUser);
+<?php function drawProfileTop($db, $user) {
+    $loggedId = $_SESSION['id'] ?? null;
+    $condition = $loggedId === $user->idUser;
+    $profileImage = $user->getProfileImage($db);
+    $averageRating = Rating::getAverageRating($db, $user->idUser);
 ?>
+    <section id="user-profile">
+        <div class="profile-info">
+            <?php if ($profileImage) { ?>
+                <img src="<?= htmlentities((string)$profileImage) ?>" alt="<?= htmlentities($user->name) ?> Profile Picture">
+            <?php } else { ?>
+                <img src="../docs/images/default_profile_picture.png" alt="<?= htmlentities($user->name) ?> Profile Picture">
+            <?php } ?>
+            <div class="profile-details">
+                <h2><?= htmlentities($user->name) ?></h2>
+                <p>Email: <?= htmlentities($user->email) ?></p>
+                <p>Username: <?= htmlentities($user->username) ?> </p>
+                <?php if ($averageRating !== null && $averageRating !== 0.0) { ?>
+                    <p>Rating: <?= number_format((float)htmlentities((string)$averageRating), 1)?> / 5 </p>
+                <?php } ?>
+            </div>
+        </div>
+        <?php if ($condition) { ?>
+        <div class="profile-content">
+            <div class="profile-actions">
+                <a href="../pages/profile_user_details.php" id="user-details">User Details</a>
+                <a href="../pages/wishlist.php" id="wishlist">Wishlist</a>
+                <a href="../pages/profile_your_items.php" id="your-items">Your Items</a>
+                <a href="../pages/profile_your_orders.php" id="your-orders">Your Orders</a>
+                <a href="../pages/profile_orders_to_ship.php" id="orders-to-ship">Orders to Ship</a>
+                <?php if ($user->isAdmin) { ?>
+                    <a href="../pages/admin-page.php" id="admin-page">Admin Panel</a>
+                <?php } ?>
+                <a href="../actions/action_logout.php">Logout</a>
+            </div>
+            <div id="content-container">
+    <?php }
+} ?>
 
-<section id="user-profile">
-    <div class="profile-info">
-        <?php if ($profileImage) { ?>
-            <img src="<?= htmlentities((string)$profileImage) ?>" alt="<?= htmlentities($user->name) ?> Profile Picture">
-        <?php } else { ?>
-            <img src="../docs/images/default_profile_picture.png" alt="<?= htmlentities($user->name) ?> Profile Picture">
-        <?php } ?>
-        <div class="profile-details">
-            <h2><?= htmlentities($user->name) ?></h2>
-            <p>Email: <?= htmlentities($user->email) ?></p>
-            <p>Username: <?= htmlentities($user->username) ?> </p>
-            <?php if ($averageRating !== null && $averageRating !== 0.0) { ?>
-                <p>Rating: <?= number_format((float)htmlentities((string)$averageRating), 1)?> / 5 </p>
-            <?php } ?>
+
+<?php function drawProfileBotton($db, $user) {
+    $loggedId = $_SESSION['id'] ?? null;
+    $condition = $loggedId === $user->idUser;
+    if ($condition) { ?>
         </div>
-    </div>
-    <?php if ($condition) { ?>
-    <div class="profile-content">
-        <div class="profile-actions">
-            <a href="../pages/profile_user_details.php" id="user-details">User Details</a>
-            <a href="../pages/wishlist.php" id="wishlist">Wishlist</a>
-            <a href="../pages/profile_your_items.php" id="your-items">Your Items</a>
-            <a href="../pages/profile_your_orders.php" id="your-orders">Your Orders</a>
-            <a href="../pages/profile_orders_to_ship.php" id="orders-to-ship">Orders to Ship</a>
-            <?php if ($user->isAdmin) { ?>
-                <a href="../pages/admin-page.php" id="admin-page">Admin Panel</a>
-            <?php } ?>
-            <a href="../actions/action_logout.php">Logout</a>
-        </div>
-        <div id="content-container"></div>
-        <div id="admin-content-container"></div>
     </div>
     <?php } ?>
     <?php if ($loggedId !== null && $loggedId !== $user->idUser) { ?>
@@ -78,8 +84,6 @@
     <script>
         let isAdmin = <?= $user->isAdmin ?>;
     </script>
-
-
 <?php } ?>
 
 <?php function drawComments($db, $userId, $limit) { //TODO melhorar muito isto ?>
