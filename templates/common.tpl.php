@@ -35,7 +35,6 @@
             </div>
             <div id="cart-items">
               <ul>
-
               </ul>
             </div>
             <form id="checkout-form" action="../pages/checkout.php" method="get">
