@@ -6,6 +6,7 @@
 
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/item.class.php');
+    require_once(__DIR__ . '/../database/category.class.php');
 
     $db = getDatabaseConnection();
 
@@ -19,6 +20,7 @@
             $cartItems[] = array(
                 'id' => $item->idItem,
                 'name' => $item->name,
+                'category' => Category::getCategoryById($db, $item->idCategory)->categoryName,
                 'price' => $item->price
             );
         }

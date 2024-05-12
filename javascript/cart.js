@@ -35,11 +35,11 @@ function updateCartDisplay(cartItems) {
        
         let itemLink = document.createElement('a');
         itemLink.href = '../pages/item.php?idItem=' + item.id;
-        itemLink.textContent = item.name;
+        let truncatedCategory = item.category.length > 9 ? item.category.substring(0, 9) + ' ': item.category;
+        itemLink.innerHTML = `${truncatedCategory}: ${item.name}`;
         listItem.appendChild(itemLink);
 
-        listItem.innerHTML += ' - $' + item.price;
-
+        listItem.innerHTML += ' - $' + item.price + ' ';
 
         let removeButton = document.createElement('button');
         removeButton.textContent = 'X';
@@ -57,7 +57,6 @@ function updateCartDisplay(cartItems) {
     totalItem.textContent = 'Total Price: $' + totalPrice.toFixed(2);
     cartList.appendChild(totalItem);
 }
-
 
 function updateButtonsAndForms(cartItems) {
     let addToCartForms = document.querySelectorAll('.add-to-cart');
@@ -183,6 +182,22 @@ document.addEventListener('DOMContentLoaded', function() {
             cartItemsContainer.style.display = 'none';
             checkoutForm.style.display = 'none';
         }
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    let cartIcon = document.getElementById('cart-icon');
+    let cartContainer = document.getElementById('cart-container');
+
+    if (cartIcon){
+        cartIcon.addEventListener('click', function(event) {
+            event.preventDefault();
+            if (cartContainer.style.display === 'none') {
+                cartContainer.style.display = 'block';
+            } else {
+                cartContainer.style.display = 'none';
+            }
         });
     }
 });
