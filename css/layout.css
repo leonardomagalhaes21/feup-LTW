@@ -58,6 +58,22 @@ body > header h1{
 }
 
 
+#cart-flex {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+#cart-items li {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#cart-items p {
+    display: flex;
+    justify-content: flex-end;
+}
+
 
 /* menu layout */
 
@@ -246,7 +262,7 @@ form {
     align-items: center;
 }
 
-/*chart layout*/
+/*cart layout*/
 
 #cart {
     grid-area: aside;
@@ -254,58 +270,6 @@ form {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 600px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
-}
-
-
-#cart h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.total-price {
-    margin-bottom: 20px;
-}
-
-.total-price p {
-    font-size: 18px;
-    color: #333;
-}
-
-#cart-items{
-    margin-top: 1em;
-    margin-right: 1em;
-    display: flex;
-    justify-content: flex-end; /* Align the container itself to the right */
-    align-items: flex-end; /* Align items within the container to the right */
-    flex-direction: column; /* Stack items vertically */
-    margin-bottom: 10px;
-    background-color: white;
-    border: 1px solid #fffcfc;
-    border-radius: 8px;
-
-}
-
-#cart-items li {
-    margin-top: 1em;
-    margin-right: 1em;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: flex-end; /* Align each item to the right */
-}
-
-#cart-items p {
-    display: flex;
-    justify-content: flex-end; /* Align total price to the right */
-    margin-bottom: 10px;
-    margin-right: 1em;
 }
 
 
@@ -319,29 +283,6 @@ form {
     align-items: center;
 }
 
-#checkout-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#checkout-button {
-    padding: 10px 20px;
-    font-size: 12px; 
-    width: 10em; 
-}
-
-#checkout-form {
-    display: flex;
-    flex-direction: column;
-    align-items:flex-end;
-    justify-content: center;
-    margin-right: 1em;
-}
-
-#total-price {
-    font-size: 16px; 
-}
 
 /* shipping form layout */
 
