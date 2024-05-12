@@ -32,7 +32,14 @@ function updateCartDisplay(cartItems) {
     for (let i = 0; i < cartItems.length; i++) {
         let item = cartItems[i];
         let listItem = document.createElement('li');
-        listItem.textContent = item.name + ' - $' + item.price;
+       
+        let itemLink = document.createElement('a');
+        itemLink.href = '../pages/item.php?idItem=' + item.id;
+        itemLink.textContent = item.name;
+        listItem.appendChild(itemLink);
+
+        listItem.innerHTML += ' - $' + item.price;
+
 
         let removeButton = document.createElement('button');
         removeButton.textContent = 'X';
