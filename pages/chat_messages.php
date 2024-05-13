@@ -29,9 +29,14 @@ $itemId = $_GET['itemId'];
 $chats = Chat::getChatByUserAndItem($db, (int)$userId, (int)$otherUserId, (int)$itemId);
 
 
-drawHeader($session);
+drawHeader($session, ['chat']);
 drawCategories($categories);
 drawChatMessages($db, $chats, $userId, $otherUserId, $itemId);
 drawFooter();
-
 ?>
+
+<script>
+    const otherUserId = <?= $otherUserId ?>;
+    const itemId = <?= $itemId ?>;
+    const userId = <?= $userId ?>;
+</script>

@@ -121,7 +121,7 @@
     <form action="/actions/action_edit_profile.php" method="post" enctype="multipart/form-data" onsubmit="return validateProfileEditForm()" id="edit-profile-form">
         <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <label>
-            Username: <input type="text" id="username" name="username" value="<?=$user->username?>" required>
+            Username: <input type="text" id="username" name="username" value="<?=htmlentities($user->username)?>" required>
         </label><br>
         <label>
             New Password: <input type="password" id="password" name="password">
@@ -130,10 +130,10 @@
             Confirm Password: <input type="password" id="confirm_password" name="confirm_password">
         </label><br>
         <label>
-            Name: <input type="text" id="name" name="name" value="<?=$user->name?>" required>
+            Name: <input type="text" id="name" name="name" value="<?=htmlentities($user->name)?>" required>
         </label><br>
         <label>
-            Email: <input type="email" id="email" name="email" value="<?=$user->email?>" required>
+            Email: <input type="email" id="email" name="email" value="<?=htmlentities($user->email)?>" required>
         </label><br>
         <label>
             Profile Picture: <input type="file" id="main_image" name="main_image" onchange="previewMainImage(event)">
