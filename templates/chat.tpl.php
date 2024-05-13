@@ -62,6 +62,7 @@
                 <h4><?=$item->name?></h4>
             </div>
         </header>
+            <div class="messages-container">
             <?php foreach ($chats as $chat) { ?>
                 <div class="message_<?php echo $chat['idSender'] === $userId ? 'outgoing' : 'incoming'; ?>">
                     <h4><?= htmlentities(User::getUserById($db, $chat['idSender'])->name) ?></h4>
@@ -69,6 +70,7 @@
                     <p class="hint"><?= htmlentities(date('d/m/Y H:i', strtotime($chat['timestamp']))) ?></p>
                 </div>
             <?php } ?>   
+           </div>
             <form action="../actions/action_send_message.php" method="post" class="message-form">
                 <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <input type="hidden" name="otherUserId" value="<?php echo $otherUserId; ?>">

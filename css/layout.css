@@ -216,7 +216,7 @@ form {
 
 /* chats layout */
 
-.chats, .chat{
+.chats, .chat {
     margin: 1em auto;
     padding: 1em;
     grid-area: details;
@@ -225,20 +225,28 @@ form {
     align-items: center;
 }
 
-.chats article, .chat header{
+.messages-container {
+    width: 100%;
+    grid-area: details;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chats article, .chat header {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 1em;
 }
 
-.chat.message_incoming {
+.chat .message_incoming {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.chat.message_outgoing {
+.chat .message_outgoing {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
