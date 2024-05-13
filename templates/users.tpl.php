@@ -102,6 +102,14 @@
                     <?php if ($commentText) { ?>
                         <p><?= $commentText ?> </p>
                     <?php } ?>
+                    <?php if (User::isAdmin($db, $_SESSION['id'])) { ?>
+                        <form action="../actions/action_delete_rating.php" method="post">
+                            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                            <input type="hidden" name="idRating" value="<?= $comment['idRating'] ?>">
+                            <input type="hidden" name="idUser" value="<?= $userId ?>">
+                            <button type="submit">Delete</button>
+                        </form>
+                    <?php } ?>
                 </div>
                 <?php
             }

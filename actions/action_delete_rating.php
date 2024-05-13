@@ -22,12 +22,11 @@
             exit();
         }
         try {
-            $rating = $_POST['rating'];
-            $comment = $_POST['comment'];
+            $rating = $_POST['idRating'];
             $userId = $_POST['idUser'];
 
-            $stmt = $db->prepare("INSERT INTO Ratings (idUser, rating, comment) VALUES (?, ?, ?)");
-            $stmt->execute(array($userId, $rating, $comment));
+            $stmt = $db->prepare("DELETE FROM Ratings WHERE idRating = ?");
+            $stmt->execute(array($rating));
 
             header("Location: ../pages/user-profile.php?idUser={$userId}#comments");
             exit();
