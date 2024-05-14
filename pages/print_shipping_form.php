@@ -4,6 +4,9 @@ declare(strict_types = 1);
 require_once(__DIR__ . '/../utils/session.php');
 $session = new Session();
 
+if(!$session->isLoggedIn()) 
+    die(header('Location: ../pages/login.php'));
+
 if (!isset($_GET['orderId']) || !isset($_GET['itemId'])) {
     header('Location: ../pages/index.php');
     exit();
