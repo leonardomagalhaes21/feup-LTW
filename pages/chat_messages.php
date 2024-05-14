@@ -4,12 +4,8 @@ declare(strict_types = 1);
 require_once(__DIR__ . '/../utils/session.php');
 $session = new Session();
 
-// Verifica se o usuário está logado
-if (!$session->isLoggedIn()) {
-    // Redireciona o usuário para a página de login se não estiver logado
-    header("Location: ../pages/login.php");
-    exit;
-}
+if(!$session->isLoggedIn()) 
+    die(header('Location: ../pages/login.php'));
 
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/category.class.php');
