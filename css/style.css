@@ -665,21 +665,6 @@ span.inactive {
     border-color: var(--blue);
 }
 
-/* shipping form styling */
-
-#shipping-form {
-    background-color: var(--white);
-    padding: 2em;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    gap: 3em;
-}
-
-.shipping-order-detail {
-    flex: 1;
-    padding-right: 2em;
-}
-
 /* cart styling */
 
 #cart {
@@ -704,6 +689,31 @@ span.inactive {
 
 .total-price p {
     font-size: 1.2em;
+}
+
+/* table styling */
+
+table {
+    border-collapse: collapse;
+    margin: 1em;
+}
+
+th, td {
+    border: 1px solid var(--lightgrey);
+    padding: 1em;
+    text-align: left;
+}
+th {
+    background-color: var(--lightergrey);
+}
+
+@media print {
+    #shipping-form {
+        background-color: var(--white);
+    }
+    body {
+        background-image: none !important;
+    }
 }
 
 /* font styling */
