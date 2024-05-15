@@ -275,11 +275,9 @@ VALUES (3, 'Football Goal', 'Football Goal', 'A football goal in good condition.
 INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, featured)
 VALUES (4, 'Xbox One', 'Xbox One', 'A console in excelent condition.', 5, 'Xbox', 'Xbox One', 3, 3, 20, 1);
 INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, featured)
-VALUES (5, 'Xbox One', 'Xbox One', 'A console in excelent condition.', 5, 'Xbox', 'Xbox One', 3, 3, 20, 1);
+VALUES (5, 'Fridge', 'Fridge', 'A fridge in excelent condition.', 7, 'LG', 'Door-in-Door', 5, 2, 150, 1);
 INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, featured)
-VALUES (5, 'Fridge', 'Fridge', 'A fridge in excelent condition.', 7, 'LG', 'LG', 5, 2, 150, 1);
-INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, featured)
-VALUES (5, 'T-shirt', 'T-shirt', 'A T-shirt in marvelous condition.', 2, 'Nike', 'Nike preta', 2, 2, 30, 1);
+VALUES (5, 'T-shirt', 'T-shirt', 'A T-shirt in marvelous condition.', 2, 'Nike', 'Nike Black', 2, 2, 30, 1);
 
 
 INSERT INTO Images (imagePath) VALUES
@@ -333,7 +331,7 @@ INSERT INTO Images (imagePath) VALUES
 ('../docs/itemImages/tool_kit_2.jpg'),
 ('../docs/itemImages/necklace_1.jpg'),
 ('../docs/itemImages/necklace_2.jpg'),
-('../docs/itemImages/football_goal.jpg')
+('../docs/itemImages/football_goal.jpg'),
 ('../docs/itemImages/xbox.jpg'),
 ('../docs/itemImages/fridge.jpg'),
 ('../docs/itemImages/t-shirt.jpg');
@@ -388,10 +386,10 @@ INSERT INTO ItemImages (idItem, idImage, isMain) VALUES
 (25, 48, FALSE),
 (26, 49, TRUE),
 (26, 50, FALSE),
-(27, 51,FALSE),
-(27, 52,TRUE),
-(28,53,TRUE),
-(28,54,FALSE);
+(27, 51,TRUE),
+(28, 52,TRUE),
+(29,53,TRUE),
+(30,54,TRUE);
 
 INSERT INTO UserImage (idUser, idImage) VALUES
 (2, 8);
