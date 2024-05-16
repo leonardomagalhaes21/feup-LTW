@@ -352,5 +352,56 @@
     </section>
 <?php } ?>
 
+<?php function drawPrintShippingForm($order, $shippingAddress, $qrCode) { ?>
+    <div id="shipping-form">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="4">Shipping Form</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2"><h2>Order Details</h2></td>
+                    <td colspan="2"><h2>Buyer Information</h2></td>
+                </tr>
+                <tr>
+                    <td><strong>Order ID:</strong></td>
+                    <td><?= $order['idOrder'] ?></td>
+                    <td><strong>Username:</strong></td>
+                    <td><?= htmlentities($order['buyerUsername']) ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Order Date:</strong></td>
+                    <td><?= htmlentities($order['orderDate']) ?></td>
+                    <td><strong>Name:</strong></td>
+                    <td><?= htmlentities($order['buyerName']) ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Item:</strong></td>
+                    <td><?= htmlentities($order['itemName']) ?></td>
+                    <td><strong>Email:</strong></td>
+                    <td><?= htmlentities($order['buyerEmail']) ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Brand:</strong></td>
+                    <td><?= htmlentities($order['brand']) ?></td>
+                    <th colspan="2">Shipping Address</th>
+                </tr>
+                <tr>
+                    <td><strong>Model:</strong></td>
+                    <td><?= htmlentities($order['model']) ?></td>
+                    <td colspan="2" rowspan="2"><?= $shippingAddress ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Price:</strong></td>
+                    <td>$<?= htmlentities((string)$order['price']) ?></td>
+                </tr>
+            </tbody>
+        </table>
+        <img src="<?= $qrCode ?>" alt="Shipping Address QR Code">
+    </div>
+<?php } ?>
+
 
 
