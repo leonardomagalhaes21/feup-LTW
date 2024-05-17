@@ -273,11 +273,19 @@ VALUES (1, 'Necklace', 'Necklace', 'A used necklace in good condition. Perfect f
 INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, featured)
 VALUES (3, 'Football Goal', 'Football Goal', 'A football goal in good condition.', 6, 'Exit Scala', 'Football Goal', 3, 3, 70, 1);
 INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, featured)
-VALUES (4, 'Xbox One', 'Xbox One', 'A console in excelent condition.', 5, 'Xbox', 'Xbox One', 3, 3, 20, 1);
+VALUES (4, 'Xbox One', 'Xbox One', 'A console in excelent condition. Perfect for an incredible time', 5, 'Xbox', 'Xbox One', 3, 3, 20, 1);
 INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, featured)
-VALUES (5, 'Fridge', 'Fridge', 'A fridge in excelent condition.', 7, 'LG', 'Door-in-Door', 5, 2, 150, 1);
+VALUES (5, 'Fridge', 'Fridge', 'A fridge in excelent condition. Perfect for cooling all your food.', 7, 'LG', 'Door-in-Door', 5, 2, 150, 1);
 INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, featured)
-VALUES (5, 'T-shirt', 'T-shirt', 'A T-shirt in marvelous condition.', 2, 'Nike', 'Nike Black', 2, 2, 30, 1);
+VALUES (6, 'T-shirt', 'T-shirt', 'A T-shirt in marvelous condition.', 2, 'Nike', 'Nike Black', 2, 2, 30, 1);
+INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, featured)
+VALUES (2, 'AirPods', 'AirPods', 'AirPods in good condition.', 1, 'Apple', 'AirPods Pro', 1, 2, 120, 1);
+INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, featured)
+VALUES (3, 'Sonia Chair Blue', 'Sonia Chair Blue', 'Blue Chair in excellent condition. ', 3, 'Target', 'Sonia Blue', 3, 3, 80, 1);
+INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, featured)
+VALUES (5, 'Os Maias', 'Os Maias', 'Book Os Maias in excellent condition.', 4, 'Porto Editora', 'Os Maias', 2, 2, 15, 1);
+INSERT INTO Items (idSeller, name, introduction, description, idCategory, brand, model, idSize, idCondition, price, featured)
+VALUES (2, 'Black Fusion Bracelet', 'Black Fusion Bracelet', 'Bracelet in excellent condition.', 8, 'Blue Bird', 'Black Fusion', 1, 2, 60, 1);
 
 
 INSERT INTO Images (imagePath) VALUES
@@ -334,7 +342,11 @@ INSERT INTO Images (imagePath) VALUES
 ('../docs/itemImages/football_goal.jpg'),
 ('../docs/itemImages/xbox.jpg'),
 ('../docs/itemImages/fridge.jpg'),
-('../docs/itemImages/t-shirt.jpg');
+('../docs/itemImages/t-shirt.jpg'),
+('../docs/itemImages/airPods.jpg'),
+('../docs/itemImages/chair.jpg'),
+('../docs/itemImages/maias.jpg'),
+('../docs/itemImages/bracelet.jpg');
 
 INSERT INTO ItemImages (idItem, idImage, isMain) VALUES
 (1, 1, TRUE),
@@ -389,7 +401,11 @@ INSERT INTO ItemImages (idItem, idImage, isMain) VALUES
 (27, 51,TRUE),
 (28, 52,TRUE),
 (29,53,TRUE),
-(30,54,TRUE);
+(30,54,TRUE),
+(31,55,TRUE),
+(32,56,TRUE),
+(33,57,TRUE),
+(34,58,TRUE);
 
 INSERT INTO UserImage (idUser, idImage) VALUES
 (2, 8);
