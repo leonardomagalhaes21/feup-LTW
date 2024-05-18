@@ -47,7 +47,7 @@
                     <?php
                     $categories = Category::getCategories($db);
                     foreach ($categories as $category) {
-                        echo "<option value='" . $category->idCategory . "'>" . htmlspecialchars_decode(htmlentities($category->categoryName)) . "</option>";
+                        echo "<option value='" . $category->idCategory . "'>" . htmlentities($category->categoryName) . "</option>";
                     }
                     ?>
                 </select>
@@ -96,9 +96,7 @@
                     unset($_SESSION['message']);
                 }
             ?>
-            <label for="user_search">Search User:</label>
-            <!-- AINDA NÃO FUNCIONA!!  -->
-            <input type="text" id="user_search" name="user_search" placeholder="Search for a user...">
+            <input type="text" id="user_search" name="user_search" placeholder="Search for a user..." onkeypress="checkEnterPress(event)">
             <div id="user_list">
                 <?php
                 $users = User::getAllUsers($db);

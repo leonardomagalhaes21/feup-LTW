@@ -64,11 +64,16 @@ class User {
         return (bool) $isAdmin;
     }
 
-    public static function getAllUsers(PDO $db): array {
-        $stmt = $db->prepare('SELECT * FROM Users');
-        $stmt->execute();
-        $users = $stmt->fetchAll();
+    public static function getAllUsers(PDO $db, int $limit=0): array {
+        if ($limit > 0){
+            $stmt = $db->prepare('SELECT * FROM Users LIMIT ?');
+            $stmt->execute(array($limit));
+        } else {
+            $stmt = $db->prepare('SELECT * FROM Users');
+            $stmt->execute();
+        }
 
+        $users = $stmt->fetchAll();
         $result = [];
         foreach ($users as $user) {
             $result[] = new User($user['idUser'], $user['name'], $user['username'], $user['password'], $user['email'], (bool) $user['isAdmin']);
@@ -107,7 +112,18 @@ class User {
         $stmt = $db->prepare('UPDATE Users SET name = ?, email = ?, username = ?, password = ? WHERE idUser = ?');
         $stmt->execute(array($name, $email, $username, $password, $idUser));
     }
-    
-    
+
+    public static function searchUser(PDO $db, string $username): array {
+        $stmt = $db->prepare('SELECT * FROM Users WHERE username LIKE ?');
+        $stmt->execute(array("%$username%"));
+        $users = $stmt->fetchAll();
+
+        $result = [];
+        foreach ($users as $user) {
+            $result[] = new User($user['idUser'], $user['name'], $user['username'], $user['password'], $user['email'], (bool) $user['isAdmin']);
+        }
+
+        return $result;
+    }
 }
 ?>

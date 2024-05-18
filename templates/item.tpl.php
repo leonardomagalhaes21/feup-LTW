@@ -115,8 +115,9 @@
                 <p><?=htmlentities($item->description)?></p>
                 <p>Brand: <?=htmlentities($item->brand)?></p>
                 <p>Model: <?=htmlentities($item->model)?></p>
-                <p>Price: <?=htmlentities((string)$item->price)?>€</p>             
-                <p>Category: <?=htmlspecialchars_decode(htmlentities(Category::getCategoryById($db, $item->idCategory)->categoryName))?></p>
+                <p>Price: <?=htmlentities((string)$item->price)?>€</p>
+                <?php $categoryName = htmlentities(Category::getCategoryById($db, $item->idCategory)->categoryName); ?>             
+                <p>Category: <?= Category::getEmojiForCategory($categoryName) . " " . $categoryName ?></p>
                 <p>Condition: <?=htmlentities(Condition::getConditionById($db, $item->idCondition)->conditionName)?></p>
                 <p>Size: <?=htmlentities(Size::getSizeById($db, $item->idSize)->sizeName)?></p>
                 <p>Seller: <a href="../pages/user-profile.php?idUser=<?=$item->idSeller?>"><?=htmlentities(User::getUserById($db, $item->idSeller)->name)?></a></p>
@@ -218,7 +219,7 @@
                 Category:
                 <select id="idCategory" name="idCategory" required>
                     <?php foreach ($categories as $category) { ?>
-                        <option value="<?php echo $category->idCategory; ?>"><?php echo htmlspecialchars_decode(htmlentities($category->categoryName)); ?></option>
+                        <option value="<?php echo $category->idCategory; ?>"><?php echo Category::getEmojiForCategory($category->categoryName) . " " . htmlentities($category->categoryName); ?></option>
                     <?php } ?>
                 </select>
             </label><br>
@@ -326,7 +327,7 @@
             <label for="category">Category:
                 <select id="category" name="category" required>
                     <?php foreach ($categories as $category) { ?>
-                        <option value="<?php echo $category->idCategory; ?>"><?php echo htmlspecialchars_decode(htmlentities($category->categoryName)); ?></option>
+                        <option value="<?php echo $category->idCategory; ?>"><?php echo Category::getEmojiForCategory($category->categoryName) . " " . htmlentities($category->categoryName); ?></option>
                     <?php } ?>
                 </select>
             </label><br>

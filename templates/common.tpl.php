@@ -63,7 +63,7 @@
         <label class="hamburger" for="hamburger"></label>
         <ul>
             <?php foreach ($categories as $category) { ?>
-                <li><a href="../pages/index.php?category=<?= $category->idCategory ?>"><?= htmlspecialchars_decode(htmlentities($category->categoryName)) ?></a></li>
+                <li><a href="../pages/index.php?category=<?= $category->idCategory ?>"><?= Category::getEmojiForCategory($category->categoryName) . " " . htmlentities($category->categoryName) ?></a></li>
             <?php } ?>
         </ul>
     </nav>
@@ -80,7 +80,7 @@
             <select id="category" name="category">
                 <option value="all" selected>All</option>
                 <?php foreach ($categories as $category) { ?>
-                    <option value="<?php echo $category->idCategory; ?>"><?php echo htmlspecialchars_decode(htmlentities($category->categoryName)); ?></option>
+                    <option value="<?php echo $category->idCategory; ?>"><?php echo Category::getEmojiForCategory($category->categoryName) . " " . htmlentities($category->categoryName); ?></option>
                 <?php } ?>
             </select>
             <br>

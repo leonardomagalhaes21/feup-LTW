@@ -78,6 +78,28 @@ class Category {
         $stmt = $db->prepare('DELETE FROM Categories WHERE idCategory = ?');
         $stmt->execute(array($idCategory));
     }
-    
+
+    public static function getEmojiForCategory(string $categoryName): string {
+        switch ($categoryName) {
+            case 'Electronics':
+                return '&#128187;';
+            case 'Clothing':
+                return '&#128084;';
+            case 'Furniture':
+                return '&#129681;';
+            case 'Books':
+                return '&#128218;';
+            case 'Games':
+                return '&#127918;';
+            case 'Sports':
+                return '&#9917;';
+            case 'Homeware':
+                return '&#128250;';
+            case 'Others':
+                return '&#128259;';
+            default:
+                return '';
+        }
+    }
 }
 ?>

@@ -64,5 +64,41 @@ class Order {
         return $items;
     }
 
+    public static function getOrderCheckoutInfo(PDO $db, int $orderId, int $itemId) : ?array {
+        $query = "SELECT 
+            O.idOrder,
+            O.orderDate,
+            CI.address,
+            CI.city,
+            CI.zipCode,
+            OI.idItem,
+            I.name AS itemName,
+            I.brand,
+            I.model,
+            I.price,
+            U.username AS buyerUsername,
+            U.name AS buyerName,
+            U.email AS buyerEmail
+        FROM 
+            Orders O
+        JOIN 
+            CheckoutInfo CI ON O.idOrder = CI.idOrder
+        JOIN 
+            OrderItems OI ON O.idOrder = OI.idOrder
+        JOIN 
+            Items I ON OI.idItem = I.idItem
+        JOIN
+            Users U ON O.idBuyer = U.idUser
+        WHERE 
+            O.idOrder = ? AND 
+            OI.idItem = ? AND 
+            O.status = 'Pending'";
+
+        $stmt = $db->prepare($query);
+        $stmt->execute(array($orderId, $itemId));
+        $order = $stmt->fetch();
+
+        return $order;
+    }
 }
 ?>
