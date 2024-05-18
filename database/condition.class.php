@@ -1,8 +1,6 @@
 <?php
 declare(strict_types=1);
 
-require_once 'connection.db.php';
-
 class Condition {
     public int $idCondition;
     public string $conditionName;

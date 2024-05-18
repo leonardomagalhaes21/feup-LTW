@@ -7,15 +7,16 @@
     if(!$session->isLoggedIn()) 
         die(header('Location: ../pages/login.php'));
 
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        exit();
+    }
+
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/chats.class.php');
 
     $db = getDatabaseConnection();
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        if ($_SESSION['csrf'] !== $_POST['csrf']) {
-            exit();
-        }
         try {
             $userId = $session->getId();
             $otherUserId = $_POST['otherUserId'] ?? null;

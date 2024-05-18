@@ -1,8 +1,6 @@
 <?php
 declare(strict_types=1);
 
-require_once 'connection.db.php';
-
 class Size {
     public int $idSize;
     public string $sizeName;
@@ -12,7 +10,7 @@ class Size {
         $this->sizeName = $sizeName;
     }
 
-    static function getSizes(PDO $db): array {
+    public static function getSizes(PDO $db): array {
         try {
             $stmt = $db->prepare('SELECT * FROM Sizes');
             $stmt->execute();

@@ -37,11 +37,9 @@
     $qrCode = "http://api.qrserver.com/v1/create-qr-code/?data=". urlencode($shippingAddress) . "&size=300x300"; // goqr.me api
 
 
-
     drawHeader($session, ['shipping-form']);
     drawPrintShippingForm($order, $shippingAddress, $qrCode);
     drawFooter();
-
 ?>
 
 

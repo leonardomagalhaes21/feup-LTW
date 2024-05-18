@@ -11,20 +11,12 @@
         exit();
     }
 
-    if (!$session->isLoggedIn()) {
-        header("Location: ../pages/login.php");
-        exit;
-    }
-
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/users.class.php');
 
     $db = getDatabaseConnection();
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        if ($_SESSION['csrf'] !== $_POST['csrf']) {
-            exit();
-        }
         try {
             $rating = $_POST['idRating'];
             $userId = $_POST['idUser'];

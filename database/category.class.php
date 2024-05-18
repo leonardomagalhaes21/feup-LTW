@@ -1,8 +1,6 @@
 <?php
 declare(strict_types=1);
 
-require_once 'connection.db.php';
-
 class Category {
     public int $idCategory;
     public string $categoryName;
@@ -12,7 +10,7 @@ class Category {
         $this->categoryName = $categoryName;
     }
 
-    static function getCategories(PDO $db): array {
+    public static function getCategories(PDO $db): array {
         try {
             $stmt = $db->prepare('SELECT * FROM Categories');
             $stmt->execute();

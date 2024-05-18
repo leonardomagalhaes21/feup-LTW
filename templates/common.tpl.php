@@ -1,7 +1,6 @@
 <?php 
   declare(strict_types = 1); 
-    //$isLoggedIn = true; // Ou substitua por lógica para verificar se o usuário está logado
-    //drawHeader($isLoggedIn);
+
 ?>
 
 <?php function drawHeader($session, $jsPages = array("script")) { ?>

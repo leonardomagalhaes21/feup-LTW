@@ -86,7 +86,7 @@
     </script>
 <?php } ?>
 
-<?php function drawComments($db, $userId, $limit) { //TODO melhorar muito isto ?>
+<?php function drawComments($db, $userId, $limit) { ?>
     <div class = "comments">
         <?php
         $comments = Rating::getRatingsByUser($db, $userId, $limit);
