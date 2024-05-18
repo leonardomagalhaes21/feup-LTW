@@ -29,14 +29,28 @@ function updateCartDisplay(cartItems) {
         return;
     }
     let totalPrice = 0;
+    const categoryToEntityMap = {
+        'Electronics': '&#128187;',
+        'Clothing': '&#128084;',
+        'Furniture': '&#129681;',
+        'Books': '&#128218;',
+        'Games': '&#127918;',
+        'Sports': '&#9917;',
+        'Homeware': '&#128250;',
+        'Others': '&#128259;'
+    };
     for (let i = 0; i < cartItems.length; i++) {
         let item = cartItems[i];
         let listItem = document.createElement('li');
        
         let itemLink = document.createElement('a');
         itemLink.href = '../pages/item.php?idItem=' + item.id;
-        let truncatedCategory = item.category.length > 9 ? item.category.substring(0, 9) + ' ': item.category;
-        itemLink.innerHTML = `${truncatedCategory}: ${item.name}`;
+        let emoji = categoryToEntityMap[item.category];
+        if (emoji === undefined || emoji === "") {
+            itemLink.innerHTML = `${item.name}`;
+        } else {
+            itemLink.innerHTML = `${emoji}: ${item.name}`;
+        }
         listItem.appendChild(itemLink);
 
         listItem.innerHTML += ' - $' + item.price + ' ';

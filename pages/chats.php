@@ -9,7 +9,7 @@
 
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/category.class.php');
-    require_once(__DIR__ . '/../database/chats.class.php'); // Importa a classe Chat
+    require_once(__DIR__ . '/../database/chats.class.php');
 
     require_once(__DIR__ . '/../templates/common.tpl.php');
     require_once(__DIR__ . '/../templates/chat.tpl.php');
@@ -17,8 +17,7 @@
     $db = getDatabaseConnection();
 
     $categories = Category::getCategories($db);
-    // Buscar e exibir mensagens agrupadas por chat
-    $userId = $session->getId(); // ID do usuário atual
+    $userId = $session->getId();
     $pairs = Chat::getUsersChats($db, (int) $userId);
 
     drawHeader($session);

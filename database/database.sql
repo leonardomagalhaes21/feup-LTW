@@ -195,14 +195,14 @@ INSERT INTO Users (name, username, password, email, isAdmin) VALUES
 ('Ricardo Pereira', 'ricardopereira', '$2y$10$4zN2fHMbSNK1tI82oS8JBeoFRJ6PNUPe6E6ZpUswZr5remJUk/0hu', 'ricardo@gmail.com', 0);
 
 INSERT INTO Categories (categoryName) VALUES
-('&#128187; Electronics'),
-('&#128084; Clothing'),
-('&#129681; Furniture'),
-('&#128218; Books'),
-('&#127918; Games'),
-('&#9917; Sports'),
-('&#128250; Homeware'),
-('&#128259; Others');
+('Electronics'),
+('Clothing'),
+('Furniture'),
+('Books'),
+('Games'),
+('Sports'),
+('Homeware'),
+('Others');
 
 INSERT INTO Sizes (sizeName) VALUES
 ('Extra Small'),
