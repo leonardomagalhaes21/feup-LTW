@@ -24,6 +24,5 @@
     drawCategories($categories);
     drawChats($pairs, $db);
     drawFooter();
-
 ?>
 

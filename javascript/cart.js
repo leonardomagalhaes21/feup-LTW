@@ -1,4 +1,3 @@
-
 async function fetchCartContents() {
     const response = await fetch('../api/api_cart_items.php');
     const cartContents = await response.json();

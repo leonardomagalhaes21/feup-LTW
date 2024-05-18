@@ -36,9 +36,6 @@
         $mainImageTargetFile = $targetDir . $mainImageName;
         $mainImageFileType = strtolower(pathinfo($mainImageTargetFile, PATHINFO_EXTENSION));
 
-        if ($_SESSION['csrf'] !== $_POST['csrf']) {
-            exit();
-        }
         $tmp_mainImageName = $_FILES["main_image"]["tmp_name"];
 
         $mainImageCheck = getimagesize($tmp_mainImageName);

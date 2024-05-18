@@ -38,5 +38,4 @@
     drawProfileBotton($db, $user);
     drawComments($db, $user->idUser, 15);
     drawFooter();
-
-    ?>
+?>

@@ -1,7 +1,6 @@
 <?php 
 declare(strict_types=1);
 
-require_once 'connection.db.php';
 require_once 'users.class.php';
 
 class Rating {

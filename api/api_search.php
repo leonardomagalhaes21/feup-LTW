@@ -35,5 +35,4 @@
     }
 
     echo json_encode($itemsWithDetails);
-
 ?>

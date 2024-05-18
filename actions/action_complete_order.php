@@ -6,6 +6,10 @@
     if(!$session->isLoggedIn()) 
         die(header('Location: ../pages/login.php'));
 
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        exit();
+    }
+
     require_once(__DIR__ . '/../database/connection.db.php');
 
 
@@ -13,9 +17,6 @@
 
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        if ($_SESSION['csrf'] !== $_POST['csrf']) {
-            exit();
-        }
         $totalPrice = (int) $_POST['total_price'];
         $address = $_POST['address'];
         $city = $_POST['city'];

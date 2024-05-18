@@ -34,5 +34,4 @@
     drawHeader($session);
     drawCheckout($totalPrice);
     drawFooter();
-
 ?>

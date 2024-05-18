@@ -1,4 +1,3 @@
-
 function validateForm() {
     let name = document.getElementById("name").value;
     let brand = document.getElementById("brand").value;

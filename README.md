@@ -61,3 +61,10 @@ We also implemented the following additional requirements:
 
 - [ ] **Rating and Review System**
 - [ ] **Real-Time Messaging System**
+
+## Credentials
+
+| USER | ADMIN |
+| -------- | -------- |
+| username: neymito   | username: paicris |
+| password: 12345678  | password: 12345678 |

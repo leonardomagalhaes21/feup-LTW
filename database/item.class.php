@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 
-require_once 'connection.db.php';
 require_once 'category.class.php';
 require_once 'size.class.php';
 require_once 'condition.class.php';
@@ -258,7 +257,7 @@ class Item {
                 $item['price'],
                 (bool) $item['active'],
                 (bool) $item['featured']
-            );;
+            );
         }
     
         return $items;
