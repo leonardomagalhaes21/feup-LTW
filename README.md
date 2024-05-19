@@ -10,7 +10,6 @@
 
     git clone git@github.com:FEUP-LTW-2024/ltw-project-2024-ltw02g04.git
     git checkout final-delivery-v1
-    sqlite database/database.db < database/database.sql
     php -S localhost:9000
 
 ## Screenshots
