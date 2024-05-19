@@ -2,9 +2,9 @@
 
 ## Group ltw02g04
 
-- David Carvalho (up202208654) %
-- Diogo Vieira (up202208723) %
-- Leonardo Magalhães (up202208726) %
+- David Carvalho (up202208654) 33.3%
+- Diogo Vieira (up202208723) 33.3%
+- Leonardo Magalhães (up202208726) 33.3%
 
 ## Install Instructions
 
@@ -14,8 +14,9 @@
     php -S localhost:9000
 
 ## Screenshots
-
-(2 or 3 screenshots of your website)
+![screenshot](docs/others/screenshot_2.jpg)
+![screenshot](docs/others/screenshot_3.jpg)
+![screenshot](docs/others/screenshot_1.jpg)
 
 ## Implemented Features
 
@@ -51,9 +52,7 @@ We have been careful with the following security aspects:
 - [ ] **SQL injection**
 - [ ] **Cross-Site Scripting (XSS)**
 - [ ] **Cross-Site Request Forgery (CSRF)**
-
-**Password Storage Mechanism**: 
-hash_password&verify_password
+- [ ] **Password Storage Mechanism**: hash_password&verify_password
 
 **Aditional Requirements**:
 
