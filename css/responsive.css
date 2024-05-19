@@ -127,6 +127,14 @@
       margin: 0 auto;
     }
 
+    #item-details header > button {
+      display: none;
+    }
+
+    #item-details header h2 {
+      margin-bottom: 0.5em;
+    }
+
     /* user profile */
 
     .profile-actions {
