@@ -140,4 +140,52 @@
     .comments {
       max-width: 100%;
     }
+
+    /* edit profile/item styling */
+
+    #edit-profile-form, #edit-item-form {
+      max-width: 100%;
+      padding: 1em;
+    }
+  
+    #edit-profile-form input{
+      padding: 0.5em;
+      margin: 0.5em 0;
+    }
+
+    #edit-item-form input {
+      padding: 0;
+      margin: 0.5em 0;
+      width: 100%;
+    }
+
+    #edit-item-form label {
+      width: 100%;
+    }
+  
+    #edit-profile-form label:last-of-type, #edit-item-form label:last-of-type{
+      margin-bottom: 1em;
+    }
+    
+    /* chats styling */
+
+    .chats, .chat {
+      width: 80%;
+    }
+    .chat .message_content {
+      margin: 0.3em 0 !important;
+    }
+
+    /* checkout styling */
+
+    #checkout{
+      width: 80%;
+      padding: 1em;
+      margin-top: 0.5em;
+    }
+
+    #checkout input{
+      width: 100%;
+    }
+
 }
