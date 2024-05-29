@@ -8,7 +8,7 @@
 
 ## Install Instructions
 
-    git clone git@github.com:FEUP-LTW-2024/ltw-project-2024-ltw02g04.git
+    git clone git@github.com:leonardomagalhaes21/feup-LTW.git
     git checkout final-delivery-v1
     php -S localhost:9000
 
