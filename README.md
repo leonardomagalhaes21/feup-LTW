@@ -9,7 +9,6 @@
 ## Install Instructions
 
     git clone git@github.com:leonardomagalhaes21/feup-LTW.git
-    git checkout final-delivery-v1
     php -S localhost:9000
 
 ## Screenshots
